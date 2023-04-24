@@ -93,7 +93,7 @@ public enum Commands {
     private Commands(String regex){
         this.regex = regex;
     }
-    public Matcher getMatcher(String input,Commands mainRegex){
+    public static Matcher getMatcher(String input,Commands mainRegex){
         Matcher matcher = Pattern.compile(mainRegex.regex).matcher(input);
         if(matcher.matches())
             return matcher;
