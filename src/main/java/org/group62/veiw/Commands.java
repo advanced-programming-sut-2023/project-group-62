@@ -4,15 +4,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum Commands {
-    CREAT_USER("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
+    CREAT_USER_WITH_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
             "(?=.+(-p|--password)\\s+(?<password>\\S+)\\s+(?<passwordConfirmation>\\S+))(?=.+(-email)" +
-            "\\s+(?<email>\\S+))(?=.+(-n|--nickname)\\s+(\\S+))((?=.+(-s|--slogan)\\s+(?<slogan>\\S+)))?.+)\\s*$"),
+            "\\s+(?<email>\\S+))(?=.+(-n|--nickname)\\s+(\\S+))((?=.+(-s|--slogan)\\s+(?<slogan>\\S+))).+)\\s*$"),
+    CREAT_USER_WITHOUT_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
+            "(?=.+(-p|--password)\\s+(?<password>\\S+)\\s+(?<passwordConfirmation>\\S+))(?=.+(-email)" +
+            "\\s+(?<email>\\S+))(?=.+(-n|--nickname)\\s+(\\S+)).+)\\s*$"),
+    CREAT_USER_WITH_RANDOM_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
+            "(?=.+(-p|--password)\\s+(?<password>\\S+)\\s+(?<passwordConfirmation>\\S+))(?=.+(-email)" +
+            "\\s+(?<email>\\S+))(?=.+(-n|--nickname)\\s+(\\S+))((?=.+(-s|--slogan)\\s+random)).+)\\s*$"),
     QUESTION_PICK("^\\s*question\\s+pick(?<args>(?=.+(-q)\\s+(?<questionNumber>\\S+))(?=.+(-a)\\s+" +
             "(?<answer>\\S+))(?=.+(-c)\\s+(?<answerConfirm>\\S+)).+)\\s*$"),
     CREAT_USER_WITH_RANDOM_PASSWORD("^\\s*user\\s+creat(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
             "(?=.+(-n|--nickname)\\s+(?<nickname>\\S+))(?=.+(-p)\\s+random)(?=.+(-e|--email)\\s+(?<email>\\S+)).+)\\s*$"),
-    CREAT_USER_WITH_RANDOM_SLOGAN("^\\s*user\\s+creat(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
-            "(?=.+(-n|--nickname)\\s+(?<nickname>\\S+))(?=.+(-p)\\s+random)(?=.+(-s)\\s+random)(?=.+(-e|--email)" +
+    CREAT_USER_WITH_RANDOM_SLOGAN_AND_RANDOM_PASSWORD("^\\s*user\\s+creat(?<args>(?=.+(-u|--username)\\s+" +
+            "(?<username>\\S+))(?=.+(-n|--nickname)\\s+(?<nickname>\\S+))(?=.+(-p)\\s+random)(?=.+(-s)\\s+random)(?=.+(-e|--email)" +
             "\\s+(?<email>\\S+)).+)\\s*$"),
     USERNAME_VALIDATION("[a-zA-Z0-9_]+"),
     STRONG_PASSWORD("^(?=.*[A-Z])(?=.*[!@#$&*%^()_\\-=\\]+}{[~`'\";:?\\/><.,|])(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{6,}$"),
