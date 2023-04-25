@@ -99,7 +99,8 @@ public enum Commands {
     BUY("^\\s*buy(?<args>(?=.+(-i)\\s+(?<itemName>.+))(?=.+(-a)\\s+(?<itemAmount>\\d+)).+)\\s*$"),
     SELL("^\\s*sell(?<args>(?=.+(-i)\\s+(?<itemName>.+))(?=.+(-a)\\s+(?<itemAmount>\\d+)).+)\\s*$"),
     BACK("^\\s*back\\s*$"),
-    NEW_GAME("^\\s*new\\s+game\\s*$");
+    NEW_GAME("^\\s*new\\s+game\\s*$"),
+    NEXT_TURN("^\\s*next\\s+turn\\s*$");
     private String regex;
     private Commands(String regex){
         this.regex = regex;
