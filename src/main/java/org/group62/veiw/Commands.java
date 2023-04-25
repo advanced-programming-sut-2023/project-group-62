@@ -25,6 +25,7 @@ public enum Commands {
     EMAIL_VALIDATION("\\S+@\\S+.\\S+"),
     USER_LOGIN("^\\s*user\\s+login(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))(?=.+(-p|--password)\\s+" +
             "(?<password>\\S+)).+)\\s*$"),
+    ENTER_LOGIN_MENU("^\\s*enter\\s+login\\s+menu\\s*$"),
     USER_STAY_LOGGED_IN("^\\s*user\\s+login(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))(?=.+(-p|--password)" +
             "\\s+(?<password>\\S+))(?=.+(--stay-logged-in)).+)\\s*$"),
     FORGOT_MY_PASSWORD("^\\s*forgot\\s+my\\s+password\\s+(-u|--username)\\s+(?<username>\\S+)\\s*$"),
