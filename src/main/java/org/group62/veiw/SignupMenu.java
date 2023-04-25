@@ -1,5 +1,8 @@
 package org.group62.veiw;
 
+import org.group62.controller.LoginMenuController;
+import org.group62.controller.SignupMenuController;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -20,15 +23,15 @@ public class SignupMenu {
         while (true) {
             inputCommand = scanner.nextLine();
             if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_SLOGAN)) != null)
-                System.out.println(normalCreatUser(matcher));
+                System.out.println(signupMenuController.normalCreatUser(matcher));
             else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITHOUT_SLOGAN)) != null)
-                System.out.println(creatUserWithoutSlogan(matcher));
+                System.out.println(signupMenuController.creatUserWithoutSlogan(matcher));
             else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_RANDOM_PASSWORD)) != null)
-                System.out.println(creatUserWithRandomPassword(matcher));
+                System.out.println(signupMenuController.creatUserWithRandomPassword(matcher));
             else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_RANDOM_SLOGAN)) != null)
-                System.out.println(creatUserWithRandomSlogan(matcher));
+                System.out.println(signupMenuController.creatUserWithRandomSlogan(matcher));
             else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_RANDOM_SLOGAN_AND_RANDOM_PASSWORD)) != null)
-                System.out.println(creatUserWithRandomPasswordAndSlogan(matcher));
+                System.out.println(signupMenuController.creatUserWithRandomPasswordAndSlogan(matcher));
             else if ((matcher = Commands.getMatcher(inputCommand, Commands.ENTER_LOGIN_MENU)) != null) {
                 LoginMenu loginMenu = new LoginMenu(loginMenuController);
                 loginMenu.run(scanner);
@@ -39,26 +42,5 @@ public class SignupMenu {
 
 
         }
-    }
-
-
-    private String creatUserWithRandomPasswordAndSlogan(Matcher matcher) {
-        return null;
-    }
-
-    private String creatUserWithRandomSlogan(Matcher matcher) {
-        return null;
-    }
-
-    private String creatUserWithRandomPassword(Matcher matcher) {
-        return null;
-    }
-
-    private String creatUserWithoutSlogan(Matcher matcher) {
-        return null;
-    }
-
-    private String normalCreatUser(Matcher matcher) {
-        return null;
     }
 }

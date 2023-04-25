@@ -1,11 +1,13 @@
 package org.group62.veiw;
 
+import org.group62.controller.ProfileMenuController;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class ProfileMenu {
     Matcher matcher;
-    ProfileMenuControlle profileMenuControlle;
+    ProfileMenuController profileMenuControlle;
 
     public ProfileMenu(ProfileMenuController profileMenuController) {
         this.profileMenuControlle = profileMenuController;

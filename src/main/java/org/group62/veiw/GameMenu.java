@@ -1,9 +1,10 @@
 package org.group62.veiw;
 
+import org.group62.controller.*;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-import static com.sun.beans.introspect.ClassInfo.clear;
 
 public class GameMenu {
     private TradeController tradeController;
@@ -25,7 +26,7 @@ public class GameMenu {
         buildingController = new BuildingController();
         turnsController = new TurnsController();
         unitsController = new UnitsController();
-        mapMenuController = new MainMenuController();
+        mapMenuController = new MapMenuController();
         marketMenuController = new MarketMenuController();
     }
 

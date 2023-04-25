@@ -1,5 +1,9 @@
 package org.group62.veiw;
 
+import org.group62.controller.GameMenuController;
+import org.group62.controller.MainMenuController;
+import org.group62.controller.ProfileMenuController;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -11,8 +15,8 @@ public class MainMenu {
 
     public MainMenu(MainMenuController mainMenuController) {
         this.mainMenuController = mainMenuController;
-        gameMenuController = new GameMenuController;
-        profileMenuController = new ProfileMenuController;
+        gameMenuController = new GameMenuController();
+        profileMenuController = new ProfileMenuController();
     }
 
     public void run(Scanner scanner) {
