@@ -8,23 +8,23 @@ public class MainMenu {
     GameMenuController gameMenuController;
     MainMenuController mainMenuController;
     Matcher matcher;
-    public MainMenu(MainMenuController mainMenuController){
+
+    public MainMenu(MainMenuController mainMenuController) {
         this.mainMenuController = mainMenuController;
         gameMenuController = new GameMenuController;
         profileMenuController = new ProfileMenuController;
     }
-    public void run(Scanner scanner){
-        while (true){
+
+    public void run(Scanner scanner) {
+        while (true) {
             String inputCommand = scanner.nextLine();
-            if(Commands.getMatcher(inputCommand,Commands.ENTER_PROFILE_MENU) != null){
+            if (Commands.getMatcher(inputCommand, Commands.ENTER_PROFILE_MENU) != null) {
                 ProfileMenu profileMenu = new ProfileMenu(profileMenuController);
                 profileMenu.run(scanner);
-            }
-            else if(Commands.getMatcher(inputCommand,Commands.ENTER_GAME_MENU) != null){
+            } else if (Commands.getMatcher(inputCommand, Commands.ENTER_GAME_MENU) != null) {
                 GameMenu gameMenu = new GameMenu(gameMenuController);
                 gameMenu.run(scanner);
-            }
-            else if(Commands.getMatcher(inputCommand,Commands.BACK) != null)
+            } else if (Commands.getMatcher(inputCommand, Commands.BACK) != null)
                 break;
             else
                 System.out.println("Invalid command!");

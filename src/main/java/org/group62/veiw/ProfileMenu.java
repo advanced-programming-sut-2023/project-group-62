@@ -6,32 +6,34 @@ import java.util.regex.Matcher;
 public class ProfileMenu {
     Matcher matcher;
     ProfileMenuControlle profileMenuControlle;
-    public ProfileMenu(ProfileMenuController profileMenuController){
+
+    public ProfileMenu(ProfileMenuController profileMenuController) {
         this.profileMenuControlle = profileMenuController;
     }
-    public void run(Scanner scanner){
+
+    public void run(Scanner scanner) {
         while (true) {
             String inputCommand = scanner.nextLine();
             if ((matcher = Commands.getMatcher(inputCommand, Commands.PROFILE_PASSWORD_CHANGE)) != null)
-                changePassword(matcher);
+                System.out.println(changePassword(matcher));
             else if ((matcher = Commands.getMatcher(inputCommand, Commands.PROFILE_USERNAME_CHANGE)) != null)
-                changeUsername(matcher);
+                System.out.println(changeUsername(matcher));
             else if ((matcher = Commands.getMatcher(inputCommand, Commands.PROFILE_NICKNAME_CHANGE)) != null)
-                changeNickname(matcher);
+                System.out.println(changeNickname(matcher));
             else if ((matcher = Commands.getMatcher(inputCommand, Commands.PROFILE_EMAIL_CHANGE)) != null)
-                changeEmail(matcher);
+                System.out.println(changeEmail(matcher));
             else if ((matcher = Commands.getMatcher(inputCommand, Commands.PROFILE_SLOGAN_CHANGE)) != null)
-                changeSlogan(matcher);
+                System.out.println(changeSlogan(matcher));
             else if ((Commands.getMatcher(inputCommand, Commands.PROFILE_REMOVE_SLOGAN)) != null)
-                removeSlogan();
+                System.out.println(removeSlogan());
             else if (Commands.getMatcher(inputCommand, Commands.PROFILE_DISPLAY_HIGH_SCORE) != null)
-                displayHighScore();
+                System.out.println(displayHighScore());
             else if (Commands.getMatcher(inputCommand, Commands.PROFILE_DISPLAY_RANK) != null)
-                displayRank();
+                System.out.println(displayRank());
             else if (Commands.getMatcher(inputCommand, Commands.PROFILE_DISPLAY_SLOGAN) != null)
-                displaySlogan();
+                System.out.println(displaySlogan());
             else if (Commands.getMatcher(inputCommand, Commands.PROFILE_DISPLAY) != null)
-                displayAllProfile();
+                System.out.println(displayAllProfile());
             else if (Commands.getMatcher(inputCommand, Commands.USER_LOGOUT) != null)
                 break;
             else
@@ -39,33 +41,43 @@ public class ProfileMenu {
         }
     }
 
-    private void displayAllProfile() {
+    private String displayAllProfile() {
+        return null;
     }
 
-    private void displaySlogan() {
+    private String displaySlogan() {
+        return null;
     }
 
-    private void displayRank() {
+    private String displayRank() {
+        return null;
     }
 
-    private void displayHighScore() {
+    private String displayHighScore() {
+        return null;
     }
 
-    private void removeSlogan() {
+    private String removeSlogan() {
+        return null;
     }
 
-    private void changeSlogan(Matcher matcher) {
+    private String changeSlogan(Matcher matcher) {
+        return null;
     }
 
-    private void changeEmail(Matcher matcher) {
+    private String changeEmail(Matcher matcher) {
+        return null;
     }
 
-    private void changeNickname(Matcher matcher) {
+    private String changeNickname(Matcher matcher) {
+        return null;
     }
 
-    private void changeUsername(Matcher matcher) {
+    private String changeUsername(Matcher matcher) {
+        return null;
     }
 
-    private void changePassword(Matcher matcher) {
+    private String changePassword(Matcher matcher) {
+        return null;
     }
 }

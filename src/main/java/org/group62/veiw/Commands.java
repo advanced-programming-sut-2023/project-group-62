@@ -102,12 +102,14 @@ public enum Commands {
     NEW_GAME("^\\s*new\\s+game\\s*$"),
     NEXT_TURN("^\\s*next\\s+turn\\s*$");
     private String regex;
-    private Commands(String regex){
+
+    private Commands(String regex) {
         this.regex = regex;
     }
-    public static Matcher getMatcher(String input,Commands mainRegex){
+
+    public static Matcher getMatcher(String input, Commands mainRegex) {
         Matcher matcher = Pattern.compile(mainRegex.regex).matcher(input);
-        if(matcher.matches())
+        if (matcher.matches())
             return matcher;
         else
             return null;

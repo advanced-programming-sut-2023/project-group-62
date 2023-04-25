@@ -16,7 +16,8 @@ public class GameMenu {
     private MarketMenuController marketMenuController;
     private GameMenuController gameMenuController;
     Matcher matcher;
-    public GameMenu(GameMenuController gameMenuController){
+
+    public GameMenu(GameMenuController gameMenuController) {
         this.gameMenuController = gameMenuController;
         tradeController = new TradeController();
         cheaterController = new CheaterController();
@@ -27,86 +28,87 @@ public class GameMenu {
         mapMenuController = new MainMenuController();
         marketMenuController = new MarketMenuController();
     }
-    public void run(Scanner scanner){
-        while (true){
+
+    public void run(Scanner scanner) {
+        while (true) {
             String inputCommand = scanner.nextLine();
-            if(Commands.getMatcher(inputCommand,Commands.NEW_GAME) != null)
+            if (Commands.getMatcher(inputCommand, Commands.NEW_GAME) != null)
                 System.out.println(newGame());
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.TRADE)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.TRADE)) != null)
                 System.out.println(setTrade(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.TRADE_LIST)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.TRADE_LIST)) != null)
                 System.out.println(showTradeList(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.TRADE_ACCEPT)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.TRADE_ACCEPT)) != null)
                 System.out.println(tradeAccept(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.SET_BLOCK_TEXTURE)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.SET_BLOCK_TEXTURE)) != null)
                 System.out.println(setBlockTexture(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.SET_RECTANGLE_TEXTURE)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.SET_RECTANGLE_TEXTURE)) != null)
                 System.out.println(setRectangleTexture(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.CLEAR)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.CLEAR)) != null)
                 System.out.println(clear(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.DROP_ROCK)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.DROP_ROCK)) != null)
                 System.out.println(dropRock(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.DROP_TREE)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.DROP_TREE)) != null)
                 System.out.println(dropTree(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.DROP_BUILDING)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.DROP_BUILDING)) != null)
                 System.out.println(dropBuilding(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.DROP_UNIT)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.DROP_UNIT)) != null)
                 System.out.println(dropUnit(matcher));
-            else if(Commands.getMatcher(inputCommand,Commands.SHOW_POPULARITY_FACTORS) != null)
+            else if (Commands.getMatcher(inputCommand, Commands.SHOW_POPULARITY_FACTORS) != null)
                 System.out.println(showPopularityFactors());
-            else if(Commands.getMatcher(inputCommand,Commands.SHOW_POPULARITY) != null)
+            else if (Commands.getMatcher(inputCommand, Commands.SHOW_POPULARITY) != null)
                 System.out.println(showPopularity());
-            else if(Commands.getMatcher(inputCommand,Commands.SHOW_FOOD_LIST) != null)
+            else if (Commands.getMatcher(inputCommand, Commands.SHOW_FOOD_LIST) != null)
                 System.out.println(showFoodList());
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.FOOD_RATE)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.FOOD_RATE)) != null)
                 System.out.println(setFoodRate(matcher));
-            else if(Commands.getMatcher(inputCommand,Commands.FOOD_RATE_SHOW) != null)
+            else if (Commands.getMatcher(inputCommand, Commands.FOOD_RATE_SHOW) != null)
                 System.out.println(showFoodRate());
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.TAX_RATE)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.TAX_RATE)) != null)
                 System.out.println(setTaxRate(matcher));
-            else if(Commands.getMatcher(inputCommand,Commands.TAX_RATE_SHOW) != null)
+            else if (Commands.getMatcher(inputCommand, Commands.TAX_RATE_SHOW) != null)
                 System.out.println(showTaxRate());
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.FEAR_RATE)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.FEAR_RATE)) != null)
                 System.out.println(setFearRate(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.SELECT_BUILDING)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.SELECT_BUILDING)) != null)
                 System.out.println(selectBuilding(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.CREATE_UNIT)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREATE_UNIT)) != null)
                 System.out.println(creatUnit(matcher));
-            else if(Commands.getMatcher(inputCommand,Commands.REPAIR) != null)
+            else if (Commands.getMatcher(inputCommand, Commands.REPAIR) != null)
                 System.out.println(repair());
-            else if(Commands.getMatcher(inputCommand,Commands.NEXT_TURN) != null)
+            else if (Commands.getMatcher(inputCommand, Commands.NEXT_TURN) != null)
                 System.out.println(nextTurn());
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.SELECT_UNIT)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.SELECT_UNIT)) != null)
                 System.out.println(selectUnit(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.MOVE_UNIT)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.MOVE_UNIT)) != null)
                 System.out.println(moveUnit(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.PATROL_UNIT)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.PATROL_UNIT)) != null)
                 System.out.println(patrolUnit(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.SET_STATE)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.SET_STATE)) != null)
                 System.out.println(setState(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.ATTACK)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.ATTACK)) != null)
                 System.out.println(attack(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.ATTACK_COORDINATES)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.ATTACK_COORDINATES)) != null)
                 System.out.println(attackWithArrows(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.POUR_OIL)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.POUR_OIL)) != null)
                 System.out.println(pourOil(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.DIG_TUNNEL)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.DIG_TUNNEL)) != null)
                 System.out.println(digTunnel(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.BUILD)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.BUILD)) != null)
                 System.out.println(buidEquipment(matcher));
-            else if(Commands.getMatcher(inputCommand,Commands.DISBAND_UNIT) != null)
+            else if (Commands.getMatcher(inputCommand, Commands.DISBAND_UNIT) != null)
                 System.out.println(disbandUnit());
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.SHOW_MAP)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.SHOW_MAP)) != null)
                 System.out.println(showMap(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.SHOW_DETAILS)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.SHOW_DETAILS)) != null)
                 System.out.println(showDetails(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.MAP_MOVE)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.MAP_MOVE)) != null)
                 System.out.println(moveMap(matcher));
-            else if(Commands.getMatcher(inputCommand,Commands.SHOW_PRICE_LIST) != null)
+            else if (Commands.getMatcher(inputCommand, Commands.SHOW_PRICE_LIST) != null)
                 System.out.println(showPriceList());
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.BUY)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.BUY)) != null)
                 System.out.println(buyItem(matcher));
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.SELL)) != null)
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.SELL)) != null)
                 System.out.println(sellItem(matcher));
             else
                 System.out.println("Invalid command!");
@@ -241,7 +243,7 @@ public class GameMenu {
         return null;
     }
 
-    private String clear(Matcher matcher){
+    private String clear(Matcher matcher) {
         return null;
     }
 

@@ -6,7 +6,8 @@ import java.util.regex.Matcher;
 public class SignupMenu {
     SignupMenuController signupMenuController;
     LoginMenuController loginMenuController;
-    public SignupMenu(SignupMenuController signupMenuController){
+
+    public SignupMenu(SignupMenuController signupMenuController) {
         this.signupMenuController = signupMenuController;
         loginMenuController = new LoginMenuController();
     }
@@ -14,24 +15,24 @@ public class SignupMenu {
     Scanner scanner = new Scanner(System.in);
     Matcher matcher;
     String inputCommand;
-    public void run(){
-        while (true){
+
+    public void run() {
+        while (true) {
             inputCommand = scanner.nextLine();
-            if((matcher = Commands.getMatcher(inputCommand,Commands.CREAT_USER_WITH_SLOGAN)) != null)
-                normalCreatUser(matcher);
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.CREAT_USER_WITHOUT_SLOGAN)) != null)
-                creatUserWithoutSlogan(matcher);
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.CREAT_USER_WITH_RANDOM_PASSWORD)) != null)
-                creatUserWithRandomPassword(matcher);
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.CREAT_USER_WITH_RANDOM_SLOGAN)) != null)
-                creatUserWithRandomSlogan(matcher);
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.CREAT_USER_WITH_RANDOM_SLOGAN_AND_RANDOM_PASSWORD)) != null)
-                creatUserWithRandomPasswordAndSlogan(matcher);
-            else if((matcher = Commands.getMatcher(inputCommand,Commands.ENTER_LOGIN_MENU)) != null){
+            if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_SLOGAN)) != null)
+                System.out.println(normalCreatUser(matcher));
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITHOUT_SLOGAN)) != null)
+                System.out.println(creatUserWithoutSlogan(matcher));
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_RANDOM_PASSWORD)) != null)
+                System.out.println(creatUserWithRandomPassword(matcher));
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_RANDOM_SLOGAN)) != null)
+                System.out.println(creatUserWithRandomSlogan(matcher));
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_RANDOM_SLOGAN_AND_RANDOM_PASSWORD)) != null)
+                System.out.println(creatUserWithRandomPasswordAndSlogan(matcher));
+            else if ((matcher = Commands.getMatcher(inputCommand, Commands.ENTER_LOGIN_MENU)) != null) {
                 LoginMenu loginMenu = new LoginMenu(loginMenuController);
                 loginMenu.run(scanner);
-            }
-            else if(Commands.getMatcher(inputCommand,Commands.EXIT) != null)
+            } else if (Commands.getMatcher(inputCommand, Commands.EXIT) != null)
                 break;
             else
                 System.out.println("Invalid command!");
@@ -41,23 +42,23 @@ public class SignupMenu {
     }
 
 
-    private void creatUserWithRandomPasswordAndSlogan(Matcher matcher) {
-        //TODO
+    private String creatUserWithRandomPasswordAndSlogan(Matcher matcher) {
+        return null;
     }
 
-    private void creatUserWithRandomSlogan(Matcher matcher) {
-        //TODO
+    private String creatUserWithRandomSlogan(Matcher matcher) {
+        return null;
     }
 
-    private void creatUserWithRandomPassword(Matcher matcher) {
-        //TODO
+    private String creatUserWithRandomPassword(Matcher matcher) {
+        return null;
     }
 
-    private void creatUserWithoutSlogan(Matcher matcher) {
-        //TODO
+    private String creatUserWithoutSlogan(Matcher matcher) {
+        return null;
     }
 
-    private void normalCreatUser(Matcher matcher) {
-        //TODO
+    private String normalCreatUser(Matcher matcher) {
+        return null;
     }
 }
