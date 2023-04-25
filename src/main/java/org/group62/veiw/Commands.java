@@ -22,6 +22,10 @@ public enum Commands {
             "\\s+(?<email>\\S+)).+)\\s*$"),
     USERNAME_VALIDATION("[a-zA-Z0-9_]+"),
     STRONG_PASSWORD("^(?=.*[A-Z])(?=.*[!@#$&*%^()_\\-=\\]+}{[~`'\";:?\\/><.,|])(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{6,}$"),
+    PASSWORD_WEAK_LOWERCASE_ALPHABET("[a-z]"),
+    PASSWORD_WEAK_UPPERCASE_ALPHABET("[A-Z]"),
+    PASSWORD_WEAK_NUMBER("[0-9]"),
+    PASSWORD_WEAK_CHARACTER("[\\.\\*!@#\\$%\\^&\\(\\)_-\\+=]\\[}\\\\{\\|\\?\\/><,]"),
     EMAIL_VALIDATION("\\S+@\\S+.\\S+"),
     USER_LOGIN("^\\s*user\\s+login(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))(?=.+(-p|--password)\\s+" +
             "(?<password>\\S+)).+)\\s*$"),
