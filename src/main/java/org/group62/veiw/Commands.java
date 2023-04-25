@@ -97,7 +97,8 @@ public enum Commands {
     TRADE_HISTORY("^\\s*trade\\s+history\\s*$"),
     SHOW_PRICE_LIST("^\\s*show\\s+price\\s+list\\s*$"),
     BUY("^\\s*buy(?<args>(?=.+(-i)\\s+(?<itemName>.+))(?=.+(-a)\\s+(?<itemAmount>\\d+)).+)\\s*$"),
-    SELL("^\\s*sell(?<args>(?=.+(-i)\\s+(?<itemName>.+))(?=.+(-a)\\s+(?<itemAmount>\\d+)).+)\\s*$");
+    SELL("^\\s*sell(?<args>(?=.+(-i)\\s+(?<itemName>.+))(?=.+(-a)\\s+(?<itemAmount>\\d+)).+)\\s*$"),
+    BACK("^\\s*back\\s*$");
     private String regex;
     private Commands(String regex){
         this.regex = regex;
