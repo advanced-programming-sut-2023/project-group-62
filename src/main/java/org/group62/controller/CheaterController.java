@@ -1,4 +1,4 @@
-package org.group62.controller;
+package org.group62.Controller;
 
 public class CheaterController {
 }
