@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Play {
     private final ArrayList<ArrayList<Governance>> alies;
     private final ArrayList<Trade> trades = new ArrayList<>();
-    private final Map map;
+    private final Ground[][] map;
     private static User currentUser = StrongHold.getCurrentUser();
 
-    public Play(ArrayList<ArrayList<Governance>> alies, Map map) {
+    public Play(ArrayList<ArrayList<Governance>> alies, Ground[][] map) {
         this.alies = alies;
         this.map = map;
     }
@@ -37,7 +37,7 @@ public class Play {
         return trades;
     }
 
-    public Map getMap() {
+    public Ground[][] getMap() {
         return map;
     }
 }

@@ -3,9 +3,8 @@ package org.group62.Model;
 import java.util.ArrayList;
 
 public class Ground {
-    private GroundLandType groundLandType = GroundLandType.LAND;
+    private GroundType groundType = GroundType.LAND;
     private GroundTreeType groundTreeType = null;
-    private GroundWaterType groundWaterType = null;
     private ArrayList<Building> buildings = new ArrayList<>();
     private ArrayList<Troop> troops = new ArrayList<>();
 
@@ -15,6 +14,14 @@ public class Ground {
 
     public void removeBuilding(Building building) {
         buildings.remove(building);
+    }
+
+    public void removeTroops() {
+        troops.clear();
+    }
+
+    public void removeBuildings() {
+        buildings.clear();
     }
 
     public void addBuilding(Building building) {
@@ -34,12 +41,12 @@ public class Ground {
         return troops;
     }
 
-    public GroundLandType getGroundLandType() {
-        return groundLandType;
+    public GroundType getGroundType() {
+        return groundType;
     }
 
-    public void setGroundLandType(GroundLandType groundLandType) {
-        this.groundLandType = groundLandType;
+    public void setGroundType(GroundType groundType) {
+        this.groundType = groundType;
     }
 
     public GroundTreeType getGroundTreeType() {
@@ -48,13 +55,5 @@ public class Ground {
 
     public void setGroundTreeType(GroundTreeType groundTreeType) {
         this.groundTreeType = groundTreeType;
-    }
-
-    public GroundWaterType getGroundWaterType() {
-        return groundWaterType;
-    }
-
-    public void setGroundWaterType(GroundWaterType groundWaterType) {
-        this.groundWaterType = groundWaterType;
     }
 }
