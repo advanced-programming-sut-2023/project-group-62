@@ -1,6 +1,6 @@
 package org.group62.veiw;
 
-import org.group62.controller.ProfileMenuController;
+import org.group62.Controller.ProfileMenuController;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

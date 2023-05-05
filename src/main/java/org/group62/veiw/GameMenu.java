@@ -1,6 +1,6 @@
 package org.group62.veiw;
 
-import org.group62.controller.*;
+import org.group62.Controller.*;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

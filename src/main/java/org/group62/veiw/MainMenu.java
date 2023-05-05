@@ -1,8 +1,8 @@
 package org.group62.veiw;
 
-import org.group62.controller.GameMenuController;
-import org.group62.controller.MainMenuController;
-import org.group62.controller.ProfileMenuController;
+import org.group62.Controller.GameMenuController;
+import org.group62.Controller.MainMenuController;
+import org.group62.Controller.ProfileMenuController;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

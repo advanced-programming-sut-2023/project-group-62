@@ -17,6 +17,15 @@ public class User {
         this.email = email;
     }
 
+    public int getRank() {
+        int rank = 1;
+        for (User anotherUser : StrongHold.getUsers()) {
+            if (anotherUser.getHighScore() > this.getHighScore())
+                rank++;
+        }
+        return rank;
+    }
+
     public boolean isPassWordCorrect(String password) {
         return this.password.equals(password);
     }

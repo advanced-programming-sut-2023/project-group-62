@@ -1,7 +1,7 @@
 package org.group62.veiw;
 
-import org.group62.controller.LoginMenuController;
-import org.group62.controller.SignupMenuController;
+import org.group62.Controller.LoginMenuController;
+import org.group62.Controller.SignupMenuController;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
