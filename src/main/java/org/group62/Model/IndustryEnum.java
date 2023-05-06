@@ -56,7 +56,33 @@ public enum IndustryEnum {
         this.workersNumber = workersNumber;
         this.constants = constants;
     }
+
     public static Industry getIndustry(IndustryEnum industryEnum) {
-        return new Industry(Play.getCurrentUser(), industryEnum.name, industryEnum.goldCost, industryEnum.resourcesCost, industryEnum.workersNumber, industryEnum.constants);
+        return new Industry(Play.getCurrentGovernance(), industryEnum.name, industryEnum.goldCost, industryEnum.resourcesCost, industryEnum.workersNumber, industryEnum.constants);
+    }
+
+    public static Industry getIndustry(IndustryEnum industryEnum, Governance governance) {
+        return new Industry(governance, industryEnum.name, industryEnum.goldCost, industryEnum.resourcesCost, industryEnum.workersNumber, industryEnum.constants);
+    }
+
+    public static IndustryEnum getIndustryEnumByName(String industryEnum) {
+        switch (industryEnum) {
+            case "iron mine":
+                return IRON_MINE;
+            case "market":
+                return MARKET;
+            case "ox tether":
+                return OX_TETHER;
+            case "pitch rig":
+                return PITCH_RIG;
+            case "quarry":
+                return QUARRY;
+            case "stockpile":
+                return STOCKPILE;
+            case "woodcutter":
+                return WOODCUTTER;
+            default:
+                return null;
+        }
     }
 }

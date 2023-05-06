@@ -47,7 +47,27 @@ public enum WeaponsEnum {
     }
 
     public static Weapons getWeapons(WeaponsEnum weaponsEnum) {
-        return new Weapons(Play.getCurrentUser(), weaponsEnum.name, weaponsEnum.goldCost, weaponsEnum.resourcesCost, weaponsEnum.workersNumber, weaponsEnum.constants);
+        return new Weapons(Play.getCurrentGovernance(), weaponsEnum.name, weaponsEnum.goldCost, weaponsEnum.resourcesCost, weaponsEnum.workersNumber, weaponsEnum.constants);
     }
+
+    public static Weapons getWeapons(WeaponsEnum weaponsEnum, Governance governance) {
+        return new Weapons(governance, weaponsEnum.name, weaponsEnum.goldCost, weaponsEnum.resourcesCost, weaponsEnum.workersNumber, weaponsEnum.constants);
+    }
+
+    public static WeaponsEnum getWeaponsEnumByName(String weaponsEnum) {
+        switch (weaponsEnum) {
+            case "armourer":
+                return ARMOURER;
+            case "blacksmith":
+                return BLACKSMITH;
+            case "fletcher":
+                return FLETCHER;
+            case "poleturner":
+                return POLETURNER;
+            default:
+                return null;
+        }
+    }
+
 
 }

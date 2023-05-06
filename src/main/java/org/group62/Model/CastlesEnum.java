@@ -118,6 +118,53 @@ public enum CastlesEnum {
     }
 
     public static Castles getCastles(CastlesEnum castlesEnum) {
-        return new Castles(Play.getCurrentUser(), castlesEnum.name, castlesEnum.goldCost, castlesEnum.resourcesCost, castlesEnum.workersNumber, castlesEnum.constants);
+        return new Castles(Play.getCurrentGovernance(), castlesEnum.name, castlesEnum.goldCost, castlesEnum.resourcesCost, castlesEnum.workersNumber, castlesEnum.constants);
+    }
+
+    public static Castles getCastles(CastlesEnum castlesEnum, Governance governance) {
+        return new Castles(governance, castlesEnum.name, castlesEnum.goldCost, castlesEnum.resourcesCost, castlesEnum.workersNumber, castlesEnum.constants);
+    }
+
+    public static CastlesEnum getCastlesEnumByName(String castlesEnum) {
+        switch (castlesEnum) {
+            case "keep":
+                return KEEP;
+            case "small stone gatehouse":
+                return SMALL_STONE_GATEHOUSE;
+            case "draw bridge":
+                return DRAW_BRIDGE;
+            case "lookout tower":
+                return LOOKOUT_TOWER;
+            case "perimeter tower":
+                return PERIMETER_TOWER;
+            case "defensive turret":
+                return DEFENSIVE_TURRET;
+            case "square tower":
+                return SQUARE_TOWER;
+            case "circular tower":
+                return CIRCULAR_TOWER;
+            case "armoury":
+                return ARMOURY;
+            case "barrack":
+                return BARRACK;
+            case "mercenary post":
+                return MERCENARY_POST;
+            case "engineer guild":
+                return ENGINEER_GUILD;
+            case "killing pit":
+                return KILLING_PIT;
+            case "oil smelter":
+                return OIL_SMELTER;
+            case "pitch ditch":
+                return PITCH_DITCH;
+            case "caged war dogs":
+                return CAGED_WAR_DOGS;
+            case "siege tent":
+                return SIEGE_TENT;
+            case "stable":
+                return STABLE;
+            default:
+                return null;
+        }
     }
 }

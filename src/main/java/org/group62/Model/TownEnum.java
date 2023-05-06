@@ -33,8 +33,24 @@ public enum TownEnum {
     }
 
 
-
     public static Town getTown(TownEnum townEnum) {
-        return new Town(Play.getCurrentUser(), townEnum.name, townEnum.goldCost, townEnum.resourcesCost, townEnum.workersNumber, townEnum.constants);
+        return new Town(Play.getCurrentGovernance(), townEnum.name, townEnum.goldCost, townEnum.resourcesCost, townEnum.workersNumber, townEnum.constants);
+    }
+
+    public static Town getTown(TownEnum townEnum, Governance governance) {
+        return new Town(governance, townEnum.name, townEnum.goldCost, townEnum.resourcesCost, townEnum.workersNumber, townEnum.constants);
+    }
+
+    public static TownEnum getTownEnumByName(String townEnum) {
+        switch (townEnum) {
+            case "hovel":
+                return HOVEL;
+            case "church":
+                return CHURCH;
+            case "cathedral":
+                return CATHEDRAL;
+            default:
+                return null;
+        }
     }
 }

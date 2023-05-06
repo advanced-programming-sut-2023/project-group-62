@@ -3,7 +3,7 @@ package org.group62.Model;
 import java.util.HashMap;
 
 public class Building {
-    private final User owner;
+    private final Governance owner;
     private final String name;
     private final int goldCost;
     private final HashMap<Resource, Integer> resourcesCost;
@@ -11,7 +11,7 @@ public class Building {
     private HashMap<Constant, Integer> constants;
 
 
-    public Building(User owner, String name, int goldCost, HashMap<Resource, Integer> resourcesCost, int workersNumber, HashMap<Constant, Integer> constants) {
+    public Building(Governance owner, String name, int goldCost, HashMap<Resource, Integer> resourcesCost, int workersNumber, HashMap<Constant, Integer> constants) {
         this.owner = owner;
         this.name = name;
         this.goldCost = goldCost;
@@ -28,7 +28,7 @@ public class Building {
         return constants.get(key);
     }
 
-    public User getOwner() {
+    public Governance getOwner() {
         return owner;
     }
 

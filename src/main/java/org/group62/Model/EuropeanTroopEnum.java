@@ -28,6 +28,33 @@ public enum EuropeanTroopEnum {
 
 
     public static EuropeanTroop getEuropeanTroop(EuropeanTroopEnum europeanTroopEnum) {
-        return new EuropeanTroop(Play.getCurrentUser(), europeanTroopEnum.name, europeanTroopEnum.HP, europeanTroopEnum.attackPower, europeanTroopEnum.defencePower, europeanTroopEnum.speed, europeanTroopEnum.range);
+        return new EuropeanTroop(Play.getCurrentGovernance(), europeanTroopEnum.name, europeanTroopEnum.HP, europeanTroopEnum.attackPower, europeanTroopEnum.defencePower, europeanTroopEnum.speed, europeanTroopEnum.range);
+    }
+
+    public static EuropeanTroop getEuropeanTroop(EuropeanTroopEnum europeanTroopEnum, Governance owner) {
+        return new EuropeanTroop(owner, europeanTroopEnum.name, europeanTroopEnum.HP, europeanTroopEnum.attackPower, europeanTroopEnum.defencePower, europeanTroopEnum.speed, europeanTroopEnum.range);
+    }
+
+    public static EuropeanTroopEnum getEuropeanTroopEnumByName(String europeanTroopEnum) {
+        switch (europeanTroopEnum) {
+            case "archer":
+                return ARCHER;
+            case "crossbowmen":
+                return CROSSBOWMEN;
+            case "spearmen":
+                return SPEARMEN;
+            case "pikemen":
+                return PIKEMEN;
+            case "macemen":
+                return MACEMEN;
+            case "swordsmen":
+                return SWORDSMEN;
+            case "knight":
+                return KNIGHT;
+            case "black monk":
+                return BLACK_MONK;
+            default:
+                return null;
+        }
     }
 }

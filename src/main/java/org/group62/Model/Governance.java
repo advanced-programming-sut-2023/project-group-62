@@ -7,6 +7,7 @@ public class Governance {
     private int population = 0;
     private int popularity;
     private int foodRate = 0;
+    private GovernanceColor color;
     private ArrayList<People> peoples = new ArrayList<>();
     private final ArrayList<Food> foods = new ArrayList<>();
     private ArrayList<Building> buildings = new ArrayList<>();
@@ -20,7 +21,14 @@ public class Governance {
 
     public Governance(User owner) {
         this.owner = owner;
-        // TODO: 4/22/2023 anbar add beshe
+    }
+
+    public GovernanceColor getColor() {
+        return color;
+    }
+
+    public void setColor(GovernanceColor color) {
+        this.color = color;
     }
 
     public void removeFood(Food food) {

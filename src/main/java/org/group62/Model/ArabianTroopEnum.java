@@ -27,6 +27,29 @@ public enum ArabianTroopEnum {
     }
 
     public static ArabianTroop getArabianTroop(ArabianTroopEnum arabianTroopEnum) {
-        return new ArabianTroop(Play.getCurrentUser(), arabianTroopEnum.name, arabianTroopEnum.HP, arabianTroopEnum.attackPower, arabianTroopEnum.defencePower, arabianTroopEnum.speed, arabianTroopEnum.range);
+        return new ArabianTroop(Play.getCurrentGovernance(), arabianTroopEnum.name, arabianTroopEnum.HP, arabianTroopEnum.attackPower, arabianTroopEnum.defencePower, arabianTroopEnum.speed, arabianTroopEnum.range);
+    }
+    public static ArabianTroop getArabianTroop(ArabianTroopEnum arabianTroopEnum, Governance owner) {
+        return new ArabianTroop(owner, arabianTroopEnum.name, arabianTroopEnum.HP, arabianTroopEnum.attackPower, arabianTroopEnum.defencePower, arabianTroopEnum.speed, arabianTroopEnum.range);
+    }
+    public static ArabianTroopEnum getArabianTroopEnumByName(String arabianTroopEnum) {
+        switch (arabianTroopEnum){
+            case "archerbow":
+                return ARCHERBOW;
+            case "slaves":
+                return SLAVES;
+            case "slingers":
+                return SLINGERS;
+            case "assassins":
+                return ASSASSINS;
+            case "horse archer":
+                return HORSE_ARCHERS;
+            case "arabian swordsmen":
+                return ARABIAN_SWORDSMEN;
+            case "fire throwers":
+                return FIRE_THROWERS;
+            default:
+                return null;
+        }
     }
 }

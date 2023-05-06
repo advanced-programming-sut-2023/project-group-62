@@ -1,7 +1,7 @@
 package org.group62.Model;
 
 public class Troop extends People {
-    private final User owner;
+    private final Governance owner;
     private final String name;
     private int HP; // Hitpoint
     private final int attackPower; // Damage
@@ -9,7 +9,7 @@ public class Troop extends People {
     private final int speed; // Number of blocks in each turn
     private final int range; // Number of blocks
 
-    public Troop(User owner,String name, int HP, int attackPower, int defencePower, int speed, int range) {
+    public Troop(Governance owner, String name, int HP, int attackPower, int defencePower, int speed, int range) {
         this.owner = owner;
         this.name = name;
         this.HP = HP;
@@ -23,7 +23,7 @@ public class Troop extends People {
         this.HP = HP;
     }
 
-    public User getOwner() {
+    public Governance getOwner() {
         return owner;
     }
 

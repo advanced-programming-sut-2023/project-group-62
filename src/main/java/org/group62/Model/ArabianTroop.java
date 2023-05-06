@@ -1,7 +1,7 @@
 package org.group62.Model;
 
 public class ArabianTroop extends Troop {
-    public ArabianTroop(User owner, String name, int HP, int attackPower, int defencePower, int speed, int range) {
+    public ArabianTroop(Governance owner, String name, int HP, int attackPower, int defencePower, int speed, int range) {
         super(owner, name, HP, attackPower, defencePower, speed, range);
     }
 }

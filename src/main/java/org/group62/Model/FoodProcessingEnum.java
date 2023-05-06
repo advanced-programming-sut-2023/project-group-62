@@ -49,7 +49,29 @@ public enum FoodProcessingEnum {
     }
 
     public static FoodProcessing getFoodProcessing(FoodProcessingEnum foodProcessingEnum) {
-        return new FoodProcessing(Play.getCurrentUser(), foodProcessingEnum.name, foodProcessingEnum.goldCost, foodProcessingEnum.resourcesCost, foodProcessingEnum.workersNumber, foodProcessingEnum.constants);
+        return new FoodProcessing(Play.getCurrentGovernance(), foodProcessingEnum.name, foodProcessingEnum.goldCost, foodProcessingEnum.resourcesCost, foodProcessingEnum.workersNumber, foodProcessingEnum.constants);
+    }
+
+    public static FoodProcessing getFoodProcessing(FoodProcessingEnum foodProcessingEnum, Governance governance) {
+        return new FoodProcessing(governance, foodProcessingEnum.name, foodProcessingEnum.goldCost, foodProcessingEnum.resourcesCost, foodProcessingEnum.workersNumber, foodProcessingEnum.constants);
+    }
+
+    public static FoodProcessingEnum getFoodProcessingEnumByName(String foodProcessingEnum) {
+        switch (foodProcessingEnum) {
+            case "inn":
+                return INN;
+            case "mill":
+                return MILL;
+            case "bakery":
+                return BAKERY;
+            case "brewery":
+                return BREWERY;
+            case "food warehouse":
+                return FOOD_WAREHOUSE;
+            default:
+                return null;
+
+        }
     }
 
 }

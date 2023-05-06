@@ -49,6 +49,28 @@ public enum FarmEnum {
 
 
     public static Farm getFarm(FarmEnum farmEnum) {
-        return new Farm(Play.getCurrentUser(), farmEnum.name, farmEnum.goldCost, farmEnum.resourcesCost, farmEnum.workersNumber, farmEnum.constants);
+        return new Farm(Play.getCurrentGovernance(), farmEnum.name, farmEnum.goldCost, farmEnum.resourcesCost, farmEnum.workersNumber, farmEnum.constants);
+    }
+
+    public static Farm getFarm(FarmEnum farmEnum, Governance governance) {
+        return new Farm(governance, farmEnum.name, farmEnum.goldCost, farmEnum.resourcesCost, farmEnum.workersNumber, farmEnum.constants);
+    }
+
+    public static FarmEnum getFarmEnumByName(String farmEnum) {
+        switch (farmEnum) {
+            case "apple garden":
+                return APPLE_GARDEN;
+            case "diary products":
+                return DAIRY_PRODUCTS;
+            case "barley farm":
+                return BARLEY_FARM;
+            case "hunting post":
+                return HUNTING_POST;
+            case "wheat farm":
+                return WHEAT_FARM;
+            default:
+                return null;
+
+        }
     }
 }

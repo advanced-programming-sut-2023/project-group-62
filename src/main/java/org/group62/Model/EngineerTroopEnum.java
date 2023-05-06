@@ -1,5 +1,7 @@
 package org.group62.Model;
 
+import javax.jws.soap.SOAPBinding;
+
 public enum EngineerTroopEnum {
     TUNNELER("Tunneler", 1000, 600, 0, 4, 0),
     LADDERMEN("Laddermen", 1000, 0, 50, 4, 0),
@@ -12,6 +14,7 @@ public enum EngineerTroopEnum {
     private final int defencePower;
     private final int speed;
     private final int range;
+
     private EngineerTroopEnum(String name, int HP, int attackPower, int defencePower, int speed, int range) {
         this.name = name;
         this.HP = HP;
@@ -22,6 +25,24 @@ public enum EngineerTroopEnum {
     }
 
     public static EngineerTroop getEngineerTroop(EngineerTroopEnum engineerTroopEnum) {
-        return new EngineerTroop(Play.getCurrentUser(), engineerTroopEnum.name, engineerTroopEnum.HP, engineerTroopEnum.attackPower, engineerTroopEnum.defencePower, engineerTroopEnum.speed, engineerTroopEnum.range);
+        return new EngineerTroop(Play.getCurrentGovernance(), engineerTroopEnum.name, engineerTroopEnum.HP, engineerTroopEnum.attackPower, engineerTroopEnum.defencePower, engineerTroopEnum.speed, engineerTroopEnum.range);
+    }
+
+    public static EngineerTroop getEngineerTroop(EngineerTroopEnum engineerTroopEnum, Governance owner) {
+        return new EngineerTroop(owner, engineerTroopEnum.name, engineerTroopEnum.HP, engineerTroopEnum.attackPower, engineerTroopEnum.defencePower, engineerTroopEnum.speed, engineerTroopEnum.range);
+    }
+
+    public static EngineerTroopEnum getEngineerTroopEnumByName(String engineerTroopEnum) {
+        switch (engineerTroopEnum) {
+            case "tunneler":
+                return TUNNELER;
+            case "laddermen":
+                return LADDERMEN;
+            case "engineer":
+                return ENGINEER;
+            default:
+                return null;
+
+        }
     }
 }
