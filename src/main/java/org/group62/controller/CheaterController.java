@@ -2,6 +2,11 @@ package org.group62.Controller;
 
 import org.group62.Model.*;
 
+import static org.group62.Model.Building.canDropBuildingThere;
+import static org.group62.Model.Building.getBuilding;
+import static org.group62.Model.GroundTreeType.canDropTreeThere;
+import static org.group62.Model.Troop.canDropTroopThere;
+
 public class CheaterController {
     public String setTexture(int x, int y, String groundType1) {
         x = x - 1;
@@ -79,7 +84,7 @@ public class CheaterController {
             return "invalid x,y";
         else if (!StrongHold.getCurrentPlay().getMap()[x][y].getBuildings().isEmpty())
             return "there is building";
-        else if (!canDropTreeOrBuildingThere(x, y))
+        else if (!canDropTreeThere(x, y))
             return "can't drop tree there";
         else {
             StrongHold.getCurrentPlay().getMap()[x][y].setGroundTreeType(groundTreeType);
@@ -92,18 +97,16 @@ public class CheaterController {
         x = x - 1;
         y = y - 1;
         Building building;
-        GovernanceColor governanceColor;
-        Governance owner;
         if ((building = getBuilding(buildingName, governance)) == null)
             return "invalid building name";
         else if (x < 0 || x > 400 || y < 0 || y > 400)
             return "invalid x,y";
-        else if (!StrongHold.getCurrentPlay().getMap()[x][y].getBuildings().isEmpty())
-            return "there is building";
         Ground ground = StrongHold.getCurrentPlay().getMap()[x][y];
-        if ((building instanceof Farm && !(ground.getGroundType().equals(GroundType.GRASS) ||
+        if (!ground.getBuildings().isEmpty())
+            return "there is building";
+        else if ((building instanceof Farm && !(ground.getGroundType().equals(GroundType.GRASS) ||
                 ground.getGroundType().equals(GroundType.DENSE_GRASSLAND))) ||
-                !canDropTreeOrBuildingThere(x, y) || ground.getGroundTreeType() == null)
+                !canDropBuildingThere(x, y) || ground.getGroundTreeType() == null)
             return "can't drop building there";
         else {
             ground.addBuilding(building);
@@ -125,7 +128,7 @@ public class CheaterController {
             return "invalid count";
         else if (engineerTroopEnum == null && arabianTroopEnum == null && europeanTroopEnum == null)
             return "invalid unit name";
-        else if (!canDropUnitThere(x, y))
+        else if (!canDropTroopThere(x, y))
             return "can't drop unit there";
         else {
             if (europeanTroopEnum != null)
@@ -139,66 +142,5 @@ public class CheaterController {
                     StrongHold.getCurrentPlay().getMap()[x][y].addTroop(EngineerTroopEnum.getEngineerTroop(engineerTroopEnum, governance));
             return "drop unit was successful";
         }
-    }
-
-    private boolean canDropUnitThere(int x, int y) {
-        GroundType groundType = StrongHold.getCurrentPlay().getMap()[x][y].getGroundType();
-        switch (groundType) {
-            case ROCK:
-            case OIL:
-            case PLAIN:
-            case RIVER:
-            case SMALL_POND:
-            case BIG_POND:
-            case BEACH:
-            case SEA:
-                return false;
-            default:
-                return true;
-        }
-    }
-
-    private boolean canDropTreeOrBuildingThere(int x, int y) {
-        GroundType groundType = StrongHold.getCurrentPlay().getMap()[x][y].getGroundType();
-        switch (groundType) {
-            case ROCK:
-            case STONE:
-            case IRON:
-            case OIL:
-            case PLAIN:
-            case SHALLOW_WATER:
-            case RIVER:
-            case SMALL_POND:
-            case BIG_POND:
-            case BEACH:
-            case SEA:
-                return false;
-            default:
-                return true;
-        }
-    }
-
-
-    private Building getBuilding(String buildingName, Governance governance) {
-        CastlesEnum castlesEnum = CastlesEnum.getCastlesEnumByName(buildingName);
-        FarmEnum farmEnum = FarmEnum.getFarmEnumByName(buildingName);
-        FoodProcessingEnum foodProcessingEnum = FoodProcessingEnum.getFoodProcessingEnumByName(buildingName);
-        IndustryEnum industryEnum = IndustryEnum.getIndustryEnumByName(buildingName);
-        TownEnum townEnum = TownEnum.getTownEnumByName(buildingName);
-        WeaponsEnum weaponsEnum = WeaponsEnum.getWeaponsEnumByName(buildingName);
-        if (castlesEnum != null)
-            return CastlesEnum.getCastles(castlesEnum, governance);
-        else if (farmEnum != null)
-            return FarmEnum.getFarm(farmEnum, governance);
-        else if (foodProcessingEnum != null)
-            return FoodProcessingEnum.getFoodProcessing(foodProcessingEnum, governance);
-        else if (industryEnum != null)
-            return IndustryEnum.getIndustry(industryEnum, governance);
-        else if (townEnum != null)
-            return TownEnum.getTown(townEnum, governance);
-        else if (weaponsEnum != null)
-            return WeaponsEnum.getWeapons(weaponsEnum, governance);
-        else
-            return null;
     }
 }

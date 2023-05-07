@@ -7,13 +7,28 @@ public class Play {
     private final ArrayList<Governance> governances;
     private final ArrayList<Trade> trades = new ArrayList<>();
     private final Ground[][] map;
-    private static User currentUser = StrongHold.getCurrentUser();
     private static Governance currentGovernance;
 
     public Play(ArrayList<ArrayList<Governance>> alies, ArrayList<Governance> governances, Ground[][] map) {
         this.alies = alies;
         this.governances = governances;
         this.map = map;
+    }
+
+    public int[] getKeepLocationOfGovernance(Governance governance) {
+        int[] output = new int[2];
+        for (int i = 0; i < 400; i++) {
+            for (int j = 0; j < 400; j++) {
+                if (!map[i][j].getBuildings().isEmpty())
+                    if (map[i][j].getBuildings().get(0).getOwner().equals(governance))
+                        if (map[i][j].getBuildings().get(0).getName().equals("Keep")) {
+                            output[0] = i;
+                            output[1] = j;
+                            return output;
+                        }
+            }
+        }
+        return null;
     }
 
     public Governance getGovernanceByColor(GovernanceColor color) {
@@ -42,14 +57,6 @@ public class Play {
 
     public void addTrade(Trade trade) {
         trades.add(trade);
-    }
-
-    public static void setCurrentUser(User currentUser) {
-        Play.currentUser = currentUser;
-    }
-
-    public static User getCurrentUser() {
-        return currentUser;
     }
 
     public ArrayList<ArrayList<Governance>> getAlies() {

@@ -23,5 +23,24 @@ public enum GroundTreeType {
                 return null;
         }
     }
+    public static boolean canDropTreeThere(int x, int y) {
+        GroundType groundType = StrongHold.getCurrentPlay().getMap()[x][y].getGroundType();
+        switch (groundType) {
+            case ROCK:
+            case STONE:
+            case IRON:
+            case OIL:
+            case PLAIN:
+            case SHALLOW_WATER:
+            case RIVER:
+            case SMALL_POND:
+            case BIG_POND:
+            case BEACH:
+            case SEA:
+                return false;
+            default:
+                return true;
+        }
+    }
 
 }

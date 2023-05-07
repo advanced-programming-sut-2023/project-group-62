@@ -2,7 +2,7 @@ package org.group62.Model;
 
 import java.util.HashMap;
 
-public enum WeaponsEnum {
+public enum WeaponsBuildingEnum {
     ARMOURER("Armourer", 100, new HashMap<Resource, Integer>() {{
         put(Resource.WOOD, 20);
     }}, 1, new HashMap<Constant, Integer>() {{
@@ -38,7 +38,7 @@ public enum WeaponsEnum {
     private int workersNumber;
     private HashMap<Constant, Integer> constants = new HashMap<>();
 
-    WeaponsEnum(String name, int goldCost, HashMap<Resource, Integer> resourcesCost, int workersNumber, HashMap<Constant, Integer> constants) {
+    WeaponsBuildingEnum(String name, int goldCost, HashMap<Resource, Integer> resourcesCost, int workersNumber, HashMap<Constant, Integer> constants) {
         this.name = name;
         this.goldCost = goldCost;
         this.resourcesCost = resourcesCost;
@@ -46,15 +46,15 @@ public enum WeaponsEnum {
         this.constants = constants;
     }
 
-    public static Weapons getWeapons(WeaponsEnum weaponsEnum) {
-        return new Weapons(Play.getCurrentGovernance(), weaponsEnum.name, weaponsEnum.goldCost, weaponsEnum.resourcesCost, weaponsEnum.workersNumber, weaponsEnum.constants);
+    public static WeaponsBuilding getWeapons(WeaponsBuildingEnum weaponsBuildingEnum) {
+        return new WeaponsBuilding(Play.getCurrentGovernance(), weaponsBuildingEnum.name, weaponsBuildingEnum.goldCost, weaponsBuildingEnum.resourcesCost, weaponsBuildingEnum.workersNumber, weaponsBuildingEnum.constants);
     }
 
-    public static Weapons getWeapons(WeaponsEnum weaponsEnum, Governance governance) {
-        return new Weapons(governance, weaponsEnum.name, weaponsEnum.goldCost, weaponsEnum.resourcesCost, weaponsEnum.workersNumber, weaponsEnum.constants);
+    public static WeaponsBuilding getWeapons(WeaponsBuildingEnum weaponsBuildingEnum, Governance governance) {
+        return new WeaponsBuilding(governance, weaponsBuildingEnum.name, weaponsBuildingEnum.goldCost, weaponsBuildingEnum.resourcesCost, weaponsBuildingEnum.workersNumber, weaponsBuildingEnum.constants);
     }
 
-    public static WeaponsEnum getWeaponsEnumByName(String weaponsEnum) {
+    public static WeaponsBuildingEnum getWeaponsEnumByName(String weaponsEnum) {
         switch (weaponsEnum) {
             case "armourer":
                 return ARMOURER;

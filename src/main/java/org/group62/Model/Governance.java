@@ -1,6 +1,7 @@
 package org.group62.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Governance {
     private final User owner;
@@ -9,7 +10,9 @@ public class Governance {
     private int foodRate = 0;
     private GovernanceColor color;
     private ArrayList<People> peoples = new ArrayList<>();
-    private final ArrayList<Food> foods = new ArrayList<>();
+    private final HashMap<Food, Integer> foods = new HashMap<>();
+    private final HashMap<Resource, Integer> resources = new HashMap<>();
+    private final HashMap<Weapons, Integer> weapons = new HashMap<>();
     private ArrayList<Building> buildings = new ArrayList<>();
     private int tax = 0;
     private int believers = 0;
@@ -31,8 +34,15 @@ public class Governance {
         this.color = color;
     }
 
-    public void removeFood(Food food) {
-        foods.remove(food);
+    public void decreaseFood(Food food, int count) {
+        foods.replace(food, foods.get(food) - count);
+    }
+
+    public void decreaseResource(Resource resource, int count) {
+        resources.replace(resource, resources.get(resource) - count);
+    }
+    public void decreaseWeapons(Weapons weapon, int count) {
+        weapons.replace(weapon, weapons.get(weapon) - count);
     }
 
     public void removePeople(People people) {
@@ -43,8 +53,15 @@ public class Governance {
         buildings.remove(building);
     }
 
-    public void addFood(Food food) {
-        foods.add(food);
+    public void addFood(Food food, int count) {
+        foods.replace(food, foods.get(food) + count);
+    }
+
+    public void addResource(Resource resource, int count) {
+        resources.replace(resource, resources.get(resource) + count);
+    }
+    public void addWeapons(Weapons weapon, int count) {
+        weapons.replace(weapon, weapons.get(weapon) + count);
     }
 
     public void addPeople(People people) {
@@ -115,8 +132,16 @@ public class Governance {
         return peoples;
     }
 
-    public ArrayList<Food> getFoods() {
+    public HashMap<Food, Integer> getFoods() {
         return foods;
+    }
+
+    public HashMap<Resource, Integer> getResources() {
+        return resources;
+    }
+
+    public HashMap<Weapons, Integer> getWeapons() {
+        return weapons;
     }
 
     public ArrayList<Building> getBuildings() {

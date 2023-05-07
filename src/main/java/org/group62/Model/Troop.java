@@ -1,22 +1,49 @@
 package org.group62.Model;
 
+import java.util.HashMap;
+
 public class Troop extends People {
     private final Governance owner;
     private final String name;
     private int HP; // Hitpoint
+    private HashMap<Weapons, Integer> weaponsCost;
+    private int goldCost;
     private final int attackPower; // Damage
     private final int defencePower; // Armor
     private final int speed; // Number of blocks in each turn
     private final int range; // Number of blocks
 
-    public Troop(Governance owner, String name, int HP, int attackPower, int defencePower, int speed, int range) {
+    public Troop(Governance owner, String name, int HP, HashMap<Weapons, Integer> weaponsCost, int goldCost, int attackPower, int defencePower, int speed, int range) {
         this.owner = owner;
         this.name = name;
         this.HP = HP;
+        this.weaponsCost = weaponsCost;
+        this.goldCost = goldCost;
         this.attackPower = attackPower;
         this.defencePower = defencePower;
         this.speed = speed;
         this.range = range;
+    }
+
+    public static boolean canDropTroopThere(int x, int y) {
+        GroundType groundType = StrongHold.getCurrentPlay().getMap()[x][y].getGroundType();
+        switch (groundType) {
+            case ROCK:
+            case OIL:
+            case PLAIN:
+            case RIVER:
+            case SMALL_POND:
+            case BIG_POND:
+            case BEACH:
+            case SEA:
+                return false;
+            default:
+                return true;
+        }
+    }
+
+    public int getGoldCost() {
+        return goldCost;
     }
 
     public void setHP(int HP) {
@@ -33,6 +60,10 @@ public class Troop extends People {
 
     public int getHP() {
         return HP;
+    }
+
+    public HashMap<Weapons, Integer> getWeaponsCost() {
+        return weaponsCost;
     }
 
     public int getAttackPower() {
