@@ -3,7 +3,6 @@ package org.group62.Model;
 import java.util.HashMap;
 
 public class Troop extends People {
-    private final Governance owner;
     private final String name;
     private int HP; // Hitpoint
     private HashMap<Weapons, Integer> weaponsCost;
@@ -14,7 +13,7 @@ public class Troop extends People {
     private final int range; // Number of blocks
 
     public Troop(Governance owner, String name, int HP, HashMap<Weapons, Integer> weaponsCost, int goldCost, int attackPower, int defencePower, int speed, int range) {
-        this.owner = owner;
+        super(owner);
         this.name = name;
         this.HP = HP;
         this.weaponsCost = weaponsCost;
@@ -48,10 +47,6 @@ public class Troop extends People {
 
     public void setHP(int HP) {
         this.HP = HP;
-    }
-
-    public Governance getOwner() {
-        return owner;
     }
 
     public String getName() {
