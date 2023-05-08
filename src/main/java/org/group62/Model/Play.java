@@ -14,7 +14,20 @@ public class Play {
         this.governances = governances;
         this.map = map;
     }
-
+    public int[] getLocationOfBuilding(Building building) {
+        int[] output = new int[2];
+        for (int i = 0; i < 400; i++) {
+            for (int j = 0; j < 400; j++) {
+                if (!map[i][j].getBuildings().isEmpty())
+                    if (map[i][j].getBuildings().get(0).equals(building)){
+                        output[0] = i;
+                        output[1] = j;
+                        return output;
+                    }
+            }
+        }
+        return null;
+    }
     public int[] getKeepLocationOfGovernance(Governance governance) {
         int[] output = new int[2];
         for (int i = 0; i < 400; i++) {

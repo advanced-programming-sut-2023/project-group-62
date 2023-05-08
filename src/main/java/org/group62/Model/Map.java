@@ -3,9 +3,11 @@ package org.group62.Model;
 public class Map {
     public static Ground[][] getMap1(Governance g1, Governance g2, Governance g3, Governance g4) {
         Ground[][] map = new Ground[400][400];
-        for (Ground[] grounds : map)
-            for (Ground ground : grounds)
-                ground = new Ground();
+        for (int i = 0; i < 400; i++) {
+            for (int j = 0; j < 400; j++) {
+                map[i][j] = new Ground(i,j);
+            }
+        }
         setKeep(map, g1, 0, 0);
         setStockpile(map, g1, 0, 1);
         setKeep(map, g2, 0, 399);

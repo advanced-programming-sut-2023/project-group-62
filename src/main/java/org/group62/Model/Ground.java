@@ -3,10 +3,17 @@ package org.group62.Model;
 import java.util.ArrayList;
 
 public class Ground {
+    private final int x;
+    private final int y;
     private GroundType groundType = GroundType.LAND;
     private GroundTreeType groundTreeType = null;
     private ArrayList<Building> buildings = new ArrayList<>();
     private ArrayList<Troop> troops = new ArrayList<>();
+
+    public Ground(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     public void removeTroop(Troop troop) {
         troops.remove(troop);
@@ -32,6 +39,13 @@ public class Ground {
         troops.add(troop);
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 
     public ArrayList<Building> getBuildings() {
         return buildings;
