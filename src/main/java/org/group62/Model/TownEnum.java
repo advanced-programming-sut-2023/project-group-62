@@ -7,21 +7,24 @@ public enum TownEnum {
         put(Resource.WOOD, 6);
     }}, 0, new HashMap<Constant, Integer>() {{
         put(Constant.HP, 2000);
+        put(Constant.MAX_HP, 2000);
     }}),
     CHURCH("Church", 250, new HashMap<Resource, Integer>()
             , 0, new HashMap<Constant, Integer>() {{
         put(Constant.HP, 2000);
+        put(Constant.MAX_HP, 2000);
         put(Constant.POPULARITY, 2);
     }}),
     CATHEDRAL("Cathedral", 1000, new HashMap<Resource, Integer>()
             , 0, new HashMap<Constant, Integer>() {{
         put(Constant.HP, 4000);
+        put(Constant.MAX_HP, 4000);
         put(Constant.POPULARITY, 2);
     }});
     private final String name;
     private final int goldCost;
     private HashMap<Resource, Integer> resourcesCost = new HashMap<>();
-    private int workersNumber;
+    private final int workersNumber;
     private HashMap<Constant, Integer> constants = new HashMap<>();
 
     TownEnum(String name, int goldCost, HashMap<Resource, Integer> resourcesCost, int workersNumber, HashMap<Constant, Integer> constants) {

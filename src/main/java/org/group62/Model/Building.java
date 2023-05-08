@@ -7,7 +7,7 @@ public class Building {
     private final String name;
     private final int goldCost;
     private final HashMap<Resource, Integer> resourcesCost;
-    private int workersNumber;
+    private final int workersNumber;
     private HashMap<Constant, Integer> constants;
 
 

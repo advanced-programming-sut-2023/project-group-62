@@ -7,6 +7,7 @@ public enum WeaponsBuildingEnum {
         put(Resource.WOOD, 20);
     }}, 1, new HashMap<Constant, Integer>() {{
         put(Constant.HP, 2000);
+        put(Constant.MAX_HP, 2000);
         put(Constant.CONSUMING_MATERIALS, 1);
         put(Constant.PRODUCTION_RATE, 2);
     }}),
@@ -14,6 +15,7 @@ public enum WeaponsBuildingEnum {
         put(Resource.WOOD, 20);
     }}, 1, new HashMap<Constant, Integer>() {{
         put(Constant.HP, 2000);
+        put(Constant.MAX_HP, 2000);
         put(Constant.CONSUMING_MATERIALS, 1);
         put(Constant.PRODUCTION_RATE, 2);
     }}),
@@ -21,6 +23,7 @@ public enum WeaponsBuildingEnum {
         put(Resource.WOOD, 20);
     }}, 1, new HashMap<Constant, Integer>() {{
         put(Constant.HP, 2000);
+        put(Constant.MAX_HP, 2000);
         put(Constant.CONSUMING_MATERIALS, 1);
         put(Constant.PRODUCTION_RATE, 1);
     }}),
@@ -28,6 +31,7 @@ public enum WeaponsBuildingEnum {
         put(Resource.WOOD, 20);
     }}, 1, new HashMap<Constant, Integer>() {{
         put(Constant.HP, 2000);
+        put(Constant.MAX_HP, 2000);
         put(Constant.CONSUMING_MATERIALS, 1);
         put(Constant.PRODUCTION_RATE, 1);
     }});
@@ -35,7 +39,7 @@ public enum WeaponsBuildingEnum {
     private final String name;
     private final int goldCost;
     private HashMap<Resource, Integer> resourcesCost = new HashMap<>();
-    private int workersNumber;
+    private final int workersNumber;
     private HashMap<Constant, Integer> constants = new HashMap<>();
 
     WeaponsBuildingEnum(String name, int goldCost, HashMap<Resource, Integer> resourcesCost, int workersNumber, HashMap<Constant, Integer> constants) {

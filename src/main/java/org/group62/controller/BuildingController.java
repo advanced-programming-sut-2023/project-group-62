@@ -60,58 +60,67 @@ public class BuildingController {
         int[] location = StrongHold.getCurrentPlay().getKeepLocationOfGovernance(Play.getCurrentGovernance());
         Ground ground = StrongHold.getCurrentPlay().getMap()[location[0]][location[1]];
         Governance governance = Play.getCurrentGovernance();
+        Troop troop;
+        EuropeanTroopEnum europeanTroopEnum = null;
+        ArabianTroopEnum arabianTroopEnum = null;
+        EngineerTroopEnum engineerTroopEnum = null;
         if (currentBuilding == null)
             return "you don't select building";
         else if (count < 1)
             return "invalid count";
         else {
-            Troop troop;
             switch (currentBuilding.getName()) {
                 case "Barrack":
-                    EuropeanTroopEnum europeanTroopEnum = EuropeanTroopEnum.getEuropeanTroopEnumByName(type);
+                    europeanTroopEnum = EuropeanTroopEnum.getEuropeanTroopEnumByName(type);
                     if (europeanTroopEnum == null)
                         return "you can't create this unit there";
-                    else{
-                        if ((troop = EuropeanTroopEnum.getEuropeanTroop(europeanTroopEnum)).getGoldCost()*count> governance.getGold())
-                            return "you haven't enough gold";
-                        else
-                            for (int i = 0; i< count; i++)
-                                ground.addTroop(EuropeanTroopEnum.getEuropeanTroop(europeanTroopEnum));
+                    else
+                        troop = EuropeanTroopEnum.getEuropeanTroop(europeanTroopEnum);
 
-                    }
                     break;
                 case "Engineer guild":
-                    ArabianTroopEnum arabianTroopEnum = ArabianTroopEnum.getArabianTroopEnumByName(type);
+                    arabianTroopEnum = ArabianTroopEnum.getArabianTroopEnumByName(type);
                     if (arabianTroopEnum == null)
                         return "you can't create this unit there";
-                    else{
-                        if ((troop = ArabianTroopEnum.getArabianTroop(arabianTroopEnum)).getGoldCost()*count> governance.getGold())
-                            return "you haven't enough gold";
-                        else
-                            for (int i = 0; i< count; i++)
-                                ground.addTroop(ArabianTroopEnum.getArabianTroop(arabianTroopEnum));
-                    }
+                    else
+                        troop = ArabianTroopEnum.getArabianTroop(arabianTroopEnum);
                     break;
                 case "Mercenary post":
-                    EngineerTroopEnum engineerTroopEnum = EngineerTroopEnum.getEngineerTroopEnumByName(type);
+                    engineerTroopEnum = EngineerTroopEnum.getEngineerTroopEnumByName(type);
                     if (engineerTroopEnum == null)
                         return "you can't create this unit there";
-                    else{
-                        if ((troop = EngineerTroopEnum.getEngineerTroop(engineerTroopEnum)).getGoldCost()*count> governance.getGold())
-                            return "you haven't enough gold";
-                        else
-                            for (int i = 0; i< count; i++)
-                                ground.addTroop(EngineerTroopEnum.getEngineerTroop(engineerTroopEnum));
-                    }
+                    else
+                        troop = EngineerTroopEnum.getEngineerTroop(engineerTroopEnum);
                     break;
                 default:
                     return "you can't create unit with this building";
             }
-            governance.setGold(governance.getGold() - count * troop.getGoldCost());
+            if (troop.getGoldCost() * count > governance.getGold())
+                return "you haven't enough gold";
+            else if (governance.getPeoples().size() < count)
+                return "you don't have enough people";
+            else if (!troop.getWeaponsCost().isEmpty()) {
+                for (Weapons weapons : troop.getWeaponsCost().keySet()) {
+                    if (troop.getWeaponsCost().get(weapons) > governance.getWeapons().get(weapons))
+                        return "you don't have enough weapons";
+                }
+            } else {
+                governance.setGold(governance.getGold() - count * troop.getGoldCost());
+                if (!troop.getWeaponsCost().isEmpty())
+                    for (Weapons weapons1 : troop.getWeaponsCost().keySet())
+                        troop.getWeaponsCost().replace(weapons1, troop.getWeaponsCost().get(weapons1) - Play.getCurrentGovernance().getWeapons().get(weapons1));
+                if (europeanTroopEnum != null)
+                    for (int i = 0; i < count; i++)
+                        ground.addTroop(EuropeanTroopEnum.getEuropeanTroop(europeanTroopEnum));
+                if (arabianTroopEnum != null)
+                    for (int i = 0; i < count; i++)
+                        ground.addTroop(ArabianTroopEnum.getArabianTroop(arabianTroopEnum));
+                if (engineerTroopEnum != null)
+                    for (int i = 0; i < count; i++)
+                        ground.addTroop(EngineerTroopEnum.getEngineerTroop(engineerTroopEnum));
+            }
             return "create unit was successful";
-
         }
-
     }
 
     public String repair() {
