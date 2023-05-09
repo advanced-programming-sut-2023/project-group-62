@@ -14,7 +14,7 @@ public class CheaterController {
         GroundType groundType;
         if ((groundType = GroundType.getGroundType(groundType1)) == null)
             return "invalid ground type";
-        else if (x < 0 || x > 400 || y < 0 || y > 400)
+        else if (x < 0 || x > 399 || y < 0 || y > 399)
             return "invalid x,y";
         else if (!StrongHold.getCurrentPlay().getMap()[x][y].getBuildings().isEmpty())
             return "there is building";
@@ -29,7 +29,7 @@ public class CheaterController {
         y1 = y1 - 1;
         x2 = x2 - 1;
         y2 = y2 - 1;
-        if (x1 < 0 || x1 > 400 || y1 < 0 || y1 > 400 || x2 < 0 || x2 > 400 || y2 < 0 || y2 > 400)
+        if (x1 < 0 || x1 > 399 || y1 < 0 || y1 > 399 || x2 < 0 || x2 > 399 || y2 < 0 || y2 > 399)
             return "invalid x,y";
         GroundType groundType;
         boolean isThereBuilding = false;
@@ -64,7 +64,7 @@ public class CheaterController {
         if (!(direction.equals("r") || direction.equals("w") || direction.equals("s") ||
                 direction.equals("e") || direction.equals("n")))
             return "invalid direction";
-        else if (x < 0 || x > 400 || y < 0 || y > 400)
+        else if (x < 0 || x > 399 || y < 0 || y > 399)
             return "invalid x,y";
         else {
             StrongHold.getCurrentPlay().getMap()[x][y].setGroundType(GroundType.ROCK);
@@ -80,7 +80,7 @@ public class CheaterController {
         GroundTreeType groundTreeType;
         if ((groundTreeType = GroundTreeType.getGroundTreeType(groundTreeType1)) == null)
             return "invalid tree type";
-        else if (x < 0 || x > 400 || y < 0 || y > 400)
+        else if (x < 0 || x > 399 || y < 0 || y > 399)
             return "invalid x,y";
         else if (!StrongHold.getCurrentPlay().getMap()[x][y].getBuildings().isEmpty())
             return "there is building";
@@ -99,7 +99,7 @@ public class CheaterController {
         Building building;
         if ((building = getBuilding(buildingName, governance)) == null)
             return "invalid building name";
-        else if (x < 0 || x > 400 || y < 0 || y > 400)
+        else if (x < 0 || x > 399 || y < 0 || y > 399)
             return "invalid x,y";
         Ground ground = StrongHold.getCurrentPlay().getMap()[x][y];
         if (!ground.getBuildings().isEmpty())
@@ -122,7 +122,7 @@ public class CheaterController {
         EuropeanTroopEnum europeanTroopEnum = EuropeanTroopEnum.getEuropeanTroopEnumByName(unitName);
         ArabianTroopEnum arabianTroopEnum = ArabianTroopEnum.getArabianTroopEnumByName(unitName);
         EngineerTroopEnum engineerTroopEnum = EngineerTroopEnum.getEngineerTroopEnumByName(unitName);
-        if (x < 0 || x > 400 || y < 0 || y > 400)
+        if (x < 0 || x > 399 || y < 0 || y > 399)
             return "invalid x,y";
         else if (count < 1)
             return "invalid count";

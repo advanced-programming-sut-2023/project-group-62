@@ -7,6 +7,9 @@ public class Troop extends People {
     private int HP; // Hitpoint
     private HashMap<Weapons, Integer> weaponsCost;
     private int goldCost;
+    boolean isMoving = false;
+    private Building buildingTarget = null;
+    private People peopleTarget = null;
     private final int attackPower; // Damage
     private final int defencePower; // Armor
     private final int speed; // Number of blocks in each turn
@@ -39,6 +42,30 @@ public class Troop extends People {
             default:
                 return true;
         }
+    }
+
+    public Building getBuildingTarget() {
+        return buildingTarget;
+    }
+
+    public void setBuildingTarget(Building buildingTarget) {
+        this.buildingTarget = buildingTarget;
+    }
+
+    public People getPeopleTarget() {
+        return peopleTarget;
+    }
+
+    public void setPeopleTarget(People peopleTarget) {
+        this.peopleTarget = peopleTarget;
+    }
+
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    public void setMoving(boolean moving) {
+        isMoving = moving;
     }
 
     public int getGoldCost() {

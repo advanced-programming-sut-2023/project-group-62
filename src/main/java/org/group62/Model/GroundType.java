@@ -59,4 +59,43 @@ public enum GroundType {
 
         }
     }
+    public static String getAbbreviationGroundType(GroundType groundType) {
+        switch (groundType) {
+            case LAND:
+                return "L";
+            case LAND_WITH_PEBBLES:
+                return "LP";
+            case STONE:
+                return "ST";
+            case ROCK:
+                return "R";
+            case IRON:
+                return "I";
+            case GRASS:
+                return "G";
+            case MEADOW:
+                return "M";
+            case DENSE_GRASSLAND:
+                return "DG";
+            case OIL:
+                return "O";
+            case PLAIN:
+                return "P";
+            case SHALLOW_WATER:
+                return "SW";
+            case RIVER:
+                return "RI";
+            case SMALL_POND:
+                return "SP";
+            case BIG_POND:
+                return "BP";
+            case BEACH:
+                return "B";
+            case SEA:
+                return "SE";
+            default:
+                return null;
+
+        }
+    }
 }

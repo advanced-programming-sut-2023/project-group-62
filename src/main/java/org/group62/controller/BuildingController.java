@@ -16,7 +16,7 @@ public class BuildingController {
         Governance governance = Play.getCurrentGovernance();
         if ((building = getBuilding(buildingName, governance)) == null)
             return "invalid building name";
-        else if (x < 0 || x > 400 || y < 0 || y > 400)
+        else if (x < 0 || x > 399 || y < 0 || y > 399)
             return "invalid x,y";
         Ground ground = StrongHold.getCurrentPlay().getMap()[x][y];
         if (!ground.getBuildings().isEmpty())
@@ -45,7 +45,7 @@ public class BuildingController {
     public String selectBuilding(int x, int y) {
         x = x - 1;
         y = y - 1;
-        if (x < 0 || x > 400 || y < 0 || y > 400)
+        if (x < 0 || x > 399 || y < 0 || y > 399)
             return "invalid x,y";
         Ground ground = StrongHold.getCurrentPlay().getMap()[x][y];
         if (ground.getBuildings().isEmpty())
@@ -108,7 +108,7 @@ public class BuildingController {
                 governance.setGold(governance.getGold() - count * troop.getGoldCost());
                 if (!troop.getWeaponsCost().isEmpty())
                     for (Weapons weapons1 : troop.getWeaponsCost().keySet())
-                        troop.getWeaponsCost().replace(weapons1, troop.getWeaponsCost().get(weapons1) - Play.getCurrentGovernance().getWeapons().get(weapons1));
+                        governance.getWeapons().replace(weapons1, governance.getWeapons().get(weapons1) - troop.getWeaponsCost().get(weapons1));
                 if (europeanTroopEnum != null)
                     for (int i = 0; i < count; i++)
                         ground.addTroop(EuropeanTroopEnum.getEuropeanTroop(europeanTroopEnum));
@@ -124,14 +124,40 @@ public class BuildingController {
     }
 
     public String repair() {
-        return null;
+        int[] location = StrongHold.getCurrentPlay().getLocationOfBuilding(this.getCurrentBuilding());
+        Ground[][] map = StrongHold.getCurrentPlay().getMap();
+        Governance governance = Play.getCurrentGovernance();
+        int x = location[0], y = location[1];
+        if (getCurrentBuilding() == null)
+            return "you don't select building";
+        else if (!(getCurrentBuilding() instanceof Castles))
+            return "This building is not a castle";
+        else if (getCurrentBuilding().getResourcesCost().containsKey(Resource.STONE))
+            return "This is not a stone building";
+        else if (getCurrentBuilding().getConstants().get(Constant.HP) >= getCurrentBuilding().getConstants().get(Constant.MAX_HP))
+            return "HP is full";
+        int stoneCost = 5;
+        if (governance.getResources().get(Resource.STONE) < stoneCost)
+            return "not enough stone to repair";
+        for (Ground[] grounds : map) {
+            for (Ground ground : grounds) {
+                if (ground.getX() < x + 10 && ground.getX() > x - 10 && ground.getY() < y + 10 && ground.getY() > y - 10)
+                    if (!ground.getTroops().isEmpty())
+                        for (Troop troop : ground.getTroops())
+                            if (!troop.getOwner().equals(getCurrentBuilding().getOwner()))
+                                return "there is enemy";
+            }
+        }
+        getCurrentBuilding().getConstants().replace(Constant.HP, getCurrentBuilding().getConstants().get(Constant.MAX_HP));
+        governance.getResources().replace(Resource.STONE, governance.getResources().get(Resource.STONE) - stoneCost);
+        return "repair was successful";
     }
 
-    public Building getCurrentBuilding() {
+    private Building getCurrentBuilding() {
         return currentBuilding;
     }
 
-    public void setCurrentBuilding(Building currentBuilding) {
+    private void setCurrentBuilding(Building currentBuilding) {
         this.currentBuilding = currentBuilding;
     }
 }
