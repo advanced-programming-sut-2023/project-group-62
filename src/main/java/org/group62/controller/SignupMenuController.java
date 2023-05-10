@@ -11,14 +11,20 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SignupMenuController {
+    ArrayList<String> usernames = new ArrayList<>();
+    ArrayList<String> emails = new ArrayList<>();
+    Scanner scanner;
     public SignupMenuController(){
 
     }
-
+    public SignupMenuController(Scanner scanner){
+        this.scanner = scanner;
+    }
     public String normalCreatUser(Matcher matcher) throws IOException {
         String username = matcher.group("username");
         String password = matcher.group("password");
@@ -48,12 +54,19 @@ public class SignupMenuController {
         } else if (!password.equals(passwordConfirmation))
             return "Creat user failed: password confirmation incorrect!";
         else if (isEmailDuplicate(email))
-            return "Creat user failed: Your email duplicate!";
+            return "Creat user failed: Your email is duplicate!";
         else if (Commands.getMatcherMatches(email, Commands.EMAIL_VALIDATION) == null)
             return "Creat user failed: Email address invalid!";
         else {
-            putDataInToDatabase(username,password,email,nickname,slogan);
-            return "Creat user successful!";
+            String firstSecurityQuestion = "1.What is your first school's name?";
+            String secondSecurityQuestion = "2.What is your favorite car?";
+            String thirdSecurityQuestion = "3.When is your birthday?";
+            return "Creat user successful!\n" +
+                    "Pick your security question:\n" +
+                    firstSecurityQuestion + "\n" +
+                    secondSecurityQuestion + "\n" +
+                    thirdSecurityQuestion + "\n" +
+                    "Help: question pick -q <question-number> -a <answer> -c <answer-confirm>";
         }
     }
 
@@ -85,13 +98,52 @@ public class SignupMenuController {
         } else if (!password.equals(passwordConfirmation))
             return "Create user failed: password confirmation incorrect!";
         else if (isEmailDuplicate(email))
-            return "Create user failed: Your email duplicate!";
+            return "Create user failed: Your email is duplicate!";
         else if (Commands.getMatcherMatches(email, Commands.EMAIL_VALIDATION) == null)
             return "Create user failed: Email address invalid!";
         else {
-            putDataInToDatabase(username,password,email,nickname,"User has no slogan!");
-            return "Create user successful!";
+            String firstSecurityQuestion = "1.What is your first school's name?";
+            String secondSecurityQuestion = "2.What is your favorite car?";
+            String thirdSecurityQuestion = "3.When is your birthday?";
+            return "Creat user successful!\n" +
+                    "Pick your security question:\n" +
+                    firstSecurityQuestion + "\n" +
+                    secondSecurityQuestion + "\n" +
+                    thirdSecurityQuestion + "\n" +
+                    "Help: question pick -q <question-number> -a <answer> -c <answer-confirm>";
         }
+    }
+
+    public String pickSecurityQuestion(boolean isSloganExist,Matcher matcher,Matcher pickQuestionMatcher) {
+        String slogan = "User has no slogan!";
+        String firstSecurityQuestion = "1.What is your first school's name?";
+        String secondSecurityQuestion = "2.What is your favorite car?";
+        String thirdSecurityQuestion = "3.When is your birthday?";
+        String username = matcher.group("username");
+        String password = matcher.group("password");
+        String email = matcher.group("email");
+        String nickname = matcher.group("nickname");
+        if(isSloganExist)
+            slogan = matcher.group("slogan");
+        String securityQuestionNumber = pickQuestionMatcher.group("questionNumber");
+        String answer = pickQuestionMatcher.group("answer");
+        String answerConfirm = pickQuestionMatcher.group("answerConfirm");
+        String securityQuestion = null;
+        if(securityQuestionNumber.equals("1"))
+            securityQuestion = firstSecurityQuestion;
+        else if(securityQuestionNumber.equals("2"))
+            securityQuestion = secondSecurityQuestion;
+        else if(securityQuestionNumber.equals("3"))
+            securityQuestion = thirdSecurityQuestion;
+        if(Integer.parseInt(securityQuestionNumber) > 3 || Integer.parseInt(securityQuestionNumber) < 1)
+            return "Pick Question failed: You hava entered invalid question number!";
+        else if(!answerConfirm.equals(answer))
+            return "Pick Question failed: Answer confirm incorrect!";
+        else {
+                putDataInToDatabase(username, password, email, nickname, slogan,securityQuestion,answer);
+                return "Picked successfully!";
+        }
+
     }
 
     public String creatUserWithRandomPassword(Matcher matcher) {
@@ -114,34 +166,30 @@ public class SignupMenuController {
             return false;
     }
 
-    private Boolean isUsernameDuplicate(String username) throws FileNotFoundException {
-        //Scanner scanner = new Scanner(new File("usernames.txt"));
-        ArrayList<String> userList = new ArrayList<>();
-        //while (scanner.hasNext()) {
-          //  userList.add(scanner.next());
-        //}
-        //scanner.close();
-        for (String name : userList) {
-            if (name.equals(username))
-                return true;
+    private boolean isUsernameDuplicate(String username){
+        userJsonFileParse("usernameCheck");
+        if(usernames.size() != 0) {
+            for (String name : usernames) {
+                if (username.equals(name))
+                    return true;
+            }
+            return false;
         }
         return false;
     }
 
-    private Boolean isEmailDuplicate(String email) throws FileNotFoundException {
-        //Scanner scanner = new Scanner(new File("emails.txt"));
-        ArrayList<String> emailList = new ArrayList<>();
-        //while (scanner.hasNext()) {
-        //    emailList.add(scanner.next().toUpperCase());
-        //}
-        //scanner.close();
-        for (String name : emailList) {
-            if (name.equals(email))
-                return true;
+    private Boolean isEmailDuplicate(String email){
+        userJsonFileParse("emailCheck");
+        if(emails.size() != 0){
+            for (String e : emails){
+                if(e.equals(email))
+                    return true;
+            }
+            return false;
         }
         return false;
     }
-    private void parseEmpObj(JSONObject emp,JSONArray userList) {
+    private void updateParseEmpObject(JSONObject emp, JSONArray userList) {
         JSONObject array = new JSONObject();
         JSONObject empobj = (JSONObject) emp.get("User");
         String username = (String) empobj.get("username");
@@ -149,21 +197,26 @@ public class SignupMenuController {
         String email = (String) empobj.get("Email");
         String nickname = (String) empobj.get("nickname");
         String slogan = (String) empobj.get("slogan");
+        String securityQuestion = (String) empobj.get("securityQuestion");
+        String securityQuestionAnswer = (String) empobj.get("securityQuestionAnswer");
         array.put("username", username);
         array.put("passwordSecure", passwordSecure);
         array.put("Email", email);
         array.put("nickname", nickname);
         array.put("slogan", slogan);
+        array.put("securityQuestion",securityQuestion);
+        array.put("securityQuestionAnswer",securityQuestionAnswer);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("User",array);
         userList.add(jsonObject);
+
     }
-    private void readUserJsonFile(JSONArray userList){
+    private void updateUserJsonFile(JSONArray userList){
         JSONParser jsonParser = new JSONParser();
         try(FileReader reader = new FileReader("database\\users.json")){
             Object object = jsonParser.parse(reader);
             JSONArray empList = (JSONArray) object;
-            empList.forEach(emp -> parseEmpObj((JSONObject) emp,userList));
+            empList.forEach(emp -> updateParseEmpObject((JSONObject) emp,userList));
         }
         catch (FileNotFoundException e){
             System.out.println("Database file not found!");
@@ -173,25 +226,48 @@ public class SignupMenuController {
             System.out.println("The database file is empty! The first user added!");
         }
     }
-    private void putDataInToDatabase(String username,String password,String email,String nickname,String slogan){
+    private void userJsonFileParse(String order){
+        JSONParser jsonParser = new JSONParser();
+        try(FileReader reader = new FileReader("database\\users.json")) {
+            Object object = jsonParser.parse(reader);
+            JSONArray empList = (JSONArray) object;
+            if (order.equals("usernameCheck"))
+                userJsonFileFunctions(empList, "usernameCheck");
+            else if (order.equals("emailCheck")){
+                userJsonFileFunctions(empList,"emailCheck");
+            }
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Database file not found!");
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }catch (ParseException e){
+            System.out.println("The database file is empty! No data to check!");
+        }
+    }
+    private void putDataInToDatabase(String username,String password,String email,String nickname,String slogan,
+                                     String securityQuestion,String securityQuestionAnswer){
         String passwordSecure = null;
         try {
             passwordSecure = SHA256.sha256Security(password);
         }catch (NoSuchAlgorithmException e){
             System.out.println(e.getMessage());
         }
+        email = email.toLowerCase();
         JSONObject userDetails = new JSONObject();
         userDetails.put("username", username);
         userDetails.put("passwordSecure", passwordSecure);
         userDetails.put("Email", email);
         userDetails.put("nickname", nickname);
         userDetails.put("slogan", slogan);
+        userDetails.put("securityQuestion",securityQuestion);
+        userDetails.put("securityQuestionAnswer",securityQuestionAnswer);
 
         JSONObject userObject = new JSONObject();
         userObject.put("User", userDetails);
 
         JSONArray userList = new JSONArray();
-        readUserJsonFile(userList);
+        updateUserJsonFile(userList);
         userList.add(userObject);
         try (FileWriter file = new FileWriter("database\\users.json")) {
             file.write(userList.toString());
@@ -199,5 +275,28 @@ public class SignupMenuController {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+    private void userJsonFileFunctions(JSONArray empList, String function){
+        switch (function){
+            case "usernameCheck":
+                usernames.clear();
+                empList.forEach(emp -> usernameParse((JSONObject) emp));
+                break;
+            case "emailCheck":
+                emails.clear();
+                empList.forEach(emp -> emailParse((JSONObject) emp));
+                break;
+        }
+
+    }
+    private void usernameParse(JSONObject emp) {
+        JSONObject empobj = (JSONObject) emp.get("User");
+        String username = (String) empobj.get("username");
+        usernames.add(username);
+    }
+    private void emailParse(JSONObject emp) {
+        JSONObject empobj = (JSONObject) emp.get("User");
+        String email = (String) empobj.get("Email");
+        emails.add(email);
     }
 }

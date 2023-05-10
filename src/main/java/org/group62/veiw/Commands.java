@@ -18,8 +18,9 @@ public enum Commands {
     CREAT_USER_WITH_RANDOM_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
             "(?=.+(-p|--password)\\s+(?<password>\\S+)\\s+(?<passwordConfirmation>\\S+))(?=.+(-email)" +
             "\\s+(?<email>\\S+))(?=.+(-n|--nickname)\\s+(?<nickname>\\S+))((?=.+(-s|--slogan)\\s+random)).+)\\s*$"),
-    QUESTION_PICK("^\\s*question\\s+pick(?<args>(?=.+(-q)\\s+(?<questionNumber>\\S+))(?=.+(-a)\\s+" +
-            "(?<answer>\\S+))(?=.+(-c)\\s+(?<answerConfirm>\\S+)).+)\\s*$"),
+    QUESTION_PICK("^\\s*question\\s+pick(?<args>(?=.+(-q)\\s+(?<questionNumber>\\S+))(?=.+(-a)\\s+(?<answer>" +
+            "\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-q|\\s+-c)|.+))(?=.+(-c)\\s+(?<answerConfirm>\"(.*\\S+\\s+.*)" +
+            "\"|.+?(?=\\s+-q|\\s+-a)|.+)).+)\\s*$"),
     CREAT_USER_WITH_RANDOM_PASSWORD("^\\s*user\\s+creat(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
             "(?=.+(-n|--nickname)\\s+(?<nickname>\\S+))(?=.+(-p)\\s+random)(?=.+(-e|--email)\\s+(?<email>\\S+)).+)\\s*$"),
     CREAT_USER_WITH_RANDOM_SLOGAN_AND_RANDOM_PASSWORD("^\\s*user\\s+creat(?<args>(?=.+(-u|--username)\\s+" +

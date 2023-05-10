@@ -6,11 +6,13 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException, ParseException {
-        SignupMenuController signupMenuController = new SignupMenuController();
-        SignupMenu signupMenu = new SignupMenu(signupMenuController);
+        Scanner scanner = new Scanner(System.in);
+        SignupMenuController signupMenuController = new SignupMenuController(scanner);
+        SignupMenu signupMenu = new SignupMenu(signupMenuController,scanner);
         signupMenu.run();
     }
 }
