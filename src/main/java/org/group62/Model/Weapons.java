@@ -6,6 +6,7 @@ public enum Weapons {
     MACE,
     SWORD,
     BOW,
+    CROSSBOW,
     SPEAR,
     PIK,
     HORSE;

@@ -7,7 +7,7 @@ public enum EuropeanTroopEnum {
         put(Weapons.BOW, 1);
     }}, 6, 400, 100, 4, 10),
     CROSSBOWMEN("Crossbowmen", 1000, new HashMap<Weapons, Integer>() {{
-        put(Weapons.BOW, 1);
+        put(Weapons.CROSSBOW, 1);
         put(Weapons.LEATHER_ARMOR, 1);
     }}, 8, 400, 150, 2, 8),
     SPEARMEN("Spearmen", 1000, new HashMap<Weapons, Integer>() {{
