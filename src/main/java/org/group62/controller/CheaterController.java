@@ -106,11 +106,27 @@ public class CheaterController {
             return "there is building";
         else if ((building instanceof Farm && !(ground.getGroundType().equals(GroundType.GRASS) ||
                 ground.getGroundType().equals(GroundType.DENSE_GRASSLAND))) ||
-                !canDropBuildingThere(x, y) || ground.getGroundTreeType() == null)
+                !canDropBuildingThere(x, y) || ground.getGroundTreeType() == null ||
+                (ground.getGroundType().equals(GroundType.STONE) && !building.getName().equals("Quarry")) ||
+                (ground.getGroundType().equals(GroundType.IRON) && !building.getName().equals("Iron mine")))
             return "can't drop building there";
         else {
             ground.addBuilding(building);
             governance.addBuilding(building);
+            if (building.getName().equals("Hovel"))
+                for (int i = 0; i < 8; i++) {
+                    People people = new People(governance);
+                    governance.addPeople(people);
+                    int[] location = StrongHold.getCurrentPlay().getKeepLocationOfGovernance(governance);
+                    StrongHold.getCurrentPlay().getMap()[location[0]][location[1]].addPeople(people);
+                }
+            int i = 0;
+            while (i < building.getWorkersNumber()) {
+                Worker worker = new Worker(governance);
+                governance.addPeople(worker);
+                ground.addPeople(worker);
+                i++;
+            }
             return "drop building was successful";
         }
 
@@ -133,13 +149,13 @@ public class CheaterController {
         else {
             if (europeanTroopEnum != null)
                 for (int i = 0; i < count; i++)
-                    StrongHold.getCurrentPlay().getMap()[x][y].addTroop(EuropeanTroopEnum.getEuropeanTroop(europeanTroopEnum, governance));
+                    StrongHold.getCurrentPlay().getMap()[x][y].addPeople(EuropeanTroopEnum.getEuropeanTroop(europeanTroopEnum, governance));
             if (arabianTroopEnum != null)
                 for (int i = 0; i < count; i++)
-                    StrongHold.getCurrentPlay().getMap()[x][y].addTroop(ArabianTroopEnum.getArabianTroop(arabianTroopEnum, governance));
+                    StrongHold.getCurrentPlay().getMap()[x][y].addPeople(ArabianTroopEnum.getArabianTroop(arabianTroopEnum, governance));
             if (engineerTroopEnum != null)
                 for (int i = 0; i < count; i++)
-                    StrongHold.getCurrentPlay().getMap()[x][y].addTroop(EngineerTroopEnum.getEngineerTroop(engineerTroopEnum, governance));
+                    StrongHold.getCurrentPlay().getMap()[x][y].addPeople(EngineerTroopEnum.getEngineerTroop(engineerTroopEnum, governance));
             return "drop unit was successful";
         }
     }

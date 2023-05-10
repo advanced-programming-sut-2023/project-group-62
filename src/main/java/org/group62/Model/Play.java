@@ -14,13 +14,14 @@ public class Play {
         this.governances = governances;
         this.map = map;
     }
-    public int[] getLocationOfTroop(Troop troop) {
+
+    public int[] getLocationOfPeople(People people) {
         int[] output = new int[2];
         for (int i = 0; i < 400; i++) {
             for (int j = 0; j < 400; j++) {
-                if (!map[i][j].getTroops().isEmpty())
-                    for (Troop troop1 : map[i][j].getTroops()) {
-                        if (troop1.equals(troop)){
+                if (!map[i][j].getPeople().isEmpty())
+                    for (People people1 : map[i][j].getPeople()) {
+                        if (people1.equals(people)) {
                             output[0] = i;
                             output[1] = j;
                             return output;
@@ -30,12 +31,13 @@ public class Play {
         }
         return null;
     }
+
     public int[] getLocationOfBuilding(Building building) {
         int[] output = new int[2];
         for (int i = 0; i < 400; i++) {
             for (int j = 0; j < 400; j++) {
                 if (!map[i][j].getBuildings().isEmpty())
-                    if (map[i][j].getBuildings().get(0).equals(building)){
+                    if (map[i][j].getBuildings().get(0).equals(building)) {
                         output[0] = i;
                         output[1] = j;
                         return output;
@@ -44,6 +46,15 @@ public class Play {
         }
         return null;
     }
+
+    public int howManyOfThisBuildingExistByName(String buildingName, Governance governance) {
+        int output = 0;
+        if (!governance.getBuildings().isEmpty())
+            if (governance.getBuildings().get(0).getName().equals(buildingName))
+                output++;
+        return output;
+    }
+
     public int[] getKeepLocationOfGovernance(Governance governance) {
         int[] output = new int[2];
         for (int i = 0; i < 400; i++) {

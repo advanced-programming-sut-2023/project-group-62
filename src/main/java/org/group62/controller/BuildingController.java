@@ -23,23 +23,56 @@ public class BuildingController {
             return "there is building";
         else if ((building instanceof Farm && !(ground.getGroundType().equals(GroundType.GRASS) ||
                 ground.getGroundType().equals(GroundType.DENSE_GRASSLAND))) ||
-                !canDropBuildingThere(x, y) || ground.getGroundTreeType() == null)
+                !canDropBuildingThere(x, y) || ground.getGroundTreeType() == null ||
+                (ground.getGroundType().equals(GroundType.STONE) && !building.getName().equals("Quarry")) ||
+                (ground.getGroundType().equals(GroundType.IRON) && !building.getName().equals("Iron mine")))
             return "can't drop building there";
         else if (governance.getGold() < building.getGoldCost())
             return "you don't have enough money";
-        else {
-            for (Resource resource : building.getResourcesCost().keySet()) {
-                if (governance.getResources().get(resource) < building.getResourcesCost().get(resource))
-                    return "you don't have enough resource";
-            }
-            for (Resource resource : building.getResourcesCost().keySet()) {
-                governance.decreaseResource(resource, building.getResourcesCost().get(resource));
-            }
-            governance.setGold(governance.getGold() - building.getGoldCost());
-            ground.addBuilding(building);
-            governance.addBuilding(building);
-            return "drop building was successful";
+        for (Resource resource : building.getResourcesCost().keySet()) {
+            if (governance.getResources().get(resource) < building.getResourcesCost().get(resource))
+                return "you don't have enough resource";
         }
+        int workLess = 0;
+        if (building.getWorkersNumber() != 0) {
+            for (People people : governance.getPeoples()) {
+                if (!(people instanceof Troop || people instanceof Worker))
+                    workLess++;
+            }
+        }
+        if (workLess < building.getWorkersNumber())
+            return "you don't have enough people to work";
+        for (Resource resource : building.getResourcesCost().keySet()) {
+            governance.decreaseResource(resource, building.getResourcesCost().get(resource));
+        }
+        if (building.getName().equals("Hovel"))
+            for (int i = 0; i < 8; i++) {
+                People people = new People(governance);
+                governance.addPeople(people);
+                int[] location = StrongHold.getCurrentPlay().getKeepLocationOfGovernance(governance);
+                StrongHold.getCurrentPlay().getMap()[location[0]][location[1]].addPeople(people);
+            }
+        if (building.getWorkersNumber() != 0) {
+            int i = 0;
+            for (int j = governance.getPeoples().size(); j >= 0; j--) {
+                if (!(governance.getPeoples().get(j) instanceof Troop || governance.getPeoples().get(j) instanceof Worker)) {
+                    int[] location = StrongHold.getCurrentPlay().getKeepLocationOfGovernance(governance);
+                    StrongHold.getCurrentPlay().getMap()[location[0]][location[1]].removePeople(governance.getPeoples().get(j));
+                    governance.getPeoples().remove(governance.getPeoples().get(j));
+                    Worker worker = new Worker(governance);
+                    governance.addPeople(worker);
+                    StrongHold.getCurrentPlay().getMap()[x][y].addPeople(worker);
+                    i++;
+                    if (i >= building.getWorkersNumber())
+                        break;
+                }
+            }
+
+        }
+        governance.setGold(governance.getGold() - building.getGoldCost());
+        ground.addBuilding(building);
+        governance.addBuilding(building);
+        return "drop building was successful";
     }
 
     public String selectBuilding(int x, int y) {
@@ -68,6 +101,13 @@ public class BuildingController {
             return "you don't select building";
         else if (count < 1)
             return "invalid count";
+        int workLess = 0;
+        for (People people : governance.getPeoples()) {
+            if (!(people instanceof Troop || people instanceof Worker))
+                workLess++;
+        }
+        if (workLess < count)
+            return "you don't have enough people";
         else {
             switch (currentBuilding.getName()) {
                 case "Barrack":
@@ -97,8 +137,6 @@ public class BuildingController {
             }
             if (troop.getGoldCost() * count > governance.getGold())
                 return "you haven't enough gold";
-            else if (governance.getPeoples().size() < count)
-                return "you don't have enough people";
             else if (!troop.getWeaponsCost().isEmpty()) {
                 for (Weapons weapons : troop.getWeaponsCost().keySet()) {
                     if (troop.getWeaponsCost().get(weapons) > governance.getWeapons().get(weapons))
@@ -111,13 +149,24 @@ public class BuildingController {
                         governance.getWeapons().replace(weapons1, governance.getWeapons().get(weapons1) - troop.getWeaponsCost().get(weapons1));
                 if (europeanTroopEnum != null)
                     for (int i = 0; i < count; i++)
-                        ground.addTroop(EuropeanTroopEnum.getEuropeanTroop(europeanTroopEnum));
+                        ground.addPeople(EuropeanTroopEnum.getEuropeanTroop(europeanTroopEnum));
                 if (arabianTroopEnum != null)
                     for (int i = 0; i < count; i++)
-                        ground.addTroop(ArabianTroopEnum.getArabianTroop(arabianTroopEnum));
+                        ground.addPeople(ArabianTroopEnum.getArabianTroop(arabianTroopEnum));
                 if (engineerTroopEnum != null)
                     for (int i = 0; i < count; i++)
-                        ground.addTroop(EngineerTroopEnum.getEngineerTroop(engineerTroopEnum));
+                        ground.addPeople(EngineerTroopEnum.getEngineerTroop(engineerTroopEnum));
+                int i = 0;
+                for (int j = governance.getPeoples().size(); j >= 0; j--) {
+                    if (!(governance.getPeoples().get(j) instanceof Troop || governance.getPeoples().get(j) instanceof Worker)) {
+                        int[] location1 = StrongHold.getCurrentPlay().getKeepLocationOfGovernance(governance);
+                        StrongHold.getCurrentPlay().getMap()[location1[0]][location1[1]].removePeople(governance.getPeoples().get(j));
+                        governance.getPeoples().remove(governance.getPeoples().get(j));
+                        i++;
+                        if (i >= count)
+                            break;
+                    }
+                }
             }
             return "create unit was successful";
         }
@@ -142,9 +191,9 @@ public class BuildingController {
         for (Ground[] grounds : map) {
             for (Ground ground : grounds) {
                 if (ground.getX() < x + 10 && ground.getX() > x - 10 && ground.getY() < y + 10 && ground.getY() > y - 10)
-                    if (!ground.getTroops().isEmpty())
-                        for (Troop troop : ground.getTroops())
-                            if (!troop.getOwner().equals(getCurrentBuilding().getOwner()))
+                    if (!ground.getPeople().isEmpty())
+                        for (People people : ground.getPeople())
+                            if (!people.getOwner().equals(getCurrentBuilding().getOwner()))
                                 return "there is enemy";
             }
         }

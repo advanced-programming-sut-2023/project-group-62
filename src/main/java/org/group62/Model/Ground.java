@@ -8,15 +8,15 @@ public class Ground {
     private GroundType groundType = GroundType.LAND;
     private GroundTreeType groundTreeType = null;
     private ArrayList<Building> buildings = new ArrayList<>();
-    private ArrayList<Troop> troops = new ArrayList<>();
+    private ArrayList<People> people = new ArrayList<>();
 
     public Ground(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public void removeTroop(Troop troop) {
-        troops.remove(troop);
+    public void removePeople(People people) {
+        this.people.remove(people);
     }
 
     public void removeBuilding(Building building) {
@@ -24,7 +24,7 @@ public class Ground {
     }
 
     public void removeTroops() {
-        troops.clear();
+        people.clear();
     }
 
     public void removeBuildings() {
@@ -35,8 +35,8 @@ public class Ground {
         buildings.add(building);
     }
 
-    public void addTroop(Troop troop) {
-        troops.add(troop);
+    public void addPeople(People people) {
+        this.people.add(people);
     }
 
     public int getX() {
@@ -51,8 +51,8 @@ public class Ground {
         return buildings;
     }
 
-    public ArrayList<Troop> getTroops() {
-        return troops;
+    public ArrayList<People> getPeople() {
+        return people;
     }
 
     public GroundType getGroundType() {
