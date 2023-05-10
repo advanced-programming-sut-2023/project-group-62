@@ -2,9 +2,14 @@ package org.group62.controller;
 
 
 import org.group62.veiw.Commands;
-import org.json.JSONArray;
-import org.json.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import javax.swing.plaf.basic.BasicArrowButton;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -13,8 +18,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SignupMenuController {
+    public SignupMenuController(){
 
-    public String normalCreatUser(Matcher matcher) throws NoSuchAlgorithmException, IOException {
+    }
+
+    public String normalCreatUser(Matcher matcher) throws NoSuchAlgorithmException, IOException, ParseException {
         String username = matcher.group("username");
         String password = matcher.group("password");
         String passwordConfirmation = matcher.group("passwordConfirmation");
@@ -45,27 +53,7 @@ public class SignupMenuController {
         else if (Commands.getMatcher(email, Commands.EMAIL_VALIDATION) == null)
             return "Creat user failed: Email address invalid!";
         else {
-            usernameDatabase(username);
-            emailDatabase(email);
-            String passwordSecure = SHA256.sha256Security(password);
-            JSONObject userDetails = new JSONObject();
-            userDetails.put("username", username);
-            userDetails.put("passwordSecure", passwordSecure);
-            userDetails.put("Email", email);
-            userDetails.put("nickname", nickname);
-            userDetails.put("slogan", slogan);
-
-            JSONObject userObject = new JSONObject();
-            userObject.put("User", userDetails);
-
-            JSONArray userList = new JSONArray();
-            userList.put(userObject);
-            try (FileWriter file = new FileWriter("users.json")) {
-                file.write(userList.toString());
-                file.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            putDataInToDatabase(username,password,email,nickname,slogan);
             return "Creat user successful!";
         }
     }
@@ -100,26 +88,7 @@ public class SignupMenuController {
         else if (Commands.getMatcher(email, Commands.EMAIL_VALIDATION) == null)
             return "Creat user failed: Email address invalid!";
         else {
-            usernameDatabase(username);
-            emailDatabase(email);
-            String passwordSecure = SHA256.sha256Security(password);
-            JSONObject userDetails = new JSONObject();
-            userDetails.put("username", username);
-            userDetails.put("passwordSecure", passwordSecure);
-            userDetails.put("Email", email);
-            userDetails.put("nickname", nickname);
-
-            JSONObject userObject = new JSONObject();
-            userObject.put("User", userDetails);
-
-            JSONArray userList = new JSONArray();
-            userList.put(userObject);
-            try (FileWriter file = new FileWriter("users.json")) {
-                file.write(userList.toString());
-                file.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            putDataInToDatabase(username,password,email,nickname,"User has no slogan!");
             return "Creat user successful!";
         }
     }
@@ -145,12 +114,12 @@ public class SignupMenuController {
     }
 
     private Boolean isUsernameDuplicate(String username) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("usernames.txt"));
+        //Scanner scanner = new Scanner(new File("usernames.txt"));
         ArrayList<String> userList = new ArrayList<>();
-        while (scanner.hasNext()) {
-            userList.add(scanner.next());
-        }
-        scanner.close();
+        //while (scanner.hasNext()) {
+          //  userList.add(scanner.next());
+        //}
+        //scanner.close();
         for (String name : userList) {
             if (name.equals(username))
                 return true;
@@ -159,30 +128,75 @@ public class SignupMenuController {
     }
 
     private Boolean isEmailDuplicate(String email) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("emails.txt"));
+        //Scanner scanner = new Scanner(new File("emails.txt"));
         ArrayList<String> emailList = new ArrayList<>();
-        while (scanner.hasNext()) {
-            emailList.add(scanner.next().toUpperCase());
-        }
-        scanner.close();
+        //while (scanner.hasNext()) {
+        //    emailList.add(scanner.next().toUpperCase());
+        //}
+        //scanner.close();
         for (String name : emailList) {
             if (name.equals(email))
                 return true;
         }
         return false;
     }
-
-    private void usernameDatabase(String username) throws IOException {
-        FileWriter fileWriter = new FileWriter("usernames.txt");
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print(username);
-        printWriter.close();
+    private void parseEmpObj(JSONObject emp,JSONArray userList) {
+        JSONObject array = new JSONObject();
+        JSONObject empobj = (JSONObject) emp.get("User");
+        String username = (String) empobj.get("username");
+        String passwordSecure = (String) empobj.get("passwordSecure");
+        String email = (String) empobj.get("Email");
+        String nickname = (String) empobj.get("nickname");
+        String slogan = (String) empobj.get("slogan");
+        array.put("username", username);
+        array.put("passwordSecure", passwordSecure);
+        array.put("Email", email);
+        array.put("nickname", nickname);
+        array.put("slogan", slogan);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("User",array);
+        userList.add(jsonObject);
     }
+    private void readUserJsonFile(JSONArray userList){
+        JSONParser jsonParser = new JSONParser();
+        try(FileReader reader = new FileReader("database\\users.json")){
+            Object object = jsonParser.parse(reader);
+            JSONArray empList = (JSONArray) object;
+            empList.forEach(emp -> parseEmpObj((JSONObject) emp,userList));
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Database file not found!");
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }catch (ParseException e){
+            System.out.println("The database file is empty! The first user added!");
+        }
+    }
+    private void putDataInToDatabase(String username,String password,String email,String nickname,String slogan){
+        String passwordSecure = null;
+        try {
+            passwordSecure = SHA256.sha256Security(password);
+        }catch (NoSuchAlgorithmException e){
+            System.out.println(e.getMessage());
+        }
+        JSONObject userDetails = new JSONObject();
+        userDetails.put("username", username);
+        userDetails.put("passwordSecure", passwordSecure);
+        userDetails.put("Email", email);
+        userDetails.put("nickname", nickname);
+        userDetails.put("slogan", slogan);
 
-    private void emailDatabase(String email) throws IOException {
-        FileWriter fileWriter = new FileWriter("emails.txt");
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.print(email);
-        printWriter.close();
+        JSONObject userObject = new JSONObject();
+        userObject.put("User", userDetails);
+
+        JSONArray userList = new JSONArray();
+        readUserJsonFile(userList);
+        userList.add(userObject);
+        try (FileWriter file = new FileWriter("database\\users.json")) {
+            file.write(userList.toString());
+            file.flush();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

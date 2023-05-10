@@ -2,6 +2,7 @@ package org.group62.veiw;
 
 import org.group62.controller.LoginMenuController;
 import org.group62.controller.SignupMenuController;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -21,7 +22,7 @@ public class SignupMenu {
     Matcher matcher;
     String inputCommand;
 
-    public void run() throws NoSuchAlgorithmException, IOException {
+    public void run() throws NoSuchAlgorithmException, IOException, ParseException {
         while (true) {
             inputCommand = scanner.nextLine();
             if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_SLOGAN)) != null)
