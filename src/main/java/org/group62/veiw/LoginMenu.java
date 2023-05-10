@@ -19,13 +19,13 @@ public class LoginMenu {
     public void run(Scanner scanner) {
         while (true) {
             String inputCommand = scanner.nextLine();
-            if ((matcher = Commands.getMatcher(inputCommand, Commands.USER_LOGIN)) != null) {
+            if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.USER_LOGIN)) != null) {
                 loginWithoutStayLoggedIn(matcher, scanner);
                 break;
-            } else if ((matcher = Commands.getMatcher(inputCommand, Commands.USER_STAY_LOGGED_IN)) != null) {
+            } else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.USER_STAY_LOGGED_IN)) != null) {
                 loginWithStayLoggedIn(matcher, scanner);
                 break;
-            } else if ((matcher = Commands.getMatcher(inputCommand, Commands.FORGOT_MY_PASSWORD)) != null)
+            } else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.FORGOT_MY_PASSWORD)) != null)
                 System.out.println(forgotPassword(matcher));
             else
                 System.out.println("Invalid command!");

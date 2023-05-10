@@ -16,27 +16,27 @@ public class ProfileMenu {
     public void run(Scanner scanner) {
         while (true) {
             String inputCommand = scanner.nextLine();
-            if ((matcher = Commands.getMatcher(inputCommand, Commands.PROFILE_PASSWORD_CHANGE)) != null)
+            if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_PASSWORD_CHANGE)) != null)
                 System.out.println(profileMenuControlle.changePassword(matcher));
-            else if ((matcher = Commands.getMatcher(inputCommand, Commands.PROFILE_USERNAME_CHANGE)) != null)
+            else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_USERNAME_CHANGE)) != null)
                 System.out.println(profileMenuControlle.changeUsername(matcher));
-            else if ((matcher = Commands.getMatcher(inputCommand, Commands.PROFILE_NICKNAME_CHANGE)) != null)
+            else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_NICKNAME_CHANGE)) != null)
                 System.out.println(profileMenuControlle.changeNickname(matcher));
-            else if ((matcher = Commands.getMatcher(inputCommand, Commands.PROFILE_EMAIL_CHANGE)) != null)
+            else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_EMAIL_CHANGE)) != null)
                 System.out.println(profileMenuControlle.changeEmail(matcher));
-            else if ((matcher = Commands.getMatcher(inputCommand, Commands.PROFILE_SLOGAN_CHANGE)) != null)
+            else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_SLOGAN_CHANGE)) != null)
                 System.out.println(profileMenuControlle.changeSlogan(matcher));
-            else if ((Commands.getMatcher(inputCommand, Commands.PROFILE_REMOVE_SLOGAN)) != null)
+            else if ((Commands.getMatcherMatches(inputCommand, Commands.PROFILE_REMOVE_SLOGAN)) != null)
                 System.out.println(profileMenuControlle.removeSlogan());
-            else if (Commands.getMatcher(inputCommand, Commands.PROFILE_DISPLAY_HIGH_SCORE) != null)
+            else if (Commands.getMatcherMatches(inputCommand, Commands.PROFILE_DISPLAY_HIGH_SCORE) != null)
                 System.out.println(profileMenuControlle.displayHighScore());
-            else if (Commands.getMatcher(inputCommand, Commands.PROFILE_DISPLAY_RANK) != null)
+            else if (Commands.getMatcherMatches(inputCommand, Commands.PROFILE_DISPLAY_RANK) != null)
                 System.out.println(profileMenuControlle.displayRank());
-            else if (Commands.getMatcher(inputCommand, Commands.PROFILE_DISPLAY_SLOGAN) != null)
+            else if (Commands.getMatcherMatches(inputCommand, Commands.PROFILE_DISPLAY_SLOGAN) != null)
                 System.out.println(profileMenuControlle.displaySlogan());
-            else if (Commands.getMatcher(inputCommand, Commands.PROFILE_DISPLAY) != null)
+            else if (Commands.getMatcherMatches(inputCommand, Commands.PROFILE_DISPLAY) != null)
                 System.out.println(profileMenuControlle.displayAllProfile());
-            else if (Commands.getMatcher(inputCommand, Commands.USER_LOGOUT) != null)
+            else if (Commands.getMatcherMatches(inputCommand, Commands.USER_LOGOUT) != null)
                 break;
             else
                 System.out.println("Invalid command!");

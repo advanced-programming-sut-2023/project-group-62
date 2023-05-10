@@ -2,18 +2,15 @@ package org.group62.controller;
 
 
 import org.group62.veiw.Commands;
-//import org.json.JSONArray;
-//import org.json.JSONObject;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.swing.plaf.basic.BasicArrowButton;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +19,7 @@ public class SignupMenuController {
 
     }
 
-    public String normalCreatUser(Matcher matcher) throws NoSuchAlgorithmException, IOException, ParseException {
+    public String normalCreatUser(Matcher matcher) throws IOException {
         String username = matcher.group("username");
         String password = matcher.group("password");
         String passwordConfirmation = matcher.group("passwordConfirmation");
@@ -32,25 +29,27 @@ public class SignupMenuController {
 
         if (isBlank(username) || isBlank(passwordConfirmation) || isBlank(password) ||
                 isBlank(email) || isBlank(nickname) || isBlank(slogan))
-            return "Creat user failed: Some fields is empty!";
-        else if (Commands.getMatcher(username, Commands.USERNAME_VALIDATION) == null)
-            return "Creat user failed: Invalid username!";
+            return "Create user failed: Some fields is empty!";
+        else if (Commands.getMatcherMatches(username, Commands.USERNAME_VALIDATION) == null)
+            return "Create user failed: Invalid username!";
         else if (isUsernameDuplicate(username))
-            return "Creat user failed: Your username is duplicate!";
-        else if (Commands.getMatcher(password, Commands.STRONG_PASSWORD) == null) {
-            if (Commands.getMatcher(password, Commands.PASSWORD_WEAK_LOWERCASE_ALPHABET) == null)
-                return "Creat user failed: Password is weak --> lowercase alphabet not involved!";
-            else if (Commands.getMatcher(password, Commands.PASSWORD_WEAK_UPPERCASE_ALPHABET) == null)
-                return "Creat user failed: Password is weak --> uppercase alphabet not involved!";
-            else if (Commands.getMatcher(password, Commands.PASSWORD_WEAK_NUMBER) == null)
-                return "Creat user failed: Password is weak --> numbers not involved!";
+            return "Create user failed: Your username is duplicate!";
+        else if (Commands.getMatcherMatches(password, Commands.STRONG_PASSWORD) == null) {
+            if(password.length() < 6)
+                return "Create user failed: Password is weak --> password is less than 6 characters!";
+            else if (Commands.getMatcherFind(password, Commands.PASSWORD_WEAK_LOWERCASE_ALPHABET) == null)
+                return "Create user failed: Password is weak --> lowercase alphabet not involved!";
+            else if (Commands.getMatcherFind(password, Commands.PASSWORD_WEAK_UPPERCASE_ALPHABET) == null)
+                return "Create user failed: Password is weak --> uppercase alphabet not involved!";
+            else if (Commands.getMatcherFind(password, Commands.PASSWORD_WEAK_NUMBER) == null)
+                return "Create user failed: Password is weak --> numbers not involved!";
             else
                 return "Creat user failed: Password is weak --> any non number or alphabet not involved!";
         } else if (!password.equals(passwordConfirmation))
             return "Creat user failed: password confirmation incorrect!";
         else if (isEmailDuplicate(email))
             return "Creat user failed: Your email duplicate!";
-        else if (Commands.getMatcher(email, Commands.EMAIL_VALIDATION) == null)
+        else if (Commands.getMatcherMatches(email, Commands.EMAIL_VALIDATION) == null)
             return "Creat user failed: Email address invalid!";
         else {
             putDataInToDatabase(username,password,email,nickname,slogan);
@@ -58,7 +57,7 @@ public class SignupMenuController {
         }
     }
 
-    public String creatUserWithoutSlogan(Matcher matcher) throws IOException, NoSuchAlgorithmException {
+    public String creatUserWithoutSlogan(Matcher matcher) throws IOException {
         String username = matcher.group("username");
         String password = matcher.group("password");
         String passwordConfirmation = matcher.group("passwordConfirmation");
@@ -67,29 +66,31 @@ public class SignupMenuController {
 
         if (isBlank(username) || isBlank(passwordConfirmation) || isBlank(password) ||
                 isBlank(email) || isBlank(nickname))
-            return "Creat user failed: Some fields is empty!";
-        else if (Commands.getMatcher(username, Commands.USERNAME_VALIDATION) == null)
-            return "Creat user failed: Invalid username!";
+            return "Create user failed: Some fields is empty!";
+        else if (Commands.getMatcherMatches(username, Commands.USERNAME_VALIDATION) == null)
+            return "Create user failed: Invalid username!";
         else if (isUsernameDuplicate(username))
-            return "Creat user failed: Your username is duplicate!";
-        else if (Commands.getMatcher(password, Commands.STRONG_PASSWORD) == null) {
-            if (Commands.getMatcher(password, Commands.PASSWORD_WEAK_LOWERCASE_ALPHABET) == null)
-                return "Creat user failed: Password is weak --> lowercase alphabet not involved!";
-            else if (Commands.getMatcher(password, Commands.PASSWORD_WEAK_UPPERCASE_ALPHABET) == null)
-                return "Creat user failed: Password is weak --> uppercase alphabet not involved!";
-            else if (Commands.getMatcher(password, Commands.PASSWORD_WEAK_NUMBER) == null)
-                return "Creat user failed: Password is weak --> numbers not involved!";
+            return "Create user failed: Your username is duplicate!";
+        else if (Commands.getMatcherMatches(password, Commands.STRONG_PASSWORD) == null) {
+            if(password.length() < 6)
+                return "Create user failed: Password is weak --> password is less than 6 characters!";
+            else if (Commands.getMatcherFind(password, Commands.PASSWORD_WEAK_LOWERCASE_ALPHABET) == null)
+                return "Create user failed: Password is weak --> lowercase alphabet not involved!";
+            else if (Commands.getMatcherFind(password, Commands.PASSWORD_WEAK_UPPERCASE_ALPHABET) == null)
+                return "Create user failed: Password is weak --> uppercase alphabet not involved!";
+            else if (Commands.getMatcherFind(password, Commands.PASSWORD_WEAK_NUMBER) == null)
+                return "Create user failed: Password is weak --> numbers not involved!";
             else
-                return "Creat user failed: Password is weak --> any non number or alphabet not involved!";
+                return "Create user failed: Password is weak --> any non number or alphabet not involved!";
         } else if (!password.equals(passwordConfirmation))
-            return "Creat user failed: password confirmation incorrect!";
+            return "Create user failed: password confirmation incorrect!";
         else if (isEmailDuplicate(email))
-            return "Creat user failed: Your email duplicate!";
-        else if (Commands.getMatcher(email, Commands.EMAIL_VALIDATION) == null)
-            return "Creat user failed: Email address invalid!";
+            return "Create user failed: Your email duplicate!";
+        else if (Commands.getMatcherMatches(email, Commands.EMAIL_VALIDATION) == null)
+            return "Create user failed: Email address invalid!";
         else {
             putDataInToDatabase(username,password,email,nickname,"User has no slogan!");
-            return "Creat user successful!";
+            return "Create user successful!";
         }
     }
 

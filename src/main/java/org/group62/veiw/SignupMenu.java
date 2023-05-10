@@ -25,20 +25,20 @@ public class SignupMenu {
     public void run() throws NoSuchAlgorithmException, IOException, ParseException {
         while (true) {
             inputCommand = scanner.nextLine();
-            if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_SLOGAN)) != null)
+            if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.CREAT_USER_WITH_SLOGAN)) != null)
                 System.out.println(signupMenuController.normalCreatUser(matcher));
-            else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITHOUT_SLOGAN)) != null)
+            else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.CREAT_USER_WITHOUT_SLOGAN)) != null)
                 System.out.println(signupMenuController.creatUserWithoutSlogan(matcher));
-            else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_RANDOM_PASSWORD)) != null)
+            else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.CREAT_USER_WITH_RANDOM_PASSWORD)) != null)
                 System.out.println(signupMenuController.creatUserWithRandomPassword(matcher));
-            else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_RANDOM_SLOGAN)) != null)
+            else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.CREAT_USER_WITH_RANDOM_SLOGAN)) != null)
                 System.out.println(signupMenuController.creatUserWithRandomSlogan(matcher));
-            else if ((matcher = Commands.getMatcher(inputCommand, Commands.CREAT_USER_WITH_RANDOM_SLOGAN_AND_RANDOM_PASSWORD)) != null)
+            else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.CREAT_USER_WITH_RANDOM_SLOGAN_AND_RANDOM_PASSWORD)) != null)
                 System.out.println(signupMenuController.creatUserWithRandomPasswordAndSlogan(matcher));
-            else if ((matcher = Commands.getMatcher(inputCommand, Commands.ENTER_LOGIN_MENU)) != null) {
+            else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.ENTER_LOGIN_MENU)) != null) {
                 LoginMenu loginMenu = new LoginMenu(loginMenuController);
                 loginMenu.run(scanner);
-            } else if (Commands.getMatcher(inputCommand, Commands.EXIT) != null)
+            } else if (Commands.getMatcherMatches(inputCommand, Commands.EXIT) != null)
                 break;
             else
                 System.out.println("Invalid command!");

@@ -4,12 +4,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum Commands {
-    CREAT_USER_WITH_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
-            "(?=.+(-p|--password)\\s+(?<password>\\S+)\\s+(?<passwordConfirmation>\\S+))(?=.+(-email)" +
-            "\\s+(?<email>\\S+))(?=.+(-n|--nickname)\\s+(?<nickname>\\S+))((?=.+(-s|--slogan)\\s+(?<slogan>\\S+))).+)\\s*$"),
-    CREAT_USER_WITHOUT_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
-            "(?=.+(-p|--password)\\s+(?<password>\\S+)\\s+(?<passwordConfirmation>\\S+))(?=.+(-email)" +
-            "\\s+(?<email>\\S+))(?=.+(-n|--nickname)\\s+(?<nickname>\\S+)).+)\\s*$"),
+    CREAT_USER_WITH_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\"(.*\\S+\\s+.*)\"" +
+            "|.+?(?=\\s+-p|\\s+-email|\\s+-n|\\s+-s)|.+))(?=.+(-p|--password)\\s+(?<password>\"(.*\\S+\\s+.*)\"|\\S+)" +
+            "\\s+(?<passwordConfirmation>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-u|\\s+-email|\\s+-n|\\s+-s)|.+))(?=.+(-email)" +
+            "\\s+(?<email>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-u|\\s+-n|\\s+-s)|.+))(?=.+(-n|--nickname)\\s+" +
+            "(?<nickname>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-email|\\s+-u|\\s+-s)|.+))((?=.+(-s|--slogan)\\s+" +
+            "(?<slogan>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-email|\\s+-u|\\s+-s)|.+))).+)\\s*$"),
+    CREAT_USER_WITHOUT_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\"(.*\\S+\\s+.*)" +
+            "\"|.+?(?=\\s+-p|\\s+-email|\\s+-n)|.+))(?=.+(-p|--password)\\s+(?<password>\"(.*\\S+\\s+.*)\"|\\S+)" +
+            "\\s+(?<passwordConfirmation>\"(.*\\S+\\s+.*)\\\"|.+?(?=\\s+-u|\\s+-email|\\s+-n)|.+))(?=.+(-email)\\s+" +
+            "(?<email>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-u|\\s+-n)|.+))(?=.+(-n|--nickname)\\s+(?<nickname>\"" +
+            "(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-email|\\s+-u)|.+)).+)\\s*$"),
     CREAT_USER_WITH_RANDOM_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
             "(?=.+(-p|--password)\\s+(?<password>\\S+)\\s+(?<passwordConfirmation>\\S+))(?=.+(-email)" +
             "\\s+(?<email>\\S+))(?=.+(-n|--nickname)\\s+(?<nickname>\\S+))((?=.+(-s|--slogan)\\s+random)).+)\\s*$"),
@@ -22,11 +27,11 @@ public enum Commands {
             "\\s+(?<email>\\S+)).+)\\s*$"),
     USERNAME_VALIDATION("[a-zA-Z0-9_]+"),
     STRONG_PASSWORD("^(?=.*[A-Z])(?=.*[!@#$&*%^()_\\-=\\]+}{\\[~`'\\\";:?\\/><.,|])(?=.*[0-9])(?=.*[a-z])(?=\\S+).{6,}$"),
-    PASSWORD_WEAK_LOWERCASE_ALPHABET("[a-z]"),
-    PASSWORD_WEAK_UPPERCASE_ALPHABET("[A-Z]"),
-    PASSWORD_WEAK_NUMBER("[0-9]"),
+    PASSWORD_WEAK_LOWERCASE_ALPHABET("[a-z]+"),
+    PASSWORD_WEAK_UPPERCASE_ALPHABET("[A-Z]+"),
+    PASSWORD_WEAK_NUMBER("[0-9]+"),
     PASSWORD_WEAK_CHARACTER("[\\.\\*!@#\\$%\\^&\\(\\)_-\\+=]\\[}\\\\{\\|\\?\\/><,]"),
-    EMAIL_VALIDATION("\\S+@\\S+.\\S+"),
+    EMAIL_VALIDATION("[a-zA-Z0-9._]+@[a-zA-Z0-9_]+\\.[a-zA-Z0-9._]+"),
     USER_LOGIN("^\\s*user\\s+login(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))(?=.+(-p|--password)\\s+" +
             "(?<password>\\S+)).+)\\s*$"),
     ENTER_LOGIN_MENU("^\\s*enter\\s+login\\s+menu\\s*$"),
@@ -111,9 +116,16 @@ public enum Commands {
         this.regex = regex;
     }
 
-    public static Matcher getMatcher(String input, Commands mainRegex) {
+    public static Matcher getMatcherMatches(String input, Commands mainRegex) {
         Matcher matcher = Pattern.compile(mainRegex.regex).matcher(input);
         if (matcher.matches())
+            return matcher;
+        else
+            return null;
+    }
+    public static Matcher getMatcherFind(String input, Commands mainRegex) {
+        Matcher matcher = Pattern.compile(mainRegex.regex).matcher(input);
+        if (matcher.find())
             return matcher;
         else
             return null;
