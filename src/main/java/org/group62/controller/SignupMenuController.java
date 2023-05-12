@@ -20,7 +20,6 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 public class SignupMenuController {
     ArrayList<String> usernames = new ArrayList<>();
@@ -121,7 +120,8 @@ public class SignupMenuController {
         }
     }
 
-    public String normalPickSecurityQuestion(boolean isSloganExist, Matcher matcher, Matcher pickQuestionMatcher,String sloganIn) {
+    public String normalPickSecurityQuestion(boolean isSloganExist, Matcher matcher,
+                                             Matcher pickQuestionMatcher,String sloganIn) {
         String slogan = sloganIn;
         String firstSecurityQuestion = "1.What is your first school's name?";
         String secondSecurityQuestion = "2.What is your favorite car?";
@@ -153,12 +153,15 @@ public class SignupMenuController {
 
     }
 
-    public String creatUserWithRandomPassword(Matcher matcher) {
+    public String creatUserWithRandomPassword(Matcher matcher,boolean isSloganExist) {
+        String slogan = "User has no slogan!";
         String username = matcher.group("username");
         String email = matcher.group("email");
         String nickname = matcher.group("nickname");
+        if(isSloganExist)
+            slogan = matcher.group("slogan");
 
-        if (isBlank(username) || isBlank(email) || isBlank(nickname))
+        if (isBlank(username) || isBlank(email) || isBlank(nickname) || isBlank(slogan))
             return "Create user failed: Some fields is empty!";
         else if (Commands.getMatcherMatches(username, Commands.USERNAME_VALIDATION) == null)
             return "Create user failed: Invalid username!";
@@ -181,7 +184,7 @@ public class SignupMenuController {
         String passwordConfirmation = matcher.group("passwordConfirmation");
         String email = matcher.group("email");
         String nickname = matcher.group("nickname");
-
+        String slogan = randomSloganGenerator();
         if (isBlank(username) || isBlank(passwordConfirmation) || isBlank(password) ||
                 isBlank(email) || isBlank(nickname))
             return "Create user failed: Some fields is empty!";
@@ -210,7 +213,8 @@ public class SignupMenuController {
             String firstSecurityQuestion = "1.What is your first school's name?";
             String secondSecurityQuestion = "2.What is your favorite car?";
             String thirdSecurityQuestion = "3.When is your birthday?";
-            return "Creat user successful!\n" +
+            return "Creat user successful!\n\n" +
+                    "Your slogan is \"" + slogan + " \"\n\n" +
                     "Pick your security question:\n" +
                     firstSecurityQuestion + "\n" +
                     secondSecurityQuestion + "\n" +
@@ -396,10 +400,16 @@ public class SignupMenuController {
             return "error";
     }
 
-    public String randomPasswordPickSecurityQuestion(Matcher matcher, Matcher pickQuestionMatcher,String randomPassword) {
+    public String randomPasswordPickSecurityQuestion(Matcher matcher, Matcher pickQuestionMatcher,String randomPassword,
+                                                     Boolean isSloganExist,Boolean isSloganRandom,String randomSlogan) {
+        String slogan = "User has no slogan!";
+        if(isSloganRandom)
+            slogan = randomSlogan;
         String username = matcher.group("username");
         String nickname = matcher.group("nickname");
         String email = matcher.group("email");
+        if(isSloganExist)
+            slogan = matcher.group("slogan");
         String securityQuestionNumber = pickQuestionMatcher.group("questionNumber");
         String answer = pickQuestionMatcher.group("answer");
         String answerConfirm = pickQuestionMatcher.group("answerConfirm");
@@ -418,7 +428,7 @@ public class SignupMenuController {
         else if(!answerConfirm.equals(answer))
             return "Pick Question failed: Answer confirm incorrect!";
         else {
-            putDataInToDatabase(username, randomPassword, email, nickname, "User has no slogan!",securityQuestion,answer);
+            putDataInToDatabase(username, randomPassword, email, nickname, slogan,securityQuestion,answer);
             return "Picked successfully!";
         }
 
@@ -430,7 +440,7 @@ public class SignupMenuController {
                 "Your time on this earth is limited. Time to say your prayers!","I will kill you soon! You and all your vermin!",
                 "I shall have my revenge, in this life or the next"));
         Random random = new Random();
-        int randomIndex = random.nextInt(1,6);
+        int randomIndex = random.nextInt(0,8);
         return randomSlogans.get(randomIndex);
     }
 }

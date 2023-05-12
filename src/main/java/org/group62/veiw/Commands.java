@@ -12,22 +12,31 @@ public enum Commands {
             "(?<slogan>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-email|\\s+-u|\\s+-s)|.+))).+)\\s*$"),
     CREAT_USER_WITHOUT_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u)\\s+(?<username>\"(.*\\S+\\s+.*)" +
             "\"|.+?(?=\\s+-p|\\s+-email|\\s+-n)|.+))(?=.+(-p)\\s+(?<password>\"(.*\\S+\\s+.*)\"|\\S+)" +
-            "\\s+(?<passwordConfirmation>\"(.*\\S+\\s+.*)\\\"|.+?(?=\\s+-u|\\s+-email|\\s+-n)|.+))(?=.+(-email)\\s+" +
+            "\\s+(?<passwordConfirmation>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-u|\\s+-email|\\s+-n)|.+))(?=.+(-email)\\s+" +
             "(?<email>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-u|\\s+-n)|.+))(?=.+(-n)\\s+(?<nickname>\"" +
             "(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-email|\\s+-u)|.+)).+)\\s*$"),
-    CREAT_USER_WITH_RANDOM_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))" +
-            "(?=.+(-p|--password)\\s+(?<password>\\S+)\\s+(?<passwordConfirmation>\\S+))(?=.+(-email)" +
-            "\\s+(?<email>\\S+))(?=.+(-n|--nickname)\\s+(?<nickname>\\S+))((?=.+(-s|--slogan)\\s+random)).+)\\s*$"),
+    CREAT_USER_WITH_RANDOM_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u)\\s+(?<username>\"(.*\\S+\\s+.*)\"" +
+            "|.+?(?=\\s+-p|\\s+-e|\\s+-n|\\s+-s)|.+))(?=.+(-e)\\s+(?<email>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|" +
+            "\\s+-u|\\s+-n|\\s+-s)|.+))(?=.+(-n)\\s+(?<nickname>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-e|\\s+-u|" +
+            "\\s+-s)|.+))((?=.+(-p)\\s+(?<password>\"(.*\\S+\\s+.*)\"|\\S+)\\s+(?<passwordConfirmation>\"" +
+            "(.*\\S+\\s+.*)\"|.+?(?=\\s+-u|\\s+-e|\\s+-n|\\s+-s)|.+)).+)((?=.+(-s)\\s+random).+))\\s*$"),
     QUESTION_PICK("^\\s*question\\s+pick(?<args>(?=.+(-q)\\s+(?<questionNumber>\\S+))(?=.+(-a)\\s+(?<answer>" +
             "\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-q|\\s+-c)|.+))(?=.+(-c)\\s+(?<answerConfirm>\"(.*\\S+\\s+.*)" +
             "\"|.+?(?=\\s+-q|\\s+-a)|.+)).+)\\s*$"),
-    CREAT_USER_WITH_RANDOM_PASSWORD("^\\s*user\\s+create(?<args>(?=.+(-u)\\s+(?<username>\"(.*\\S+\\s+.*)\"" +
+    CREAT_USER_WITH_RANDOM_PASSWORD_WITH_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u)\\s+(?<username>\"" +
+            "(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-e|\\s+-n|\\s+-s)|.+))(?=.+(-e)\\s+(?<email>\"(.*\\S+\\s+.*)\"" +
+            "|.+?(?=\\s+-p|\\s+-u|\\s+-n|\\s+-s)|.+))(?=.+(-n)\\s+(?<nickname>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|" +
+            "\\s+-e|\\s+-u|\\s+-s)|.+))((?=.+(-p)\\s+random).+)((?=.+(-s)\\s+(?<slogan>\"(.*\\S+\\s+.*)\"|.+?" +
+            "(?=\\s+-p|\\s+-e|\\s+-u|\\s+-n)|.+)).+))\\s*$"),
+    CREAT_USER_WITH_RANDOM_PASSWORD_WITHOUT_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u)\\s+(?<username>\"(.*\\S+\\s+.*)\"" +
             "|.+?(?=\\s+-p|\\s+-e|\\s+-n)|.+))(?=.+(-p)\\s+(?<password>random))(?=.+(-e)\\s+(?<email>\"(.*\\S+" +
             "\\s+.*)\"|.+?(?=\\s+-p|\\s+-u|\\s+-n)|.+))(?=.+(-n)\\s+(?<nickname>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|" +
             "\\s+-e|\\s+-u)|.+)).+)\\s*$"),
-    CREAT_USER_WITH_RANDOM_SLOGAN_AND_RANDOM_PASSWORD("^\\s*user\\s+creat(?<args>(?=.+(-u|--username)\\s+" +
-            "(?<username>\\S+))(?=.+(-n|--nickname)\\s+(?<nickname>\\S+))(?=.+(-p)\\s+random)(?=.+(-s)\\s+random)(?=.+(-e|--email)" +
-            "\\s+(?<email>\\S+)).+)\\s*$"),
+    CREAT_USER_WITH_RANDOM_SLOGAN_AND_RANDOM_PASSWORD("^\\s*user\\s+create(?<args>(?=.+(-u)\\s+(?<username>\"" +
+            "(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-e|\\s+-n|\\s+-s)|.+))(?=.+(-e)\\s+(?<email>\"(.*\\S+\\s+.*)\"|.+?" +
+            "(?=\\s+-p|\\s+-u|\\s+-n|\\s+-s)|.+))(?=.+(-n)\\s+(?<nickname>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-e|" +
+            "\\s+-u|\\s+-s)|.+))((?=.+(-p)\\s+random).+)((?=.+(-s)\\s+random).+))\\s*$"),
+    SHOW_CURRENT_MENU("^\\s*show\\s+current\\s+menu\\s*$"),
     USERNAME_VALIDATION("[a-zA-Z0-9_]+"),
     STRONG_PASSWORD("^(?=.*[A-Z])(?=.*[!@#$&*%^()_\\-=\\]+}{\\[~`'\\\";:?\\/><.,|])(?=.*[0-9])(?=.*[a-z])(?=\\S+).{6,}$"),
     PASSWORD_WEAK_LOWERCASE_ALPHABET("[a-z]+"),
