@@ -223,9 +223,6 @@ public class SignupMenuController {
         }
     }
 
-    public String creatUserWithRandomPasswordAndSlogan(Matcher matcher) {
-        return null;
-    }
 
     private Boolean isBlank(String input) {
         Matcher whiteSpaceMatcher = Pattern.compile("\s+").matcher(input);

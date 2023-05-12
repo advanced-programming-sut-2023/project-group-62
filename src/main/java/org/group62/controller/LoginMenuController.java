@@ -1,19 +1,15 @@
 package org.group62.controller;
 
 import org.group62.model.User;
+import org.group62.veiw.Commands;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.security.NoSuchAlgorithmException;
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 
 public class LoginMenuController {
@@ -26,40 +22,44 @@ public class LoginMenuController {
         this.currentUser = currentUser;
     }
 
-    public String loginWithoutStayLoggedIn(Matcher matcher, Integer timerFactor) throws NoSuchAlgorithmException,
-            InterruptedException {
+    public String loginWithoutStayLoggedIn(Matcher matcher) throws NoSuchAlgorithmException {
         String username = matcher.group("username");
         String password = matcher.group("password");
-        userJsonFileParse("usernameCheck",username);
-        if(!isUsernameExist(username))
+        userJsonFileParse("usernameCheck", username, null, currentUser, null);
+        if (!isUsernameExist(username))
             return "Username and password didn’t match! --> Username not exist!";
-        else if(!isPasswordCorrect(password,username))
+        else if (!isPasswordCorrect(password, username))
             return "Username and password didn’t match! --> Password is incorrect!";
-        else
+        else {
+            userJsonFileParse("parseUserInformation", username, null, currentUser, null);
             return "User logged in successfully!";
+        }
 
     }
 
-    private boolean isPasswordCorrect(String password,String username) throws NoSuchAlgorithmException {
-        userJsonFileParse("parseUserInformation",username);
+    private boolean isPasswordCorrect(String password, String username) throws NoSuchAlgorithmException {
+        User tempUser = new User();
+        userJsonFileParse("parseUserInformation", username, null, tempUser, null);
         String passwordInHashSecurity = SHA256.sha256Security(password);
-        if(passwordInHashSecurity.equals(currentUserPasswordInHashFormat))
+        if (passwordInHashSecurity.equals(tempUser.getPasswordSecure()))
             return true;
         else
             return false;
     }
 
     private boolean isUsernameExist(String username) {
-        if(usernames.size() != 0){
-            for(String name : usernames){
-                if(name.equals(username))
+        if (usernames.size() != 0) {
+            for (String name : usernames) {
+                if (name.equals(username))
                     return true;
             }
             return false;
         }
         return false;
     }
-    private void updateParseEmpObject(JSONObject emp, JSONArray userList) {
+
+
+    private void updateUserJsonFile(JSONObject emp, JSONArray newUserList) {
         JSONObject array = new JSONObject();
         JSONObject empobj = (JSONObject) emp.get("User");
         String username = (String) empobj.get("username");
@@ -74,95 +74,69 @@ public class LoginMenuController {
         array.put("Email", email);
         array.put("nickname", nickname);
         array.put("slogan", slogan);
-        array.put("securityQuestion",securityQuestion);
-        array.put("securityQuestionAnswer",securityQuestionAnswer);
+        array.put("securityQuestion", securityQuestion);
+        array.put("securityQuestionAnswer", securityQuestionAnswer);
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("User",array);
-        userList.add(jsonObject);
+        jsonObject.put("User", array);
+        newUserList.add(jsonObject);
+    }
 
-    }
-    private void updateUserJsonFile(JSONArray userList){
+    private void userJsonFileParse(String order, String username, String newPassword, User user, JSONArray newUserList) {
         JSONParser jsonParser = new JSONParser();
-        try(FileReader reader = new FileReader("database\\users.json")){
+        try (FileReader reader = new FileReader("database\\users.json")) {
             Object object = jsonParser.parse(reader);
             JSONArray empList = (JSONArray) object;
-            empList.forEach(emp -> updateParseEmpObject((JSONObject) emp,userList));
-        }
-        catch (FileNotFoundException e){
+            userJsonFileFunctions(empList, order, username, newPassword, user, newUserList);
+        } catch (FileNotFoundException e) {
             System.out.println("Database file not found!");
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
-        }catch (ParseException e){
-            System.out.println("The database file is empty! The first user added!");
-        }
-    }
-    private void userJsonFileParse(String order,String username){
-        JSONParser jsonParser = new JSONParser();
-        try(FileReader reader = new FileReader("database\\users.json")) {
-            Object object = jsonParser.parse(reader);
-            JSONArray empList = (JSONArray) object;
-            if (order.equals("usernameCheck"))
-                userJsonFileFunctions(empList, "usernameCheck",username);
-            else if (order.equals("parseUserInformation")){
-                userJsonFileFunctions(empList,"parseUserInformation",username);
-            }
-        }
-        catch (FileNotFoundException e){
-            System.out.println("Database file not found!");
-        }catch (IOException e){
-            System.out.println(e.getMessage());
-        }catch (ParseException e){
+        } catch (ParseException e) {
             System.out.println("The database file is empty! No data to check!");
         }
     }
-    private void putDataInToDatabase(String username,String password,String email,String nickname,String slogan,
-                                     String securityQuestion,String securityQuestionAnswer){
-        String passwordSecure = null;
-        try {
-            passwordSecure = SHA256.sha256Security(password);
-        }catch (NoSuchAlgorithmException e){
-            System.out.println(e.getMessage());
-        }
-        email = email.toLowerCase();
-        JSONObject userDetails = new JSONObject();
-        userDetails.put("username", username);
-        userDetails.put("passwordSecure", passwordSecure);
-        userDetails.put("Email", email);
-        userDetails.put("nickname", nickname);
-        userDetails.put("slogan", slogan);
-        userDetails.put("securityQuestion",securityQuestion);
-        userDetails.put("securityQuestionAnswer",securityQuestionAnswer);
 
-        JSONObject userObject = new JSONObject();
-        userObject.put("User", userDetails);
-
-        JSONArray userList = new JSONArray();
-        updateUserJsonFile(userList);
-        userList.add(userObject);
-        try (FileWriter file = new FileWriter("database\\users.json")) {
-            file.write(userList.toString());
-            file.flush();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    private void userJsonFileFunctions(JSONArray empList, String function,String username){
-        switch (function){
+    private void userJsonFileFunctions(JSONArray empList, String function, String username, String newPassword,
+                                       User user, JSONArray newUserList) {
+        switch (function) {
             case "usernameCheck":
                 usernames.clear();
                 empList.forEach(emp -> usernameParse((JSONObject) emp));
                 break;
             case "parseUserInformation":
-                empList.forEach(emp -> parseUserInformation((JSONObject) emp,username));
+                empList.forEach(emp -> parseUserInformation((JSONObject) emp, username, user));
                 break;
+            case "putNewPassword":
+                empList.forEach(emp -> {
+                    try {
+                        putNewPasswordInJsonFile((JSONObject) emp, username, newPassword, newUserList);
+                    } catch (NoSuchAlgorithmException e) {
+                        throw new RuntimeException(e);
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+
         }
 
     }
 
-    private void parseUserInformation(JSONObject emp,String usernameIn) {
+    private void putNewPasswordInJsonFile(JSONObject emp, String usernameIn,
+                                          String newPassword, JSONArray newUserList) throws NoSuchAlgorithmException, FileNotFoundException {
         JSONObject empobj = (JSONObject) emp.get("User");
         String username = (String) empobj.get("username");
-        if(username.equals(usernameIn)) {
+        if (username.equals(usernameIn)) {
+            String securePassword = SHA256.sha256Security(newPassword);
+            empobj.put("passwordSecure", securePassword);
+        }
+        updateUserJsonFile(emp, newUserList);
+    }
+
+    private void parseUserInformation(JSONObject emp, String usernameIn, User user) {
+        JSONObject empobj = (JSONObject) emp.get("User");
+        String username = (String) empobj.get("username");
+        if (username.equals(usernameIn)) {
             String passwordSecure = (String) empobj.get("passwordSecure");
             currentUserPasswordInHashFormat = passwordSecure;
             String email = (String) empobj.get("Email");
@@ -170,13 +144,13 @@ public class LoginMenuController {
             String slogan = (String) empobj.get("slogan");
             String securityQuestion = (String) empobj.get("securityQuestion");
             String securityQuestionAnswer = (String) empobj.get("securityQuestionAnswer");
-            currentUser.setPassword(passwordSecure);
-            currentUser.setUsername(username);
-            currentUser.setEmail(email);
-            currentUser.setNickname(nickname);
-            currentUser.setSlogan(slogan);
-            currentUser.setPasswordRecoveryAnswer(securityQuestionAnswer);
-            currentUser.setPasswordRecoveryQuestion(securityQuestion);
+            user.setPassword(passwordSecure);
+            user.setUsername(username);
+            user.setEmail(email);
+            user.setNickname(nickname);
+            user.setSlogan(slogan);
+            user.setPasswordRecoveryAnswer(securityQuestionAnswer);
+            user.setPasswordRecoveryQuestion(securityQuestion);
         }
     }
 
@@ -184,5 +158,58 @@ public class LoginMenuController {
         JSONObject empobj = (JSONObject) emp.get("User");
         String username = (String) empobj.get("username");
         usernames.add(username);
+    }
+
+    public String loginWithStayLoggedIn(Matcher matcher) throws NoSuchAlgorithmException {
+        String username = matcher.group("username");
+        String password = matcher.group("password");
+        String passwordInHashFormat = SHA256.sha256Security(password);
+        if (!username.equals(currentUser.getUsername()))
+            return "Error: The username that you hava entered is not equal to last logged in user!";
+        else if (!passwordInHashFormat.equals(currentUserPasswordInHashFormat))
+            return "Error: Incorrect password!";
+        else
+            return "User logged in successfully";
+    }
+
+    public String forgotPasswordReturnSecurityQuestion(String username) {
+        User forgetfulUser = new User();
+        userJsonFileParse("parseUserInformation", username, null, forgetfulUser, null);
+        String passwordRecoveryQuestion = forgetfulUser.getPasswordRecoveryQuestion();
+        if (passwordRecoveryQuestion != null)
+            return passwordRecoveryQuestion;
+        else
+            return "Username not found!";
+    }
+
+    public String forgotPasswordReturnSecurityQuestionAnswer(String username) {
+        User forgetfulUser = new User();
+        userJsonFileParse("parseUserInformation", username, null, forgetfulUser, null);
+        return forgetfulUser.getPasswordRecoveryAnswer();
+    }
+
+    public String forgotPasswordSetNewPassword(String username, String password) {
+        if (Commands.getMatcherMatches(password, Commands.STRONG_PASSWORD) == null) {
+            if (password.length() < 6)
+                return "Set a new password failed: Password is weak --> password is less than 6 characters!";
+            else if (Commands.getMatcherFind(password, Commands.PASSWORD_WEAK_LOWERCASE_ALPHABET) == null)
+                return "Set a new password failed: Password is weak --> lowercase alphabet not involved!";
+            else if (Commands.getMatcherFind(password, Commands.PASSWORD_WEAK_UPPERCASE_ALPHABET) == null)
+                return "Set a new password failed: Password is weak --> uppercase alphabet not involved!";
+            else if (Commands.getMatcherFind(password, Commands.PASSWORD_WEAK_NUMBER) == null)
+                return "Set a new password failed: Password is weak --> numbers not involved!";
+            else
+                return "Set a new password failed: Password is weak --> any non number or alphabet not involved!";
+        } else {
+            JSONArray newUserList = new JSONArray();
+            userJsonFileParse("putNewPassword", username, password, null, newUserList);
+            try (FileWriter file = new FileWriter("database\\users.json")) {
+                file.write(newUserList.toString());
+                file.flush();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+            return "Set a new password successful!";
+        }
     }
 }

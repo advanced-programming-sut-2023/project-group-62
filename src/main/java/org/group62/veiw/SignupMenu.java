@@ -2,6 +2,7 @@ package org.group62.veiw;
 
 import org.group62.controller.LoginMenuController;
 import org.group62.controller.SignupMenuController;
+import org.group62.model.User;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -12,10 +13,12 @@ public class SignupMenu {
     SignupMenuController signupMenuController;
     LoginMenuController loginMenuController;
     Scanner scanner;
+    private User currentUser;
 
     public SignupMenu(SignupMenuController signupMenuController, Scanner scanner) {
         this.scanner = scanner;
         this.signupMenuController = signupMenuController;
+        currentUser = new User();
         loginMenuController = new LoginMenuController();
     }
 
@@ -38,10 +41,11 @@ public class SignupMenu {
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.CREAT_USER_WITH_RANDOM_SLOGAN)) != null)
                 createUserWithRandomSlogan(matcher);
             else if(Commands.getMatcherMatches(inputCommand,Commands.SHOW_CURRENT_MENU) != null)
-                System.out.println("You are in the signup menu!");
+                System.out.println("Current menu is signup menu!");
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.ENTER_LOGIN_MENU)) != null) {
                 LoginMenu loginMenu = new LoginMenu(loginMenuController);
                 System.out.println("You are in the login menu!");
+                loginMenu.setCurrentUser(currentUser);
                 loginMenu.run(scanner);
             } else if (Commands.getMatcherMatches(inputCommand, Commands.EXIT) != null)
                 break;
