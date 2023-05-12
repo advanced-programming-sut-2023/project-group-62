@@ -27,11 +27,13 @@ public class MapMenuController {
                         else
                             part = "B";
                     }
-                    if (!ground.getTroops().isEmpty()) {
-                        for (Troop troop : ground.getTroops()) {
-                            if (troop.isMoving()) {
-                                part = "S";
-                                break;
+                    if (!ground.getPeople().isEmpty()) {
+                        for (People people : ground.getPeople()) {
+                            if (people instanceof Troop) {
+                                if (((Troop) people).isMoving()) {
+                                    part = "S";
+                                    break;
+                                }
                             }
                         }
                     }
@@ -93,12 +95,14 @@ public class MapMenuController {
             for (Building building : ground.getBuildings())
                 output = output + building.getName() + "\n";
         output = output + "Troops:\n";
-        if (!ground.getTroops().isEmpty()) {
-            for (Troop troop : ground.getTroops()) {
-                if (troopsHashMap.containsKey(troop.getName()))
-                    troopsHashMap.replace(troop.getName(), troopsHashMap.get(troop.getName()) + 1);
-                else
-                    troopsHashMap.put(troop.getName(), 1);
+        if (!ground.getPeople().isEmpty()) {
+            for (People people : ground.getPeople()) {
+                if (people instanceof Troop) {
+                    if (troopsHashMap.containsKey(((Troop) people).getName()))
+                        troopsHashMap.replace(((Troop) people).getName(), troopsHashMap.get(((Troop) people).getName()) + 1);
+                    else
+                        troopsHashMap.put(((Troop) people).getName(), 1);
+                }
             }
             for (String key : troopsHashMap.keySet()) {
                 output = output + key + ": " + troopsHashMap.get(key) + "\n";
