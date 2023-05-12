@@ -1,4 +1,4 @@
-package org.group62.Model;
+package org.group62.model;
 
 public class ArabianTroop extends Troop {
     public ArabianTroop(User owner, String name, int HP, int attackPower, int defencePower, int speed, int range) {

@@ -1,4 +1,4 @@
-package org.group62.Model;
+package org.group62.model;
 
 public enum EngineerTroopEnum {
     TUNNELER("Tunneler", 1000, 600, 0, 4, 0),

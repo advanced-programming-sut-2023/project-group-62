@@ -1,15 +1,17 @@
-package org.group62.Model;
+package org.group62.model;
 
 public class User {
-    private final String username;
+    private String username;
     private String password;
-    private final String nickname;
-    private final String email;
+    private String nickname;
+    private String email;
     private String slogan;
     private String passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
     private int highScore;
+    public User(){
 
+    }
     public User(String username, String password, String nickname, String email) {
         this.username = username;
         this.password = password;

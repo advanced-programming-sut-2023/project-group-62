@@ -1,4 +1,4 @@
-package org.group62.Model;
+package org.group62.model;
 
 public class Map {
     private Ground[][] map = new Ground[400][400];

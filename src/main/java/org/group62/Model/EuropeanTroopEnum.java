@@ -1,4 +1,4 @@
-package org.group62.Model;
+package org.group62.model;
 
 public enum EuropeanTroopEnum {
     ARCHER("Archer", 1000, 400, 100, 4, 10),

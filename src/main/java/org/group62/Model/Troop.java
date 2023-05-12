@@ -1,4 +1,4 @@
-package org.group62.Model;
+package org.group62.model;
 
 public class Troop extends People {
     private final User owner;
