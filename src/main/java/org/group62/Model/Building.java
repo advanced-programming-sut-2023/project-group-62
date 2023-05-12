@@ -64,8 +64,8 @@ public class Building {
         constants.replace(constant, keyInteger);
     }
 
-    public int getConstantsInteger(String key) {
-        return constants.get(key);
+    public int getConstantsInteger(Constant constant) {
+        return constants.get(constant);
     }
 
     public Governance getOwner() {

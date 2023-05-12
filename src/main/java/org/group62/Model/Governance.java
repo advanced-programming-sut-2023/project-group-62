@@ -26,8 +26,9 @@ public class Governance {
 
     public int getReligionPopularity() {
         return StrongHold.getCurrentPlay().howManyOfThisBuildingExistByName("Church", Play.getCurrentGovernance()) *
-                2 + StrongHold.getCurrentPlay().howManyOfThisBuildingExistByName("Cathedral", Play.getCurrentGovernance()) *
-                2;
+                TownEnum.getTown(TownEnum.CHURCH).getConstantsInteger(Constant.POPULARITY) +
+                StrongHold.getCurrentPlay().howManyOfThisBuildingExistByName("Cathedral", Play.getCurrentGovernance()) *
+                        TownEnum.getTown(TownEnum.CATHEDRAL).getConstantsInteger(Constant.POPULARITY);
     }
 
     public int getFoodPopularity() {
@@ -67,6 +68,7 @@ public class Governance {
                 return 0;
         }
     }
+
     public double getTaxOfPerPerson(int taxRate) {
         switch (getTax()) {
             case -3:
@@ -108,14 +110,20 @@ public class Governance {
 
     public void decreaseFood(Food food, int count) {
         foods.replace(food, foods.get(food) - count);
+        if (foods.get(food)< 1)
+            foods.remove(food);
     }
 
     public void decreaseResource(Resource resource, int count) {
         resources.replace(resource, resources.get(resource) - count);
+        if (resources.get(resource)<1)
+            resources.remove(resource);
     }
 
     public void decreaseWeapons(Weapons weapon, int count) {
         weapons.replace(weapon, weapons.get(weapon) - count);
+        if (weapons.get(weapon)<1)
+            weapons.remove(weapon);
     }
 
     public void removePeople(People people) {
