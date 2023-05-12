@@ -19,6 +19,18 @@ public class User {
         this.email = email;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public boolean isPassWordCorrect(String password) {
         return this.password.equals(password);
     }

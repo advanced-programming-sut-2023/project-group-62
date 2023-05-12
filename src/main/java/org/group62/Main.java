@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws NoSuchAlgorithmException, IOException, ParseException {
+    public static void main(String[] args) throws NoSuchAlgorithmException, IOException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
         SignupMenuController signupMenuController = new SignupMenuController(scanner);
         SignupMenu signupMenu = new SignupMenu(signupMenuController,scanner);

@@ -22,30 +22,22 @@ public class LoginMenuController {
 
     private ArrayList<String> usernames = new ArrayList<>();
 
-    public String loginWithoutStayLoggedIn(Matcher matcher,Integer timerFactor) throws NoSuchAlgorithmException,
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public String loginWithoutStayLoggedIn(Matcher matcher, Integer timerFactor) throws NoSuchAlgorithmException,
             InterruptedException {
         String username = matcher.group("username");
         String password = matcher.group("password");
+        userJsonFileParse("usernameCheck",username);
         if(!isUsernameExist(username))
             return "Username and password didn’t match! --> Username not exist!";
-        else if(!isPasswordCorrect(password,username)){
-            String message = "Username and password didn’t match! --> Password is incorrect!";
-            int timer = timerFactor * 5;
-            while (timer != -1) {
-                message += "\nYou can enter password in " + timer + " seconds!";
-                timer--;
-                Thread.sleep(1000);
-                if(timer == 0) {
-                    message += "Now you can try one more!";
-                    break;
-                }
-            }
-            return message;
-        }else{
-            timerFactor = 1;
+        else if(!isPasswordCorrect(password,username))
+            return "Username and password didn’t match! --> Password is incorrect!";
+        else
+            return "User logged in successfully!";
 
-            return "Login successfully!";
-        }
     }
 
     private boolean isPasswordCorrect(String password,String username) throws NoSuchAlgorithmException {
@@ -178,7 +170,10 @@ public class LoginMenuController {
             String slogan = (String) empobj.get("slogan");
             String securityQuestion = (String) empobj.get("securityQuestion");
             String securityQuestionAnswer = (String) empobj.get("securityQuestionAnswer");
-            currentUser = new User(username, passwordSecure, nickname, email);
+            currentUser.setPassword(passwordSecure);
+            currentUser.setUsername(username);
+            currentUser.setEmail(email);
+            currentUser.setNickname(nickname);
             currentUser.setSlogan(slogan);
             currentUser.setPasswordRecoveryAnswer(securityQuestionAnswer);
             currentUser.setPasswordRecoveryQuestion(securityQuestion);
