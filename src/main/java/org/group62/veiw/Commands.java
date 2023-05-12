@@ -44,13 +44,14 @@ public enum Commands {
     PASSWORD_WEAK_NUMBER("[0-9]+"),
     PASSWORD_WEAK_CHARACTER("[\\.\\*!@#\\$%\\^&\\(\\)_-\\+=]\\[}\\\\{\\|\\?\\/><,]"),
     EMAIL_VALIDATION("[a-zA-Z0-9._]+@[a-zA-Z0-9_]+\\.[a-zA-Z0-9._]+"),
-    USER_LOGIN("^\\s*user\\s+login(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))(?=.+(-p|--password)\\s+" +
-            "(?<password>\\S+)).+)\\s*$"),
+    USER_LOGIN("^\\s*user\\s+login(?<args>(?=.+(-u)\\s+((?<username>\"(.*\\S+\\s+.*)\"|" +
+            ".+?(?=\\s+-p)|.+)))(?=.+(-p)\\s+((?<password>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-u)|.+))).+)\\s*$"),
     ENTER_LOGIN_MENU("^\\s*enter\\s+login\\s+menu\\s*$"),
     ENTER_PROFILE_MENU("^\\s*enter\\s+profile\\s+menu\\s*$"),
     ENTER_GAME_MENU("^\\s*enter\\s+game\\s+menu\\s*$"),
-    USER_STAY_LOGGED_IN("^\\s*user\\s+login(?<args>(?=.+(-u|--username)\\s+(?<username>\\S+))(?=.+(-p|--password)" +
-            "\\s+(?<password>\\S+))(?=.+(--stay-logged-in)).+)\\s*$"),
+    USER_STAY_LOGGED_IN("^\\s*user\\s+login(?<args>(?=.+(-u)\\s+((?<username>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p" +
+            "|\\s+--stay-logged-in)|.+)))(?=.+(-p)\\s+((?<password>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-u|\\s+--stay-logged-in)" +
+            "|.+)))((?=.+(--stay-logged-in)).+))\\s*$"),
     FORGOT_MY_PASSWORD("^\\s*forgot\\s+my\\s+password\\s+(-u|--username)\\s+(?<username>\\S+)\\s*$"),
     USER_LOGOUT("^\\s*user\\s+logout\\s*$"),
     PROFILE_USERNAME_CHANGE("^\\s*profile\\s+change\\s+(-u|--username)\\s+(?<username>\\S+)\\s*$"),
