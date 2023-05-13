@@ -29,13 +29,13 @@ public class ProfileMenu {
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_USERNAME_CHANGE)) != null)
                 changeUsername(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_NICKNAME_CHANGE)) != null)
-                System.out.println(profileMenuController.changeNickname(matcher));
+                changeNickname(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_EMAIL_CHANGE)) != null)
-                System.out.println(profileMenuController.changeEmail(matcher));
+                changeEmail(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_SLOGAN_CHANGE)) != null)
-                System.out.println(profileMenuController.changeSlogan(matcher));
+                changeSlogan(matcher);
             else if ((Commands.getMatcherMatches(inputCommand, Commands.PROFILE_REMOVE_SLOGAN)) != null)
-                System.out.println(profileMenuController.removeSlogan());
+                removeSlogan();
             else if (Commands.getMatcherMatches(inputCommand, Commands.PROFILE_DISPLAY_HIGH_SCORE) != null)
                 System.out.println(profileMenuController.displayHighScore());
             else if (Commands.getMatcherMatches(inputCommand, Commands.PROFILE_DISPLAY_RANK) != null)
@@ -49,6 +49,22 @@ public class ProfileMenu {
             else
                 System.out.println("Invalid command!");
         }
+    }
+
+    private void removeSlogan() {
+        System.out.println(profileMenuController.removeSlogan());
+    }
+
+    private void changeSlogan(Matcher matcher) {
+        System.out.println(profileMenuController.changeSlogan(matcher));
+    }
+
+    private void changeEmail(Matcher matcher) {
+        System.out.println(profileMenuController.changeEmail(matcher));
+    }
+
+    private void changeNickname(Matcher matcher) {
+        System.out.println(profileMenuController.changeNickname(matcher));
     }
 
     private void changeUsername(Matcher matcher) throws NoSuchAlgorithmException {

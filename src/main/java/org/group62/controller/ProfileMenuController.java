@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 public class ProfileMenuController {
     private User currentUser;
     private ArrayList<String> usernames = new ArrayList<>();
+    private ArrayList<String> emails = new ArrayList<>();
 
     public Boolean checkNewPasswordConfirmation(String newPasswordConfirmation, String newPassword) {
         if (newPassword.equals(newPasswordConfirmation))
@@ -34,7 +35,9 @@ public class ProfileMenuController {
         String oldPassword = matcher.group("oldPassword");
         String newPassword = matcher.group("newPassword");
         if (!isPasswordCorrect(oldPassword))
-            return "Profile change password failed: Your oldPassword is incorrect!";
+            return "Profile change password failed: Current password is incorrect!";
+        else if(oldPassword.equals(newPassword))
+            return "Profile change password failed: Please enter a new password!";
         else if (Commands.getMatcherMatches(newPassword, Commands.STRONG_PASSWORD) == null) {
             if (newPassword.length() < 6)
                 return "Profile change password failed: Password is weak --> password is less than 6 characters!";
@@ -74,19 +77,37 @@ public class ProfileMenuController {
 
 
     public String changeNickname(Matcher matcher) {
-        return null;
+        String newNickname = matcher.group("nickname");
+        writeDataInJsonFile("putNewNickname",newNickname);
+        currentUser.setNickname(newNickname);
+        return "Profile change nickname successfully!";
     }
 
     public String changeEmail(Matcher matcher) {
-        return null;
+        String newEmail = matcher.group("email");
+        if(isEmailDuplicate(newEmail))
+            return "Profile change email failed: Duplicate email address!";
+        else if(Commands.getMatcherMatches(newEmail,Commands.EMAIL_VALIDATION) == null)
+            return "Profile change email failed: Invalid email address format!";
+        else{
+            writeDataInJsonFile("putNewEmailAddress",newEmail);
+            currentUser.setEmail(newEmail);
+            return "Profile change email address successfully!";
+        }
+
     }
 
     public String changeSlogan(Matcher matcher) {
-        return null;
+        String newSlogan = matcher.group("slogan");
+        writeDataInJsonFile("putNewSlogan",newSlogan);
+        currentUser.setSlogan(newSlogan);
+        return "Profile change slogan successfully!";
     }
 
     public String removeSlogan() {
-        return null;
+        writeDataInJsonFile("putNewSlogan","User has no slogan!");
+        currentUser.setSlogan(null);
+        return "Profile remove slogan successfully!";
     }
 
     public String displayHighScore() {
@@ -145,19 +166,35 @@ public class ProfileMenuController {
                 empList.forEach(emp -> usernameParse((JSONObject) emp));
                 break;
             case "putNewUsername":
-                empList.forEach(emp -> putNewUsernameInJsonFile((JSONObject) emp, currentUsername, newData,newUserList));
-
-
+                empList.forEach(emp -> putNewUserDataInJsonFile((JSONObject) emp, "username", currentUsername, newData, newUserList));
+                break;
+            case "putNewNickname":
+                empList.forEach(emp -> putNewUserDataInJsonFile((JSONObject) emp, "nickname", currentUsername, newData, newUserList));
+                break;
+            case "emailCheck":
+                emails.clear();
+                empList.forEach(emp -> emailParse((JSONObject) emp));
+                break;
+            case "putNewEmailAddress":
+                empList.forEach(emp -> putNewUserDataInJsonFile((JSONObject) emp, "Email", currentUsername, newData, newUserList));
+                break;
+            case "putNewSlogan":
+                empList.forEach(emp -> putNewUserDataInJsonFile((JSONObject) emp, "slogan", currentUsername, newData, newUserList));
+                break;
         }
-
-
     }
 
-    private void putNewUsernameInJsonFile(JSONObject emp, String oldUsername, String newUsername, JSONArray newUserList) {
+    private void emailParse(JSONObject emp) {
+        JSONObject empobj = (JSONObject) emp.get("User");
+        String email = (String) empobj.get("Email");
+        emails.add(email);
+    }
+
+    private void putNewUserDataInJsonFile(JSONObject emp, String partName, String oldUsername, String newData, JSONArray newUserList) {
         JSONObject empobj = (JSONObject) emp.get("User");
         String username = (String) empobj.get("username");
         if (username.equals(oldUsername)) {
-            empobj.put("username", newUsername);
+            empobj.put(partName, newData);
         }
         updateUserJsonFile(emp, newUserList);
     }
@@ -220,5 +257,16 @@ public class ProfileMenuController {
     public void putNewPasswordInCurrentUserPassword(String newPassword) throws NoSuchAlgorithmException {
         String newPasswordSecure = SHA256.sha256Security(newPassword);
         currentUser.setPassword(newPasswordSecure);
+    }
+    private Boolean isEmailDuplicate(String email){
+        userJsonFileParse("emailCheck",null,null,null,null);
+        if(emails.size() != 0){
+            for (String e : emails){
+                if(e.equals(email))
+                    return true;
+            }
+            return false;
+        }
+        return false;
     }
 }
