@@ -54,10 +54,11 @@ public enum Commands {
             "|.+)))(?=.+(--stay-logged-in)).+)\\s*$"),
     FORGOT_MY_PASSWORD("^\\s*forgot\\s+my\\s+password\\s+(-u|--username)\\s+(?<username>\\S+)\\s*$"),
     USER_LOGOUT("^\\s*user\\s+logout\\s*$"),
-    PROFILE_USERNAME_CHANGE("^\\s*profile\\s+change\\s+(-u|--username)\\s+(?<username>\\S+)\\s*$"),
+    PROFILE_USERNAME_CHANGE("^\\s*profile\\s+change\\s+(-u)\\s+(?<username>\"(.*\\S+\\s+.*)\"|\\S+)\\s*$"),
     PROFILE_NICKNAME_CHANGE("^\\s*profile\\s+change\\s+(-n|--nickname)\\s+(?<nickname>\\S+)\\s*$"),
-    PROFILE_PASSWORD_CHANGE("^\\s*profile\\s+change(?<args>(?=.+(-o)\\s+(?<oldPassword>\\S+))(?=.+(-n)" +
-            "\\s+(?<newPassword>\\S+)).+)\\s*$"),
+    PROFILE_PASSWORD_CHANGE("^\\s*profile\\s+change\\s+password(?<args>(?=.+(-o)\\s+(?<oldPassword>" +
+            "\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-n)|.+))(?=.+(-n)\\s+(?<newPassword>\"(.*\\S+\\s+.*)\"|.+?" +
+            "(?=\\s+-o)|.+)).+)\\s*$"),
     PROFILE_EMAIL_CHANGE("^\\s*profile\\s+change\\s+(-e|--email)\\s+(?<email>\\S+)\\s*$"),
     PROFILE_SLOGAN_CHANGE("^\\s*profile\\s+change\\s+slogan\\s+(-s)\\s+(?<slogan>\\S+)\\s*$"),
     PROFILE_REMOVE_SLOGAN("^\\s*profile\\s+remove\\s+slogan\\s*$"),

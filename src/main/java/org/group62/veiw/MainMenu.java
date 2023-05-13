@@ -5,6 +5,7 @@ import org.group62.controller.MainMenuController;
 import org.group62.controller.ProfileMenuController;
 import org.group62.model.User;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -25,15 +26,19 @@ public class MainMenu {
         profileMenuController = new ProfileMenuController();
     }
 
-    public void run(Scanner scanner) {
+    public void run(Scanner scanner) throws NoSuchAlgorithmException {
 
         while (true) {
             String inputCommand = scanner.nextLine();
             if (Commands.getMatcherMatches(inputCommand, Commands.ENTER_PROFILE_MENU) != null) {
                 ProfileMenu profileMenu = new ProfileMenu(profileMenuController);
+                profileMenu.setCurrentUser(currentUser);
+                System.out.println("You are in the profile menu!");
                 profileMenu.run(scanner);
             } else if (Commands.getMatcherMatches(inputCommand, Commands.ENTER_GAME_MENU) != null) {
                 GameMenu gameMenu = new GameMenu(gameMenuController);
+                gameMenu.setCurrentUser(currentUser);
+                System.out.println("You are in the game menu!");
                 gameMenu.run(scanner);
             } else if (Commands.getMatcherMatches(inputCommand, Commands.USER_LOGOUT) != null) {
                 System.out.println("user logged out successfully!");

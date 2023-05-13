@@ -1,6 +1,7 @@
 package org.group62.veiw;
 
 import org.group62.controller.*;
+import org.group62.model.User;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -16,7 +17,12 @@ public class GameMenu {
     private MapMenuController mapMenuController;
     private MarketMenuController marketMenuController;
     private GameMenuController gameMenuController;
+    private User currentUser;
     Matcher matcher;
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 
     public GameMenu(GameMenuController gameMenuController) {
         this.gameMenuController = gameMenuController;
