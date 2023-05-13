@@ -113,27 +113,19 @@ public class ProfileMenuController {
     }
 
     public String displayHighScore() {
-        User user = StrongHold.getCurrentUser();
-        return String.format("%s highscore: %d",user.getNickname(),user.getHighScore());
+        return null;
     }
 
     public String displayRank() {
-        User user = StrongHold.getCurrentUser();
-        return String.format("%s rank: %d",user.getNickname(),user.getRank());
+        return null;
     }
 
     public String displaySlogan() {
-        User user = StrongHold.getCurrentUser();
-        if (user.getSlogan() == null)
-            return "Slogan is empty!";
-        else
-            return String.format("%s slogan: %s",user.getNickname(),user.getSlogan());
+        return null;
     }
 
     public String displayAllProfile() {
-        User user = StrongHold.getCurrentUser();
-        return String.format("%s\nhighscore: %d\nrank: %d\nslogan: %s",user.getNickname(),
-                user.getHighScore(),user.getRank(),user.getSlogan());
+        return null;
     }
 
     private void updateUserJsonFile(JSONObject emp, JSONArray newUserList) {
