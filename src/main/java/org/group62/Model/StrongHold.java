@@ -11,15 +11,6 @@ public class StrongHold {
         users.add(user);
     }
 
-    public static int getRankOfUser(User user) {
-        int rank = 1;
-        for (User anotherUser : users) {
-            if (anotherUser.getHighScore() > user.getHighScore())
-                rank++;
-        }
-        return rank;
-    }
-
     public static void setCurrentUser(User currentUser) {
         StrongHold.currentUser = currentUser;
     }

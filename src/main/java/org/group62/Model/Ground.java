@@ -3,43 +3,64 @@ package org.group62.model;
 import java.util.ArrayList;
 
 public class Ground {
-    private GroundLandType groundLandType = GroundLandType.LAND;
+    private final int x;
+    private final int y;
+    private GroundType groundType = GroundType.LAND;
     private GroundTreeType groundTreeType = null;
-    private GroundWaterType groundWaterType = null;
     private ArrayList<Building> buildings = new ArrayList<>();
-    private ArrayList<Troop> troops = new ArrayList<>();
+    private ArrayList<People> people = new ArrayList<>();
 
-    public void removeTroop(Troop troop) {
-        troops.remove(troop);
+    public Ground(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void removePeople(People people) {
+        this.people.remove(people);
     }
 
     public void removeBuilding(Building building) {
         buildings.remove(building);
     }
 
+    public void removeTroops() {
+        people.clear();
+    }
+
+    public void removeBuildings() {
+        buildings.clear();
+    }
+
     public void addBuilding(Building building) {
         buildings.add(building);
     }
 
-    public void addTroop(Troop troop) {
-        troops.add(troop);
+    public void addPeople(People people) {
+        this.people.add(people);
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 
     public ArrayList<Building> getBuildings() {
         return buildings;
     }
 
-    public ArrayList<Troop> getTroops() {
-        return troops;
+    public ArrayList<People> getPeople() {
+        return people;
     }
 
-    public GroundLandType getGroundLandType() {
-        return groundLandType;
+    public GroundType getGroundType() {
+        return groundType;
     }
 
-    public void setGroundLandType(GroundLandType groundLandType) {
-        this.groundLandType = groundLandType;
+    public void setGroundType(GroundType groundType) {
+        this.groundType = groundType;
     }
 
     public GroundTreeType getGroundTreeType() {
@@ -48,13 +69,5 @@ public class Ground {
 
     public void setGroundTreeType(GroundTreeType groundTreeType) {
         this.groundTreeType = groundTreeType;
-    }
-
-    public GroundWaterType getGroundWaterType() {
-        return groundWaterType;
-    }
-
-    public void setGroundWaterType(GroundWaterType groundWaterType) {
-        this.groundWaterType = groundWaterType;
     }
 }

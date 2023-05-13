@@ -1,5 +1,8 @@
 package org.group62.controller;
 
+import org.group62.model.StrongHold;
+import org.group62.model.User;
+
 import org.group62.model.User;
 import org.group62.veiw.Commands;
 import org.json.simple.JSONArray;
@@ -14,7 +17,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
-
 public class ProfileMenuController {
     private User currentUser;
     private ArrayList<String> usernames = new ArrayList<>();
@@ -111,19 +113,27 @@ public class ProfileMenuController {
     }
 
     public String displayHighScore() {
-        return null;
+        User user = StrongHold.getCurrentUser();
+        return String.format("%s highscore: %d",user.getNickname(),user.getHighScore());
     }
 
     public String displayRank() {
-        return null;
+        User user = StrongHold.getCurrentUser();
+        return String.format("%s rank: %d",user.getNickname(),user.getRank());
     }
 
     public String displaySlogan() {
-        return null;
+        User user = StrongHold.getCurrentUser();
+        if (user.getSlogan() == null)
+            return "Slogan is empty!";
+        else
+            return String.format("%s slogan: %s",user.getNickname(),user.getSlogan());
     }
 
     public String displayAllProfile() {
-        return null;
+        User user = StrongHold.getCurrentUser();
+        return String.format("%s\nhighscore: %d\nrank: %d\nslogan: %s",user.getNickname(),
+                user.getHighScore(),user.getRank(),user.getSlogan());
     }
 
     private void updateUserJsonFile(JSONObject emp, JSONArray newUserList) {
