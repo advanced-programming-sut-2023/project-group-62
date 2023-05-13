@@ -44,7 +44,9 @@ public class ProfileMenu {
                 System.out.println(profileMenuController.displaySlogan());
             else if (Commands.getMatcherMatches(inputCommand, Commands.PROFILE_DISPLAY) != null)
                 System.out.println(profileMenuController.displayAllProfile());
-            else if (Commands.getMatcherMatches(inputCommand, Commands.USER_LOGOUT) != null)
+            else if (Commands.getMatcherMatches(inputCommand, Commands.SHOW_CURRENT_MENU) != null)
+                System.out.println("Current menu is profile menu!");
+            else if (Commands.getMatcherMatches(inputCommand, Commands.BACK) != null)
                 break;
             else
                 System.out.println("Invalid command!");
