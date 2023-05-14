@@ -29,7 +29,7 @@ public class GovernanceController {
         int foodsNumber = 0;
         for (Food food : Play.getCurrentGovernance().getFoods().keySet())
             foodsNumber = foodsNumber + Play.getCurrentGovernance().getFoods().get(food);
-        if (foodsNumber < Food.GetAmountOfFoodPerPerson(foodRate) * Play.getCurrentGovernance().getPeoples().size())
+        if (foodsNumber < (int) (Food.GetAmountOfFoodPerPerson(foodRate) * Play.getCurrentGovernance().getPeoples().size()))
             return "you don't have enough food for this food rate";
         Play.getCurrentGovernance().setFoodRate(foodRate);
         return "set food rate was successful";
@@ -42,7 +42,7 @@ public class GovernanceController {
     public String setTaxRate(int taxRate) {
         if (taxRate > 8 || taxRate < -3)
             return "invalid tax rate";
-        if (Play.getCurrentGovernance().getGold() - Play.getCurrentGovernance().getPeoples().size() * Play.getCurrentGovernance().getTaxOfPerPerson(taxRate) < 0)
+        if (Play.getCurrentGovernance().getGold() + (int) (Play.getCurrentGovernance().getPeoples().size() * Play.getCurrentGovernance().getTaxOfPerPerson(taxRate)) < 0)
             return "you don't have enough gold for this tax rate";
         Play.getCurrentGovernance().setTax(taxRate);
         return "set tax rate was successful";
