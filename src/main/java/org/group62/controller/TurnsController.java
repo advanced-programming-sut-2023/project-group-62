@@ -195,10 +195,10 @@ public class TurnsController {
         ArrayList<Governance> allGovernance = StrongHold.getCurrentPlay().getGovernances();
         for(int i = 0;i < allGovernance.size();i++){
             if(allGovernance.get(i).equals(currentGovernance)) {
-                if(i == allGovernance.size() - 1){
+                if(i == allGovernance.size() - 1)
                     Play.setCurrentGovernance(allGovernance.get(0));
-                }
-                Play.setCurrentGovernance(allGovernance.get(i++));
+                else
+                    Play.setCurrentGovernance(allGovernance.get(i++));
             }
         }
 
