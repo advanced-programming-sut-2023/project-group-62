@@ -25,7 +25,8 @@ public class BuildingController {
                 ground.getGroundType().equals(GroundType.DENSE_GRASSLAND))) ||
                 !canDropBuildingThere(x, y) || ground.getGroundTreeType() == null ||
                 (ground.getGroundType().equals(GroundType.STONE) && !building.getName().equals("Quarry")) ||
-                (ground.getGroundType().equals(GroundType.IRON) && !building.getName().equals("Iron mine")))
+                (ground.getGroundType().equals(GroundType.IRON) && !building.getName().equals("Iron mine")) ||
+                (ground.getGroundType().equals(GroundType.PLAIN) && !building.getName().equals("Pitch rig")))
             return "can't drop building there";
         else if (governance.getGold() < building.getGoldCost())
             return "you don't have enough money";
@@ -146,7 +147,7 @@ public class BuildingController {
                 governance.setGold(governance.getGold() - count * troop.getGoldCost());
                 if (!troop.getWeaponsCost().isEmpty())
                     for (Weapons weapons1 : troop.getWeaponsCost().keySet())
-                        governance.getWeapons().replace(weapons1, governance.getWeapons().get(weapons1) - troop.getWeaponsCost().get(weapons1));
+                        governance.decreaseWeapons(weapons1, troop.getWeaponsCost().get(weapons1));
                 if (europeanTroopEnum != null)
                     for (int i = 0; i < count; i++)
                         ground.addPeople(EuropeanTroopEnum.getEuropeanTroop(europeanTroopEnum));
