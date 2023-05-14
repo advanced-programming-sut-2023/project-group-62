@@ -45,9 +45,36 @@ public class MapMenuController {
 
         return output;
     }
-
+    public String moveMap(String direction, int count) {
+        int x = getCurrentX(), y = getCurrentY();
+        switch (direction) {
+            case "up":
+                if (getCurrentX() - count < 0)
+                    return "map doesn't big enough";
+                x = getCurrentX() - count + 1;
+                break;
+            case "down":
+                if (getCurrentX() + count > 399)
+                    return "map doesn't big enough";
+                x = getCurrentX() + count + 1;
+                break;
+            case "right":
+                if (getCurrentY() + count > 399)
+                    return "map doesn't big enough";
+                y = getCurrentY() + count + 1;
+                break;
+            case "left":
+                if (getCurrentY() - count < 0)
+                    return "map doesn't big enough";
+                y = getCurrentY() - count + 1;
+                break;
+            default:
+                return "write right or left or down or up";
+        }
+        return showMap(x, y);
+    }
     public String moveMap(String upDown, String rightLeft, int count) {
-        int x, y;
+        int x = getCurrentX(), y = getCurrentY();
         switch (upDown) {
             case "up":
                 if (getCurrentX() - count < 0)

@@ -1,6 +1,7 @@
 package org.group62.veiw;
 
 import org.group62.controller.*;
+import org.group62.model.Governance;
 import org.group62.model.Play;
 import org.group62.model.Resource;
 import org.group62.model.User;
@@ -44,75 +45,75 @@ public class GameMenu {
             if (Commands.getMatcherMatches(inputCommand, Commands.NEW_GAME) != null)
                 newGame(scanner);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.TRADE)) != null)
-                System.out.println(setTrade(matcher));
-            else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.TRADE_LIST)) != null)
-                System.out.println(showTradeList(matcher));
+                setTrade(matcher);
+            else if ((Commands.getMatcherMatches(inputCommand, Commands.TRADE_LIST)) != null)
+                showTradeList();
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.TRADE_ACCEPT)) != null)
-                System.out.println(tradeAccept(matcher));
+                tradeAccept(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SET_BLOCK_TEXTURE)) != null)
-                System.out.println(setBlockTexture(matcher));
+                setBlockTexture(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SET_RECTANGLE_TEXTURE)) != null)
-                System.out.println(setRectangleTexture(matcher));
+                setRectangleTexture(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.CLEAR)) != null)
-                System.out.println(clear(matcher));
+                clear(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.DROP_ROCK)) != null)
-                System.out.println(dropRock(matcher));
+                dropRock(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.DROP_TREE)) != null)
-                System.out.println(dropTree(matcher));
+                dropTree(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.DROP_BUILDING)) != null)
-                System.out.println(dropBuilding(matcher));
+                dropBuilding(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.DROP_UNIT)) != null)
-                System.out.println(dropUnit(matcher));
+                dropUnit(matcher);
             else if (Commands.getMatcherMatches(inputCommand, Commands.SHOW_POPULARITY_FACTORS) != null)
-                System.out.println(showPopularityFactors());
+                showPopularityFactors();
             else if (Commands.getMatcherMatches(inputCommand, Commands.SHOW_POPULARITY) != null)
-                System.out.println(showPopularity());
+                showPopularity();
             else if (Commands.getMatcherMatches(inputCommand, Commands.SHOW_FOOD_LIST) != null)
-                System.out.println(showFoodList());
+                showFoodList();
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.FOOD_RATE)) != null)
-                System.out.println(setFoodRate(matcher));
+                setFoodRate(matcher);
             else if (Commands.getMatcherMatches(inputCommand, Commands.FOOD_RATE_SHOW) != null)
-                System.out.println(showFoodRate());
+                showFoodRate();
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.TAX_RATE)) != null)
-                System.out.println(setTaxRate(matcher));
+                setTaxRate(matcher);
             else if (Commands.getMatcherMatches(inputCommand, Commands.TAX_RATE_SHOW) != null)
-                System.out.println(showTaxRate());
+                showTaxRate();
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.FEAR_RATE)) != null)
-                System.out.println(setFearRate(matcher));
+                setFearRate(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SELECT_BUILDING)) != null)
-                System.out.println(selectBuilding(matcher));
+                selectBuilding(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.CREATE_UNIT)) != null)
-                System.out.println(creatUnit(matcher));
+                creatUnit(matcher);
             else if (Commands.getMatcherMatches(inputCommand, Commands.REPAIR) != null)
-                System.out.println(repair());
+                repair();
             else if (Commands.getMatcherMatches(inputCommand, Commands.NEXT_TURN) != null)
-                System.out.println(nextTurn());
+                nextTurn();
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SELECT_UNIT)) != null)
-                System.out.println(selectUnit(matcher));
+                selectUnit(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.MOVE_UNIT)) != null)
-                System.out.println(moveUnit(matcher));
+                moveUnit(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PATROL_UNIT)) != null)
-                System.out.println(patrolUnit(matcher));
+                patrolUnit(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SET_STATE)) != null)
-                System.out.println(setState(matcher));
+                setState(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.ATTACK)) != null)
-                System.out.println(attack(matcher));
+                attack(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.ATTACK_COORDINATES)) != null)
-                System.out.println(attackWithArrows(matcher));
+                attackWithArrows(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.POUR_OIL)) != null)
-                System.out.println(pourOil(matcher));
+                pourOil(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.DIG_TUNNEL)) != null)
-                System.out.println(digTunnel(matcher));
+                digTunnel(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.BUILD)) != null)
-                System.out.println(buidEquipment(matcher));
+                buidEquipment(matcher);
             else if (Commands.getMatcherMatches(inputCommand, Commands.DISBAND_UNIT) != null)
-                System.out.println(disbandUnit());
+                disbandUnit();
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SHOW_MAP)) != null)
-                System.out.println(showMap(matcher));
+                showMap(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SHOW_DETAILS)) != null)
-                System.out.println(showDetails(matcher));
+                showDetails(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.MAP_MOVE)) != null)
-                System.out.println(moveMap(matcher));
+                moveMap(matcher);
             else if (Commands.getMatcherMatches(inputCommand, Commands.SHOW_PRICE_LIST) != null)
                 showPriceList();
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.BUY)) != null)
@@ -151,144 +152,197 @@ public class GameMenu {
                 Resource.WHEAT.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.WHEAT) + "items.");
     }
 
-    private String moveMap(Matcher matcher) {
-        return null;
+    private void moveMap(Matcher matcher) {
+        //TODO
+        //mapMenuController.moveMap();
+
     }
 
-    private String showDetails(Matcher matcher) {
-        return null;
+    private void showDetails(Matcher matcher) {
+        String xCoordinate = matcher.group("xCoordinates");
+        String yCoordinate = matcher.group("yCoordinates");
+        System.out.println(mapMenuController.showMap(Integer.parseInt(xCoordinate),Integer.parseInt(yCoordinate)));
     }
 
-    private String showMap(Matcher matcher) {
-        return null;
+    private void showMap(Matcher matcher) {
+        String xCoordinate = matcher.group("xCoordinates");
+        String yCoordinate = matcher.group("yCoordinates");
+        System.out.println(mapMenuController.showMap(Integer.parseInt(xCoordinate),Integer.parseInt(yCoordinate)));
     }
 
-    private String disbandUnit() {
-        return null;
+    private void disbandUnit() {
+        //TODO
     }
 
-    private String buidEquipment(Matcher matcher) {
-        return null;
+    private void buidEquipment(Matcher matcher) {
+        //TODO
     }
 
-    private String digTunnel(Matcher matcher) {
-        return null;
+    private void digTunnel(Matcher matcher) {
+        //TODO
     }
 
-    private String pourOil(Matcher matcher) {
-        return null;
+    private void pourOil(Matcher matcher) {
+        //TODO
     }
 
-    private String attackWithArrows(Matcher matcher) {
-        return null;
+    private void attackWithArrows(Matcher matcher) {
+        //TODO
     }
 
-    private String attack(Matcher matcher) {
-        return null;
+    private void attack(Matcher matcher) {
+        //TODO
     }
 
-    private String setState(Matcher matcher) {
-        return null;
+    private void setState(Matcher matcher) {
+        //TODO
     }
 
-    private String patrolUnit(Matcher matcher) {
-        return null;
+    private void patrolUnit(Matcher matcher) {
+        //TODO
     }
 
-    private String moveUnit(Matcher matcher) {
-        return null;
+    private void moveUnit(Matcher matcher) {
+        //TODO
     }
 
-    private String selectUnit(Matcher matcher) {
-        return null;
+    private void selectUnit(Matcher matcher) {
+        //TODO
     }
 
-    private String nextTurn() {
-        return null;
+    private void nextTurn() {
+        //TODO
+        turnsController.nextTurn();
     }
 
-    private String repair() {
-        return null;
+    private void repair() {
+        System.out.println(buildingController.repair());
     }
 
-    private String creatUnit(Matcher matcher) {
-        return null;
+    private void creatUnit(Matcher matcher) {
+        String type = matcher.group("type");
+        String count = matcher.group("count");
+        System.out.println(buildingController.createUnit(type,Integer.parseInt(count)));
     }
 
-    private String selectBuilding(Matcher matcher) {
-        return null;
+    private void selectBuilding(Matcher matcher) {
+        String xCoordinates = matcher.group("xCoordinates");
+        String yCoordinates = matcher.group("yCoordinates");
+        System.out.println(buildingController.selectBuilding(Integer.parseInt(xCoordinates),Integer.parseInt(yCoordinates)));
     }
 
-    private String setFearRate(Matcher matcher) {
-        return null;
+    private void setFearRate(Matcher matcher) {
+        String rateNumber = matcher.group("rateNumber");
+        System.out.println(governanceController.setFearRate(Integer.parseInt(rateNumber)));
     }
 
-    private String showTaxRate() {
-        return null;
+    private void showTaxRate() {
+        System.out.println(governanceController.showTaxRate());
     }
 
-    private String setTaxRate(Matcher matcher) {
-        return null;
+    private void setTaxRate(Matcher matcher) {
+        String rateNumber = matcher.group("rateNumber");
+        System.out.println(governanceController.setTaxRate(Integer.parseInt(rateNumber)));
     }
 
-    private String showFoodRate() {
-        return null;
+    private void showFoodRate() {
+        System.out.println(governanceController.showFoodRate());
     }
 
-    private String setFoodRate(Matcher matcher) {
-        return null;
+    private void setFoodRate(Matcher matcher) {
+        String rateNumber = matcher.group("rateNumber");
+        governanceController.setFoodRate(Integer.parseInt(rateNumber));
     }
 
-    private String showFoodList() {
-        return null;
+    private void showFoodList() {
+        governanceController.showFoodList();
     }
 
-    private String showPopularity() {
-        return null;
+    private void showPopularity() {
+        governanceController.showPopularity();
     }
 
-    private String showPopularityFactors() {
-        return null;
+    private void showPopularityFactors() {
+        governanceController.showPopularityFactors();
     }
 
-    private String dropUnit(Matcher matcher) {
-        return null;
+    private void dropUnit(Matcher matcher) {
+        String xCoordinates = matcher.group("xCoordinates");
+        String yCoordinates = matcher.group("yCoordinates");
+        String type = matcher.group("type");
+        String count = matcher.group("count");
+        String color = matcher.group("color");
+        Governance governance = cheaterController.findGovernanceByColor(color);
+        System.out.println(cheaterController.dropUnit(Integer.parseInt(xCoordinates),
+                Integer.parseInt(yCoordinates),type,Integer.parseInt(count),governance));
     }
 
-    private String dropBuilding(Matcher matcher) {
-        return null;
+    private void dropBuilding(Matcher matcher) {
+        String xCoordinates = matcher.group("xCoordinates");
+        String yCoordinates = matcher.group("yCoordinates");
+        String type = matcher.group("type");
+        String color = matcher.group("color");
+        Governance governance = cheaterController.findGovernanceByColor(color);
+        System.out.println(cheaterController.dropBuilding(Integer.parseInt(xCoordinates),Integer.parseInt(yCoordinates),
+                type,governance));
     }
 
-    private String dropTree(Matcher matcher) {
-        return null;
+    private void dropTree(Matcher matcher) {
+        String xCoordinates = matcher.group("xCoordinates");
+        String yCoordinates = matcher.group("yCoordinates");
+        String type = matcher.group("type");
+        System.out.println(cheaterController.dropTree(Integer.parseInt(xCoordinates),Integer.parseInt(yCoordinates),
+                type));
     }
 
-    private String dropRock(Matcher matcher) {
-        return null;
+    private void dropRock(Matcher matcher) {
+        String xCoordinates = matcher.group("xCoordinates");
+        String yCoordinates = matcher.group("yCoordinates");
+        String direction = matcher.group("direction");
+        System.out.println(cheaterController.dropRock(Integer.parseInt(xCoordinates),Integer.parseInt(yCoordinates),direction));
     }
 
-    private String clear(Matcher matcher) {
-        return null;
+    private void clear(Matcher matcher) {
+        String xCoordinates = matcher.group("xCoordinates");
+        String yCoordinates = matcher.group("yCoordinates");
+        System.out.println(cheaterController.clear(Integer.parseInt(xCoordinates),Integer.parseInt(yCoordinates)));
     }
 
-    private String setRectangleTexture(Matcher matcher) {
-        return null;
+    private void setRectangleTexture(Matcher matcher) {
+        String x1Coordinates = matcher.group("x1Coordinates");
+        String y1Coordinates = matcher.group("y1Coordinates");
+        String x2Coordinates = matcher.group("x2Coordinates");
+        String y2Coordinates = matcher.group("y2Coordinates");
+        String type = matcher.group("type");
+        System.out.println(cheaterController.setTexture(Integer.parseInt(x1Coordinates),Integer.parseInt(y1Coordinates),
+                Integer.parseInt(x2Coordinates),Integer.parseInt(y2Coordinates),type));
     }
 
-    private String setBlockTexture(Matcher matcher) {
-        return null;
+    private void setBlockTexture(Matcher matcher) {
+        String xCoordinates = matcher.group("xCoordinates");
+        String yCoordinates = matcher.group("yCoordinates");
+        String type = matcher.group("type");
+        System.out.println(cheaterController.setTexture(Integer.parseInt(xCoordinates),
+                Integer.parseInt(yCoordinates),type));
     }
 
-    private String tradeAccept(Matcher matcher) {
-        return null;
+    private void tradeAccept(Matcher matcher) {
+        int id = Integer.parseInt(matcher.group("id"));
+        String message = matcher.group("message");
+        System.out.println(tradeController.acceptTrade(id,message));
     }
 
-    private String showTradeList(Matcher matcher) {
-        return null;
+    private void showTradeList() {
+        System.out.println(tradeController.showTradeList());
     }
 
-    private String setTrade(Matcher matcher) {
-        return null;
+    private void setTrade(Matcher matcher) {
+        String resourceType = matcher.group("resourceType");
+        String resourceAmount = matcher.group("resourceAmount");
+        String price = matcher.group("price");
+        String message = matcher.group("message");
+        System.out.println(tradeController.addTrade(resourceType,Integer.parseInt(resourceAmount),
+                Integer.parseInt(price),message));
     }
 
     private void newGame(Scanner scanner) {

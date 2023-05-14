@@ -9,12 +9,16 @@ public class Map {
             }
         }
         setKeep(map, g1, 0, 0);
+        map[0][0].addPeople(King.getKing(g1));
         setStockpile(map, g1, 0, 1);
         setKeep(map, g2, 0, 399);
+        map[0][399].addPeople(King.getKing(g2));
         setStockpile(map, g2, 0, 398);
         setKeep(map, g3, 399, 0);
+        map[399][0].addPeople(King.getKing(g3));
         setStockpile(map, g3, 399, 1);
         setKeep(map, g4, 399, 399);
+        map[399][399].addPeople(King.getKing(g4));
         setStockpile(map, g4, 399, 398);
         setGround(map, GroundType.SHALLOW_WATER, 190, 0, 210, 399);
         setGround(map, GroundType.RIVER, 190, 0, 210, 10);

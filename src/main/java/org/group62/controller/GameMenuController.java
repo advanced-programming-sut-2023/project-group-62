@@ -1,7 +1,6 @@
 package org.group62.controller;
 
-import org.group62.model.Governance;
-import org.group62.model.User;
+import org.group62.model.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,8 +9,8 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameMenuController {
     private ArrayList<String> usernames = new ArrayList<>();
@@ -35,11 +34,6 @@ public class GameMenuController {
         }
 
     }
-
-    private String createNewGame(Governance g1, Governance g2, Governance g3, Governance g4) {
-        return null;
-    }
-
 
     private boolean isPlayersIsValid(String[] players) {
         for(String username : players){
@@ -112,5 +106,15 @@ public class GameMenuController {
             user.setHighScore(highScore);
             user.setRank(rank);
         }
+    }
+    public String createNewGame(Governance g1, Governance g2, Governance g3, Governance g4) {
+        g1.setColor(GovernanceColor.BLACK);
+        g2.setColor(GovernanceColor.GREEN);
+        g3.setColor(GovernanceColor.BLUE);
+        g4.setColor(GovernanceColor.RED);
+        Play play = new Play(null, new ArrayList<Governance>(Arrays.asList(g1, g2, g3, g4)), Map.getMap1(g1, g2, g3, g4));
+        play.set10PeopleInEveryKeep();
+        StrongHold.setCurrentPlay(play);
+        return "new game create successful";
     }
 }

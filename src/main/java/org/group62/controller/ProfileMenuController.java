@@ -119,9 +119,12 @@ public class ProfileMenuController {
     }
 
     public String displayRank() {
-        String rank = "";
-        rank += currentUser.getRank();
-        return "User rank is: " + rank;
+        int rank = 1;
+        for (User user : StrongHold.getUsers()) {
+            if (Integer.parseInt(StrongHold.getCurrentUser().getHighScore())<Integer.parseInt(user.getHighScore()))
+                rank++;
+        }
+        return "your rank is: "+ rank;
     }
 
     public String displaySlogan() {
