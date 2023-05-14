@@ -110,4 +110,16 @@ public class Play {
     public Ground[][] getMap() {
         return map;
     }
+
+    public void set10PeopleInEveryKeep() {
+        for (Governance governance : getGovernances()) {
+            int[] location = this.getKeepLocationOfGovernance(governance);
+            for (int i = 0;i<10;i++){
+                People people = new People(governance);
+                map[location[0]][location[1]].addPeople(people);
+                governance.addPeople(people);
+            }
+
+        }
+    }
 }
