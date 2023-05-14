@@ -1,6 +1,7 @@
 package org.group62.veiw;
 import org.group62.controller.LoginMenuController;
 import org.group62.controller.MainMenuController;
+import org.group62.controller.SHA256;
 import org.group62.model.User;
 
 import java.security.NoSuchAlgorithmException;
@@ -59,17 +60,19 @@ public class LoginMenu {
         }
     }
 
-    private void forgotPassword(Matcher matcher,Scanner scanner) {
+    private void forgotPassword(Matcher matcher,Scanner scanner) throws NoSuchAlgorithmException {
         String username = matcher.group("username");
         String passwordRecoveryQuestionMessage = loginMenuController.forgotPasswordReturnSecurityQuestion(username);
         if(passwordRecoveryQuestionMessage.equals("Username not found!")) {
             System.out.println(passwordRecoveryQuestionMessage);
         }else {
+            String recoveryQuestion = loginMenuController.decodePasswordRecoveryQuestionMessage(passwordRecoveryQuestionMessage);
             System.out.println("To reset your password you must answer security question below: \n" +
-                    passwordRecoveryQuestionMessage);
+                    recoveryQuestion);
             String correctRecoveryQuestionAnswer = loginMenuController.forgotPasswordReturnSecurityQuestionAnswer(username);
             String recoveryQuestionAnswer = scanner.nextLine();
-            if (recoveryQuestionAnswer.equals(correctRecoveryQuestionAnswer)) {
+            String userRecoveryPasswordAnswerSecure = SHA256.sha256Security(recoveryQuestionAnswer);
+            if (userRecoveryPasswordAnswerSecure.equals(correctRecoveryQuestionAnswer)) {
                 System.out.println("Your answer is correct. Set a new password with correct format: ");
                 String message = "";
                 while (!message.equals("Set a new password successful!")) {

@@ -10,6 +10,7 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 
 public class LoginMenuController {
@@ -67,15 +68,19 @@ public class LoginMenuController {
         String email = (String) empobj.get("Email");
         String nickname = (String) empobj.get("nickname");
         String slogan = (String) empobj.get("slogan");
-        String securityQuestion = (String) empobj.get("securityQuestion");
-        String securityQuestionAnswer = (String) empobj.get("securityQuestionAnswer");
+        String securityQuestionSecure = (String) empobj.get("securityQuestionSecure");
+        String securityQuestionAnswerSecure = (String) empobj.get("securityQuestionAnswerSecure");
+        String highScore = (String) empobj.get("highScore");
+        String rank = (String) empobj.get("rank");
         array.put("username", username);
         array.put("passwordSecure", passwordSecure);
         array.put("Email", email);
         array.put("nickname", nickname);
         array.put("slogan", slogan);
-        array.put("securityQuestion", securityQuestion);
-        array.put("securityQuestionAnswer", securityQuestionAnswer);
+        array.put("securityQuestionSecure", securityQuestionSecure);
+        array.put("securityQuestionAnswerSecure", securityQuestionAnswerSecure);
+        array.put("highScore",highScore);
+        array.put("rank",rank);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("User", array);
         newUserList.add(jsonObject);
@@ -142,15 +147,19 @@ public class LoginMenuController {
             String email = (String) empobj.get("Email");
             String nickname = (String) empobj.get("nickname");
             String slogan = (String) empobj.get("slogan");
-            String securityQuestion = (String) empobj.get("securityQuestion");
-            String securityQuestionAnswer = (String) empobj.get("securityQuestionAnswer");
+            String securityQuestionSecure = (String) empobj.get("securityQuestionSecure");
+            String securityQuestionAnswerSecure = (String) empobj.get("securityQuestionAnswerSecure");
+            String highScore = (String) empobj.get("highScore");
+            String rank = (String) empobj.get("rank");
             user.setPassword(passwordSecure);
             user.setUsername(username);
             user.setEmail(email);
             user.setNickname(nickname);
             user.setSlogan(slogan);
-            user.setPasswordRecoveryAnswer(securityQuestionAnswer);
-            user.setPasswordRecoveryQuestion(securityQuestion);
+            user.setPasswordRecoveryAnswer(securityQuestionAnswerSecure);
+            user.setPasswordRecoveryQuestion(securityQuestionSecure);
+            user.setHighScore(Integer.parseInt(highScore));
+            user.setRank(Integer.parseInt(rank));
         }
     }
 
@@ -211,5 +220,19 @@ public class LoginMenuController {
             }
             return "Set a new password successful!";
         }
+    }
+
+    public String decodePasswordRecoveryQuestionMessage(String passwordRecoveryQuestionMessage) throws NoSuchAlgorithmException {
+        String firstSecurityQuestion = "1.What is your first school's name?";
+        String secondSecurityQuestion = "2.What is your favorite car?";
+        String thirdSecurityQuestion = "3.When is your birthday?";
+        ArrayList<String> securityQuestions = new ArrayList<>(Arrays.asList(firstSecurityQuestion,
+                secondSecurityQuestion,thirdSecurityQuestion));
+        for(String question : securityQuestions){
+            String secure = SHA256.sha256Security(question);
+            if(secure.equals(passwordRecoveryQuestionMessage))
+                return question;
+        }
+        return "Question not found!";
     }
 }

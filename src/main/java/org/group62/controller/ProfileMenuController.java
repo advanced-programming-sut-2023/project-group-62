@@ -113,19 +113,30 @@ public class ProfileMenuController {
     }
 
     public String displayHighScore() {
-        return null;
+        String highScore = "";
+        highScore += currentUser.getHighScore();
+        return "User high score is: " + highScore;
     }
 
     public String displayRank() {
-        return null;
+        String rank = "";
+        rank += currentUser.getRank();
+        return "User rank is: " + rank;
     }
 
     public String displaySlogan() {
-        return null;
+        return "User slogan is: " + currentUser.getSlogan();
     }
 
     public String displayAllProfile() {
-        return null;
+        String message = "";
+        message += "Username is: " + currentUser.getUsername();
+        message += "\nNickname is: " + currentUser.getNickname();
+        message += "\nEmail address is: " + currentUser.getEmail();
+        message += "\nSlogan is: " + currentUser.getSlogan();
+        message += "\nRank is: " + currentUser.getRank();
+        message += "\nHigh score is: " + currentUser.getHighScore();
+        return message;
     }
 
     private void updateUserJsonFile(JSONObject emp, JSONArray newUserList) {
@@ -136,15 +147,19 @@ public class ProfileMenuController {
         String email = (String) empobj.get("Email");
         String nickname = (String) empobj.get("nickname");
         String slogan = (String) empobj.get("slogan");
-        String securityQuestion = (String) empobj.get("securityQuestion");
-        String securityQuestionAnswer = (String) empobj.get("securityQuestionAnswer");
+        String securityQuestionSecure = (String) empobj.get("securityQuestionSecure");
+        String securityQuestionAnswerSecure = (String) empobj.get("securityQuestionAnswerSecure");
+        String highScore = (String) empobj.get("highScore");
+        String rank = (String) empobj.get("rank");
         array.put("username", username);
         array.put("passwordSecure", passwordSecure);
         array.put("Email", email);
         array.put("nickname", nickname);
         array.put("slogan", slogan);
-        array.put("securityQuestion", securityQuestion);
-        array.put("securityQuestionAnswer", securityQuestionAnswer);
+        array.put("securityQuestionSecure", securityQuestionSecure);
+        array.put("securityQuestionAnswerSecure", securityQuestionAnswerSecure);
+        array.put("highScore",highScore);
+        array.put("rank",rank);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("User", array);
         newUserList.add(jsonObject);

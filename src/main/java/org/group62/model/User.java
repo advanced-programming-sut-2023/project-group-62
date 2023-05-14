@@ -9,9 +9,19 @@ public class User {
     private String passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
     private int highScore;
+    private int rank;
     public User(){
 
     }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
     public User(String username, String password, String nickname, String email) {
         this.username = username;
         this.password = password;
