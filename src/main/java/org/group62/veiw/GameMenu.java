@@ -105,7 +105,7 @@ public class GameMenu {
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.DIG_TUNNEL)) != null)
                 digTunnel(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.BUILD)) != null)
-                buidEquipment(matcher);
+                buildEquipment(matcher);
             else if (Commands.getMatcherMatches(inputCommand, Commands.DISBAND_UNIT) != null)
                 disbandUnit();
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SHOW_MAP)) != null)
@@ -128,7 +128,8 @@ public class GameMenu {
     private String sellItem(Matcher matcher) {
         String itemName = matcher.group("itemName");
         String itemAmount = matcher.group("itemAmount");
-        marketMenuController.s
+        //marketMenuController.
+        return null;
     }
 
     private String buyItem(Matcher matcher) {
@@ -176,7 +177,7 @@ public class GameMenu {
         //TODO
     }
 
-    private void buidEquipment(Matcher matcher) {
+    private void buildEquipment(Matcher matcher) {
         //TODO
     }
 
