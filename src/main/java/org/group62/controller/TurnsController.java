@@ -37,7 +37,8 @@ public class TurnsController {
             default:
                 return;
         }
-        building.getOwner().addResource(resource, building.getConstantsInteger(Constant.RATE));
+        if (building.getOwner().getCapacityOfResource() >= building.getOwner().getAmountOfResource() + building.getConstantsInteger(Constant.RATE))
+            building.getOwner().addResource(resource, building.getConstantsInteger(Constant.RATE));
     }
 
     private void collectFoodFarm(Building building) {
@@ -49,7 +50,8 @@ public class TurnsController {
                 break;
             case "Dairy products":
                 food = Food.CHEESE;
-                building.getOwner().addWeapons(Weapons.LEATHER_ARMOR, 1);
+                if (building.getOwner().getCapacityOfWeapons() >= building.getOwner().getAmountOfWeapons() + 1)
+                    building.getOwner().addWeapons(Weapons.LEATHER_ARMOR, 1);
                 break;
             case "Barley farm":
                 resource = Resource.BARLEY;
@@ -64,9 +66,11 @@ public class TurnsController {
                 return;
         }
         if (food != null)
-            building.getOwner().addFood(food, building.getConstantsInteger(Constant.RATE));
+            if (building.getOwner().getCapacityOfFood() >= building.getOwner().getAmountOfFood() + building.getConstantsInteger(Constant.RATE))
+                building.getOwner().addFood(food, building.getConstantsInteger(Constant.RATE));
         if (resource != null)
-            building.getOwner().addResource(resource, building.getConstantsInteger(Constant.RATE));
+            if (building.getOwner().getCapacityOfResource() >= building.getOwner().getAmountOfResource() + building.getConstantsInteger(Constant.RATE))
+                building.getOwner().addResource(resource, building.getConstantsInteger(Constant.RATE));
     }
 
     private void collectFoodProcessing(Building building) {
@@ -86,8 +90,10 @@ public class TurnsController {
                 break;
             case "Bakery":
                 if (building.getOwner().getResources().containsKey(Resource.FLOUR)) {
-                    building.getOwner().decreaseResource(Resource.BEER, building.getConstantsInteger(Constant.WINE_USAGE));
-                    building.getOwner().addFood(Food.BREAD, building.getConstantsInteger(Constant.RATE));
+                    if (building.getOwner().getCapacityOfFood() >= building.getOwner().getAmountOfFood() + building.getConstantsInteger(Constant.RATE)) {
+                        building.getOwner().decreaseResource(Resource.BEER, building.getConstantsInteger(Constant.WINE_USAGE));
+                        building.getOwner().addFood(Food.BREAD, building.getConstantsInteger(Constant.RATE));
+                    }
                 }
                 return;
             case "Brewery":
@@ -98,8 +104,10 @@ public class TurnsController {
                 return;
         }
         if (building.getOwner().getResources().containsKey(resourceCost)) {
-            building.getOwner().decreaseResource(resourceCost, 1);
-            building.getOwner().addResource(resource, building.getConstantsInteger(Constant.RATE));
+            if (building.getOwner().getCapacityOfResource() >= building.getOwner().getAmountOfWeapons() + building.getConstantsInteger(Constant.RATE)) {
+                building.getOwner().decreaseResource(resourceCost, 1);
+                building.getOwner().addResource(resource, building.getConstantsInteger(Constant.RATE));
+            }
         }
     }
 
@@ -110,7 +118,12 @@ public class TurnsController {
         switch (building.getName()) {
             case "Armourer":
                 resourceCost = Resource.IRON;
-                building.getOwner().addWeapons(Weapons.METAL_ARMOR, 1);
+                if (building.getOwner().getResources().get(resourceCost) > building.getConstantsInteger(Constant.CONSUMING_MATERIALS)) {
+                    if (building.getOwner().getCapacityOfWeapons() >= building.getOwner().getAmountOfWeapons() + building.getConstantsInteger(Constant.PRODUCTION_RATE)) {
+                        building.getOwner().decreaseResource(resourceCost, building.getConstantsInteger(Constant.CONSUMING_MATERIALS));
+                        building.getOwner().addWeapons(Weapons.METAL_ARMOR, 1);
+                    }
+                }
                 return;
             case "Blacksmith":
                 resourceCost = Resource.IRON;
@@ -131,9 +144,11 @@ public class TurnsController {
                 return;
         }
         if (building.getOwner().getResources().get(resourceCost) > building.getConstantsInteger(Constant.CONSUMING_MATERIALS)) {
-            building.getOwner().decreaseResource(resourceCost, building.getConstantsInteger(Constant.CONSUMING_MATERIALS));
-            building.getOwner().addWeapons(weapon1, building.getConstantsInteger(Constant.PRODUCTION_RATE));
-            building.getOwner().addWeapons(weapon2, building.getConstantsInteger(Constant.PRODUCTION_RATE));
+            if (building.getOwner().getCapacityOfWeapons() >= building.getOwner().getAmountOfWeapons() + 2 * building.getConstantsInteger(Constant.PRODUCTION_RATE)){
+                building.getOwner().decreaseResource(resourceCost, building.getConstantsInteger(Constant.CONSUMING_MATERIALS));
+                building.getOwner().addWeapons(weapon1, building.getConstantsInteger(Constant.PRODUCTION_RATE));
+                building.getOwner().addWeapons(weapon2, building.getConstantsInteger(Constant.PRODUCTION_RATE));
+            }
         }
     }
 
@@ -157,7 +172,7 @@ public class TurnsController {
             int i = 0;
             while (i < (int) (Food.GetAmountOfFoodPerPerson(governance.getFoodRate()) * governance.getPeoples().size())) {
                 for (Food food : governance.getFoods().keySet()) {
-                    governance.decreaseFood(food,1);
+                    governance.decreaseFood(food, 1);
                     i++;
                     if (i < (int) (Food.GetAmountOfFoodPerPerson(governance.getFoodRate()) * governance.getPeoples().size()))
                         break;

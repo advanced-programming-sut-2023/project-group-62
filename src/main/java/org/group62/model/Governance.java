@@ -18,17 +18,20 @@ public class Governance {
     private Building currentBuilding;
     private ArrayList<Troop> currentTroops;
     private final ArrayList<Trade> tradesHistory = new ArrayList<>();
+    private int capacityOfFood = 0;
+    private int capacityOfResource = 0;
+    private int capacityOfWeapons = 0;
     private int gold = 1000;
 
     public Governance(User owner) {
         this.owner = owner;
         foods.put(Food.APPLE, 30);
-        foods.put(Food.CHEESE,30);
-        resources.put(Resource.WOOD,50);
-        resources.put(Resource.STONE,50);
-        resources.put(Resource.IRON,15);
-        weapons.put(Weapons.SPEAR,20);
-        weapons.put(Weapons.BOW,20);
+        foods.put(Food.CHEESE, 30);
+        resources.put(Resource.WOOD, 50);
+        resources.put(Resource.STONE, 50);
+        resources.put(Resource.IRON, 15);
+        weapons.put(Weapons.SPEAR, 20);
+        weapons.put(Weapons.BOW, 20);
     }
 
     public int getReligionPopularity() {
@@ -105,6 +108,54 @@ public class Governance {
             default:
                 return -2;
         }
+    }
+
+    public int getAmountOfFood() {
+        int output = 0;
+        for (Food food : foods.keySet()) {
+            output = output + foods.get(food);
+        }
+        return output;
+    }
+
+    public int getAmountOfResource() {
+        int output = 0;
+        for (Resource resource : resources.keySet()) {
+            output = output + resources.get(resource);
+        }
+        return output;
+    }
+
+    public int getAmountOfWeapons() {
+        int output = 0;
+        for (Weapons weapons1 : weapons.keySet()) {
+            output = output + weapons.get(weapons1);
+        }
+        return output;
+    }
+
+    public int getCapacityOfFood() {
+        return capacityOfFood;
+    }
+
+    public void setCapacityOfFood(int capacityOfFood) {
+        this.capacityOfFood = capacityOfFood;
+    }
+
+    public int getCapacityOfResource() {
+        return capacityOfResource;
+    }
+
+    public void setCapacityOfResource(int capacityOfResource) {
+        this.capacityOfResource = capacityOfResource;
+    }
+
+    public int getCapacityOfWeapons() {
+        return capacityOfWeapons;
+    }
+
+    public void setCapacityOfWeapons(int capacityOfWeapons) {
+        this.capacityOfWeapons = capacityOfWeapons;
     }
 
     public GovernanceColor getColor() {

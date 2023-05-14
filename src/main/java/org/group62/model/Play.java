@@ -15,6 +15,18 @@ public class Play {
         this.map = map;
     }
 
+    public Building getBuildingByName(String buildingName, Governance governance){
+        for (int i = 0; i < 400; i++) {
+            for (int j = 0; j < 400; j++) {
+                if (!map[i][j].getPeople().isEmpty())
+                    if (!map[i][j].getBuildings().isEmpty())
+                        if (map[i][j].getBuildings().get(0).getName().equals(buildingName)) {
+                            return map[i][j].getBuildings().get(0);
+                        }
+            }
+        }
+        return null;
+    }
     public int[] getLocationOfPeople(People people) {
         int[] output = new int[2];
         for (int i = 0; i < 400; i++) {

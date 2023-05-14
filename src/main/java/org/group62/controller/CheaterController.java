@@ -128,6 +128,19 @@ public class CheaterController {
                 ground.addPeople(worker);
                 i++;
             }
+            switch (building.getName()){
+                case "Stockpile":
+                    governance.setCapacityOfResource(governance.getCapacityOfResource() + 50);
+                    break;
+                case "Armoury":
+                    governance.setCapacityOfWeapons(governance.getCapacityOfWeapons() + 50);
+                    break;
+                case "Food Warehouse":
+                    governance.setCapacityOfFood(governance.getCapacityOfFood() + 50);
+                    break;
+                default:
+                    break;
+            }
             return "drop building was successful";
         }
 
