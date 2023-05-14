@@ -105,7 +105,7 @@ public class GameMenu {
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.DIG_TUNNEL)) != null)
                 digTunnel(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.BUILD)) != null)
-                buidEquipment(matcher);
+                buildEquipment(matcher);
             else if (Commands.getMatcherMatches(inputCommand, Commands.DISBAND_UNIT) != null)
                 disbandUnit();
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SHOW_MAP)) != null)
@@ -126,6 +126,9 @@ public class GameMenu {
     }
 
     private String sellItem(Matcher matcher) {
+        String itemName = matcher.group("itemName");
+        String itemAmount = matcher.group("itemAmount");
+        //marketMenuController.
         return null;
     }
 
@@ -174,7 +177,7 @@ public class GameMenu {
         //TODO
     }
 
-    private void buidEquipment(Matcher matcher) {
+    private void buildEquipment(Matcher matcher) {
         //TODO
     }
 
@@ -211,8 +214,7 @@ public class GameMenu {
     }
 
     private void nextTurn() {
-        //TODO
-        turnsController.nextTurn();
+        System.out.println(turnsController.nextTurn());
     }
 
     private void repair() {
@@ -251,19 +253,19 @@ public class GameMenu {
 
     private void setFoodRate(Matcher matcher) {
         String rateNumber = matcher.group("rateNumber");
-        governanceController.setFoodRate(Integer.parseInt(rateNumber));
+        System.out.println(governanceController.setFoodRate(Integer.parseInt(rateNumber)));
     }
 
     private void showFoodList() {
-        governanceController.showFoodList();
+        System.out.println(governanceController.showFoodList());
     }
 
     private void showPopularity() {
-        governanceController.showPopularity();
+        System.out.println(governanceController.showPopularity());
     }
 
     private void showPopularityFactors() {
-        governanceController.showPopularityFactors();
+        System.out.println(governanceController.showPopularityFactors());
     }
 
     private void dropUnit(Matcher matcher) {

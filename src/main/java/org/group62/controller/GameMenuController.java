@@ -95,7 +95,6 @@ public class GameMenuController {
             String securityQuestionSecure = (String) empobj.get("securityQuestionSecure");
             String securityQuestionAnswerSecure = (String) empobj.get("securityQuestionAnswerSecure");
             String highScore = (String) empobj.get("highScore");
-            String rank = (String) empobj.get("rank");
             user.setPassword(passwordSecure);
             user.setUsername(username);
             user.setEmail(email);
@@ -104,7 +103,6 @@ public class GameMenuController {
             user.setPasswordRecoveryAnswer(securityQuestionAnswerSecure);
             user.setPasswordRecoveryQuestion(securityQuestionSecure);
             user.setHighScore(highScore);
-            user.setRank(rank);
         }
     }
     public String createNewGame(Governance g1, Governance g2, Governance g3, Governance g4) {
