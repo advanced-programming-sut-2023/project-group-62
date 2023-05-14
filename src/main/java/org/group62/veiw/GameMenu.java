@@ -126,7 +126,9 @@ public class GameMenu {
     }
 
     private String sellItem(Matcher matcher) {
-        return null;
+        String itemName = matcher.group("itemName");
+        String itemAmount = matcher.group("itemAmount");
+        marketMenuController.s
     }
 
     private String buyItem(Matcher matcher) {
@@ -211,8 +213,7 @@ public class GameMenu {
     }
 
     private void nextTurn() {
-        //TODO
-        turnsController.nextTurn();
+        System.out.println(turnsController.nextTurn());
     }
 
     private void repair() {
@@ -251,19 +252,19 @@ public class GameMenu {
 
     private void setFoodRate(Matcher matcher) {
         String rateNumber = matcher.group("rateNumber");
-        governanceController.setFoodRate(Integer.parseInt(rateNumber));
+        System.out.println(governanceController.setFoodRate(Integer.parseInt(rateNumber)));
     }
 
     private void showFoodList() {
-        governanceController.showFoodList();
+        System.out.println(governanceController.showFoodList());
     }
 
     private void showPopularity() {
-        governanceController.showPopularity();
+        System.out.println(governanceController.showPopularity());
     }
 
     private void showPopularityFactors() {
-        governanceController.showPopularityFactors();
+        System.out.println(governanceController.showPopularityFactors());
     }
 
     private void dropUnit(Matcher matcher) {

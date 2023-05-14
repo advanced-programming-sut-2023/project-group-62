@@ -190,7 +190,7 @@ public class TurnsController {
         }
     }
 
-    public void nextTurn() {
+    public String nextTurn() {
         Governance currentGovernance = Play.getCurrentGovernance();
         ArrayList<Governance> allGovernance = StrongHold.getCurrentPlay().getGovernances();
         for(int i = 0;i < allGovernance.size();i++){
@@ -201,6 +201,6 @@ public class TurnsController {
                     Play.setCurrentGovernance(allGovernance.get(i++));
             }
         }
-
+        return "Now is next governance turn!";
     }
 }
