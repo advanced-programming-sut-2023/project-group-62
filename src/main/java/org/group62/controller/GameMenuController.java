@@ -1,5 +1,17 @@
 package org.group62.controller;
 
+import org.group62.model.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class GameMenuController {
     private ArrayList<String> usernames = new ArrayList<>();
     public String newGame(String[] players,User currentUser) {
