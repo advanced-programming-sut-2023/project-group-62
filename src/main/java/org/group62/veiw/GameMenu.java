@@ -40,7 +40,7 @@ public class GameMenu {
         while (true) {
             String inputCommand = scanner.nextLine();
             if (Commands.getMatcherMatches(inputCommand, Commands.NEW_GAME) != null)
-                System.out.println(newGame());
+                newGame(scanner);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.TRADE)) != null)
                 System.out.println(setTrade(matcher));
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.TRADE_LIST)) != null)
@@ -274,7 +274,10 @@ public class GameMenu {
         return null;
     }
 
-    private String newGame() {
-        return null;
+    private void newGame(Scanner scanner) {
+        System.out.println("Please enter user 3 usernames to play with them: ");
+        String playUsernames = scanner.nextLine();
+        String[] players = playUsernames.split(" ");
+        gameMenuController.newGame(players,currentUser);
     }
 }
