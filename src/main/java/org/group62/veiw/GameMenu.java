@@ -1,6 +1,8 @@
 package org.group62.veiw;
 
 import org.group62.controller.*;
+import org.group62.model.Play;
+import org.group62.model.Resource;
 import org.group62.model.User;
 
 import java.util.Scanner;
@@ -40,7 +42,7 @@ public class GameMenu {
         while (true) {
             String inputCommand = scanner.nextLine();
             if (Commands.getMatcherMatches(inputCommand, Commands.NEW_GAME) != null)
-                System.out.println(newGame());
+                newGame(scanner);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.TRADE)) != null)
                 System.out.println(setTrade(matcher));
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.TRADE_LIST)) != null)
@@ -112,7 +114,7 @@ public class GameMenu {
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.MAP_MOVE)) != null)
                 System.out.println(moveMap(matcher));
             else if (Commands.getMatcherMatches(inputCommand, Commands.SHOW_PRICE_LIST) != null)
-                System.out.println(showPriceList());
+                showPriceList();
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.BUY)) != null)
                 System.out.println(buyItem(matcher));
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SELL)) != null)
@@ -130,8 +132,23 @@ public class GameMenu {
         return null;
     }
 
-    private String showPriceList() {
-        return null;
+    private void showPriceList() {
+        System.out.println(Resource.WOOD + "\tBuyPrice: " + Resource.WOOD.getBuyPrice() + "\tSellPrice: " +
+                Resource.WOOD.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.WOOD) + "items.");
+        System.out.println(Resource.STONE + "\tBuyPrice: " + Resource.STONE.getBuyPrice() + "\tSellPrice: " +
+                Resource.STONE.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.STONE) + "items.");
+        System.out.println(Resource.PITCH + "\tBuyPrice: " + Resource.PITCH.getBuyPrice() + "\tSellPrice: " +
+                Resource.PITCH.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.PITCH) + "items.");
+        System.out.println(Resource.BEER + "\tBuyPrice: " + Resource.BEER.getBuyPrice() + "\tSellPrice: " +
+                Resource.BEER.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.BEER) + "items.");
+        System.out.println(Resource.IRON + "\tBuyPrice: " + Resource.IRON.getBuyPrice() + "\tSellPrice: " +
+                Resource.IRON.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.IRON) + "items.");
+        System.out.println(Resource.BARLEY + "\tBuyPrice: " + Resource.BARLEY.getBuyPrice() + "\tSellPrice: " +
+                Resource.BARLEY.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.BARLEY) + "items.");
+        System.out.println(Resource.FLOUR + "\tBuyPrice: " + Resource.FLOUR.getBuyPrice() + "\tSellPrice: " +
+                Resource.FLOUR.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.FLOUR) + "items.");
+        System.out.println(Resource.WHEAT + "\tBuyPrice: " + Resource.WHEAT.getBuyPrice() + "\tSellPrice: " +
+                Resource.WHEAT.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.WHEAT) + "items.");
     }
 
     private String moveMap(Matcher matcher) {
@@ -274,7 +291,11 @@ public class GameMenu {
         return null;
     }
 
-    private String newGame() {
-        return null;
+    private void newGame(Scanner scanner) {
+        System.out.println("Please enter user 3 usernames to play with them: ");
+        String playUsernames = scanner.nextLine();
+        String[] players = playUsernames.split(" ");
+        String message = gameMenuController.newGame(players,currentUser);
+        System.out.println(message);
     }
 }
