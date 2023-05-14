@@ -7,6 +7,7 @@ public class TurnsController {
         collectTax();
         decreasedFoodIntake();
         setPopularity();
+        checkForEndKing();
         for (Ground[] grounds : StrongHold.getCurrentPlay().getMap()) {
             for (Ground ground : grounds) {
                 if (!ground.getBuildings().isEmpty()) {
@@ -17,6 +18,12 @@ public class TurnsController {
                 }
             }
         }
+        Governance winner;
+        if ((winner = checkForEndGame()) != null)
+            endGame(winner.getOwner());
+    }
+
+    private void endGame(User user) {
     }
 
     private void collectResource(Building building) {
@@ -144,7 +151,7 @@ public class TurnsController {
                 return;
         }
         if (building.getOwner().getResources().get(resourceCost) > building.getConstantsInteger(Constant.CONSUMING_MATERIALS)) {
-            if (building.getOwner().getCapacityOfWeapons() >= building.getOwner().getAmountOfWeapons() + 2 * building.getConstantsInteger(Constant.PRODUCTION_RATE)){
+            if (building.getOwner().getCapacityOfWeapons() >= building.getOwner().getAmountOfWeapons() + 2 * building.getConstantsInteger(Constant.PRODUCTION_RATE)) {
                 building.getOwner().decreaseResource(resourceCost, building.getConstantsInteger(Constant.CONSUMING_MATERIALS));
                 building.getOwner().addWeapons(weapon1, building.getConstantsInteger(Constant.PRODUCTION_RATE));
                 building.getOwner().addWeapons(weapon2, building.getConstantsInteger(Constant.PRODUCTION_RATE));
@@ -204,5 +211,51 @@ public class TurnsController {
     }
 
     public void nextTurn() {
+    }
+
+    private void checkForEndKing() {
+        for (Ground[] grounds : StrongHold.getCurrentPlay().getMap()) {
+            for (Ground ground : grounds) {
+                if (!ground.getPeople().isEmpty()) {
+                    for (People person : ground.getPeople()) {
+                        if (person instanceof King)
+                            if (((King) person).getHP() < 1)
+                                destroyGovernance(person.getOwner());
+                    }
+                }
+            }
+        }
+    }
+
+    private void destroyGovernance(Governance owner) {
+        for (Ground[] grounds : StrongHold.getCurrentPlay().getMap()) {
+            for (Ground ground : grounds) {
+                for (int i = ground.getBuildings().size(); i >= 0; i--)
+                    if (ground.getBuildings().get(i).getOwner().equals(owner))
+                        ground.getBuildings().remove(i);
+                for (int i = ground.getPeople().size(); i >= 0; i--)
+                    if (ground.getPeople().get(i).getOwner().equals(owner))
+                        ground.getPeople().remove(i);
+            }
+        }
+    }
+    private Governance checkForEndGame(){
+        int i = 0;
+        Governance winner = null;
+        for (Ground[] grounds : StrongHold.getCurrentPlay().getMap()) {
+            for (Ground ground : grounds) {
+                for (People person : ground.getPeople()) {
+                    if (person instanceof King){
+                        winner = person.getOwner();
+                        i++;
+                    }
+
+                }
+            }
+        }
+        if(i<2)
+            return winner;
+        else
+            return null;
     }
 }
