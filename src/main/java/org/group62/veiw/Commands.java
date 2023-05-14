@@ -82,8 +82,9 @@ public enum Commands {
     TAX_RATE("^\\s*tax\\s+rate\\s+-r(?<rateNumber>\\d+)\\s*$"),
     TAX_RATE_SHOW("^\\s*tax\\s+rate\\s+show\\s*$"),
     FEAR_RATE("^\\s*fear\\s+rate\\s+-r(?<rateNumber>\\d+)\\s*$"),
-    DROP_BUILDING("^\\s*drop\\s+building(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))" +
-            "(?=.+(-y)\\s+(?<yCoordinates>\\d+))(?=.+(-type)\\s+(?<type>.+)).+)\\s*$"),
+    DROP_BUILDING("^\\s*drop\\s+building(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+" +
+            "(?<yCoordinates>\\d+))(?=.+(-t)\\s+(?<type>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-y|\\s+-c|\\s+-color" +
+            "|\\s+-x)|.+))(?=.+(-color)\\s+(?<color>\\w+)).+)\\s*$"),
     SELECT_BUILDING("^^\\s*select\\s+building(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))" +
             "(?=.+(-y)\\s+(?<yCoordinates>\\d+)).+)\\s*$$"),
     CREATE_UNIT("^\\s*createunit(?<args>(?=.+(-t)\\s+(?<type>.+))(?=.+(-c)\\s+(?<count>\\d+)).+)\\s*$"),
@@ -104,20 +105,24 @@ public enum Commands {
     BUILD("^\\s*build\\s+-q\\s+(?<equipmentName>.+)\\s*$"),
     DISBAND_UNIT("^\\s*disband\\s+unit\\s*$"),
     SET_BLOCK_TEXTURE("^\\s*settexture(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+(?<yCoordinates>\\d+))" +
-            "(?=.+(-t)\\s+(?<type>.+)).+)\\s*$"),
-    SET_RECTANGLE_TEXTURE("^\\s*settexture(?<args>(?=.+(-x1)\\s+(?<x1Coordinates>\\d+))(?=.+(-y1)\\s+(?<y1Coordinates>\\d+))" +
-            "(?=.+(-x2)\\s+(?<x2Coordinates>\\d+))(?=.+(-y2)\\s+(?<y2Coordinates>\\d+))(?=.+(-t)\\s+(?<type>.+)).+)\\s*$"),
+            "(?=.+(-t)\\s+(?<type>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-x1|\\s+-y1)|.+)).+)\\s*$"),
+    SET_RECTANGLE_TEXTURE("^\\s*settexture(?<args>(?=.+(-x1)\\s+(?<x1Coordinates>\\d+))(?=.+(-y1)\\s+" +
+            "(?<y1Coordinates>\\d+))(?=.+(-x2)\\s+(?<x2Coordinates>\\d+))(?=.+(-y2)\\s+(?<y2Coordinates>\\d+))" +
+            "(?=.+(-t)\\s+(?<type>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-x1|\\s+-y1|\\s+-x2|\\s+-y2)|.+)).+)\\s*$"),
     CLEAR("^\\s*clear(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+(?<yCoordinates>\\d+)).+)\\s*$"),
     DROP_ROCK("^\\s*droprock(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+(?<yCoordinates>\\d+))(?=.+(-d)" +
             "\\s+(?<direction>\\w)).+)\\s*$"),
-    DROP_TREE("^\\s*droptree(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+(?<yCoordinates>\\d+))(?=.+(-t)" +
-            "\\s+(?<type>.+)).+)\\s*$"),
+    DROP_TREE("^\\s*droptree(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+(?<yCoordinates>\\d+))" +
+            "(?=.+(-t)\\s+(?<type>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-y|\\s+-c|\\s+-color|\\s+-x)|.+)).+)\\s*$"),
     DROP_UNIT("^\\s*dropunit(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+(?<yCoordinates>\\d+))" +
-            "(?=.+(-t)\\s+(?<type>.+))(?=.+(-c)\\s+(?<count>\\d+)).+)\\s*$"),
-    TRADE("^\\s*trade(?<args>(?=.+(-t)\\s+(?<resourceType>.+))(?=.+(-a)\\s+(?<resourceAmount>.+))" +
-            "(?=.+(-p)\\s+(?<price>.+))(?=.+(-m)\\s+(?<message>.+)).+)\\s*$"),
+            "(?=.+(-t)\\s+(?<type>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-y|\\s+-c|\\s+-color|\\s+-x)|.+))(?=.+(-c)\\s+" +
+            "(?<count>\\d+))(?=.+(-color)\\s+(?<color>\\w+)).+)\\s*$"),
+    TRADE("^\\s*trade(?<args>(?=.+(-t)\\s+(?<resourceType>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-a|\\s+-p|\\s+-m)|.+))" +
+            "(?=.+(-a)\\s+(?<resourceAmount>\\d+))(?=.+(-p)\\s+(?<price>\\d+))(?=.+(-m)\\s+(?<message>\"(.*\\S+\\s+.*)" +
+            "\"|.+?(?=\\s+-p|\\s+-a|\\s+-t)|.+)).+)\\s*$"),
     TRADE_LIST("^\\s*trade\\s+list\\s*$"),
-    TRADE_ACCEPT("^\\s*trade\\s+accept(?<args>(?=.+(-i)\\s+(?<id>\\d+))(?=.+(-m)\\s+(?<message>.+)).+)\\s*$"),
+    TRADE_ACCEPT("^\\s*trade\\s+accept(?<args>(?=.+(-i)\\s+(?<id>\\d+))(?=.+(-m)\\s+(?<message>\"" +
+            "(.*\\S+\\s+.*)\"|.+?(?=\\s+-i)|.+)).+)\\s*$"),
     TRADE_HISTORY("^\\s*trade\\s+history\\s*$"),
     SHOW_PRICE_LIST("^\\s*show\\s+price\\s+list\\s*$"),
     BUY("^\\s*buy(?<args>(?=.+(-i)\\s+(?<itemName>.+))(?=.+(-a)\\s+(?<itemAmount>\\d+)).+)\\s*$"),
