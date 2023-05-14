@@ -71,7 +71,6 @@ public class LoginMenuController {
         String securityQuestionSecure = (String) empobj.get("securityQuestionSecure");
         String securityQuestionAnswerSecure = (String) empobj.get("securityQuestionAnswerSecure");
         String highScore = (String) empobj.get("highScore");
-        String rank = (String) empobj.get("rank");
         array.put("username", username);
         array.put("passwordSecure", passwordSecure);
         array.put("Email", email);
@@ -80,7 +79,6 @@ public class LoginMenuController {
         array.put("securityQuestionSecure", securityQuestionSecure);
         array.put("securityQuestionAnswerSecure", securityQuestionAnswerSecure);
         array.put("highScore",highScore);
-        array.put("rank",rank);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("User", array);
         newUserList.add(jsonObject);
@@ -150,7 +148,6 @@ public class LoginMenuController {
             String securityQuestionSecure = (String) empobj.get("securityQuestionSecure");
             String securityQuestionAnswerSecure = (String) empobj.get("securityQuestionAnswerSecure");
             String highScore = (String) empobj.get("highScore");
-            String rank = (String) empobj.get("rank");
             user.setPassword(passwordSecure);
             user.setUsername(username);
             user.setEmail(email);
@@ -159,7 +156,6 @@ public class LoginMenuController {
             user.setPasswordRecoveryAnswer(securityQuestionAnswerSecure);
             user.setPasswordRecoveryQuestion(securityQuestionSecure);
             user.setHighScore(highScore);
-            user.setRank(rank);
         }
     }
 

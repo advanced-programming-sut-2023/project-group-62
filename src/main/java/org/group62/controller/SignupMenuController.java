@@ -265,8 +265,7 @@ public class SignupMenuController {
         String slogan = (String) empobj.get("slogan");
         String securityQuestionSecure = (String) empobj.get("securityQuestionSecure");
         String securityQuestionAnswerSecure = (String) empobj.get("securityQuestionAnswerSecure");
-        String highScore = (String) empobj.get("highScore");
-        String rank = (String) empobj.get("rank");
+        String highScore = (String) empobj.get("highScore");;
         array.put("username", username);
         array.put("passwordSecure", passwordSecure);
         array.put("Email", email);
@@ -275,7 +274,6 @@ public class SignupMenuController {
         array.put("securityQuestionSecure",securityQuestionSecure);
         array.put("securityQuestionAnswerSecure",securityQuestionAnswerSecure);
         array.put("highScore",highScore);
-        array.put("rank",rank);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("User",array);
         userList.add(jsonObject);
@@ -337,7 +335,6 @@ public class SignupMenuController {
         userDetails.put("securityQuestionSecure",recoveryPasswordQuestionSecure);
         userDetails.put("securityQuestionAnswerSecure",recoveryPasswordAnswerSecure);
         userDetails.put("highScore","empty");
-        userDetails.put("rank","empty");
 
         JSONObject userObject = new JSONObject();
         userObject.put("User", userDetails);

@@ -2,6 +2,8 @@ package org.group62.controller;
 
 import org.group62.model.*;
 
+import java.util.ArrayList;
+
 public class TurnsController {
     public void nextRound() {
         collectTax();
@@ -210,7 +212,18 @@ public class TurnsController {
         }
     }
 
-    public void nextTurn() {
+    public String nextTurn() {
+        Governance currentGovernance = Play.getCurrentGovernance();
+        ArrayList<Governance> allGovernance = StrongHold.getCurrentPlay().getGovernances();
+        for(int i = 0;i < allGovernance.size();i++){
+            if(allGovernance.get(i).equals(currentGovernance)) {
+                if(i == allGovernance.size() - 1)
+                    Play.setCurrentGovernance(allGovernance.get(0));
+                else
+                    Play.setCurrentGovernance(allGovernance.get(i++));
+            }
+        }
+        return "Now is next governance turn!";
     }
 
     private void checkForEndKing() {
