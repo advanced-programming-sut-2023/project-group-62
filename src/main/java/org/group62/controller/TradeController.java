@@ -14,7 +14,7 @@ public class TradeController {
         else if (price < 0)
             return "invalid price";
         else {
-            Trade trade = new Trade(Play.getCurrentGovernance(), resource, resourceAmount, price, message)
+            Trade trade = new Trade(Play.getCurrentGovernance(), resource, resourceAmount, price, message);
             StrongHold.getCurrentPlay().addTrade(trade);
             Play.getCurrentGovernance().addTradeToTradeHistory(trade);
             return "add trade was successful";

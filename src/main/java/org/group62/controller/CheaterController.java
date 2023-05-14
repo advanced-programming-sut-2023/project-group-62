@@ -160,4 +160,12 @@ public class CheaterController {
             return "drop unit was successful";
         }
     }
+
+    public Governance findGovernanceByColor(String color) {
+        for (Governance governance : StrongHold.getCurrentPlay().getGovernances()){
+            if(governance.getColor().equals(GovernanceColor.getGovernanceColor(color)))
+                return governance;
+        }
+        return null;
+    }
 }

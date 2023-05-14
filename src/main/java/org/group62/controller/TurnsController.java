@@ -187,4 +187,7 @@ public class TurnsController {
             governance.setPopularity(popularity);
         }
     }
+
+    public void nextTurn() {
+    }
 }
