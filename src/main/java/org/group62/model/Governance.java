@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Governance {
     private final User owner;
-    private int popularity;
+    private int popularity = 100;
     private int foodRate = 0;
     private GovernanceColor color;
     private ArrayList<People> peoples = new ArrayList<>();
@@ -17,11 +17,18 @@ public class Governance {
     private int fear = 0;
     private Building currentBuilding;
     private ArrayList<Troop> currentTroops;
-    private final ArrayList<Trade> trades = new ArrayList<>();
-    private int gold;
+    private final ArrayList<Trade> tradesHistory = new ArrayList<>();
+    private int gold = 1000;
 
     public Governance(User owner) {
         this.owner = owner;
+        foods.put(Food.APPLE, 30);
+        foods.put(Food.CHEESE,30);
+        resources.put(Resource.WOOD,50);
+        resources.put(Resource.STONE,50);
+        resources.put(Resource.IRON,15);
+        weapons.put(Weapons.SPEAR,20);
+        weapons.put(Weapons.BOW,20);
     }
 
     public int getReligionPopularity() {
@@ -110,19 +117,19 @@ public class Governance {
 
     public void decreaseFood(Food food, int count) {
         foods.replace(food, foods.get(food) - count);
-        if (foods.get(food)< 1)
+        if (foods.get(food) < 1)
             foods.remove(food);
     }
 
     public void decreaseResource(Resource resource, int count) {
         resources.replace(resource, resources.get(resource) - count);
-        if (resources.get(resource)<1)
+        if (resources.get(resource) < 1)
             resources.remove(resource);
     }
 
     public void decreaseWeapons(Weapons weapon, int count) {
         weapons.replace(weapon, weapons.get(weapon) - count);
-        if (weapons.get(weapon)<1)
+        if (weapons.get(weapon) < 1)
             weapons.remove(weapon);
     }
 
@@ -154,8 +161,8 @@ public class Governance {
         buildings.add(building);
     }
 
-    public void addTrade(Trade trade) {
-        trades.add(trade);
+    public void addTradeToTradeHistory(Trade trade) {
+        tradesHistory.add(trade);
     }
 
 
@@ -236,8 +243,8 @@ public class Governance {
         return currentTroops;
     }
 
-    public ArrayList<Trade> getTrades() {
-        return trades;
+    public ArrayList<Trade> getTradesHistory() {
+        return tradesHistory;
     }
 
     public int getGold() {
