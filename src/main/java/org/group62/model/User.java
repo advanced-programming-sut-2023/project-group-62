@@ -8,17 +8,17 @@ public class User {
     private String slogan;
     private String passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
-    private int highScore;
-    private int rank;
+    private String highScore;
+    private String rank;
     public User(){
 
     }
 
-    public int getRank() {
+    public String getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
+    public void setRank(String rank) {
         this.rank = rank;
     }
 
@@ -65,7 +65,7 @@ public class User {
         this.password = password;
     }
 
-    public void setHighScore(int highScore) {
+    public void setHighScore(String highScore) {
         this.highScore = highScore;
     }
 
@@ -93,7 +93,7 @@ public class User {
         return passwordRecoveryAnswer;
     }
 
-    public int getHighScore() {
+    public String getHighScore() {
         return highScore;
     }
 }

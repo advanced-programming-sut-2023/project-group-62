@@ -158,8 +158,8 @@ public class LoginMenuController {
             user.setSlogan(slogan);
             user.setPasswordRecoveryAnswer(securityQuestionAnswerSecure);
             user.setPasswordRecoveryQuestion(securityQuestionSecure);
-            user.setHighScore(Integer.parseInt(highScore));
-            user.setRank(Integer.parseInt(rank));
+            user.setHighScore(highScore);
+            user.setRank(rank);
         }
     }
 

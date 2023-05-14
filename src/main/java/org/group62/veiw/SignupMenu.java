@@ -56,7 +56,7 @@ public class SignupMenu {
         }
     }
 
-    private void createUserWithRandomSlogan(Matcher matcher) {
+    private void createUserWithRandomSlogan(Matcher matcher) throws NoSuchAlgorithmException {
         String feedback;
         String randomSlogan = signupMenuController.randomSloganGenerator();
         System.out.println(feedback = signupMenuController.creatUserWithRandomSlogan(matcher));
@@ -143,7 +143,7 @@ public class SignupMenu {
 
     }
 
-    private void createUserPrintResult(boolean flag) throws IOException {
+    private void createUserPrintResult(boolean flag) throws IOException, NoSuchAlgorithmException {
         String feedback;
         if (flag)
             System.out.println(feedback = signupMenuController.normalCreatUser(matcher));

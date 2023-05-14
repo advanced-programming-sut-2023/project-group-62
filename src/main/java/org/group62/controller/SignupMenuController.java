@@ -31,7 +31,7 @@ public class SignupMenuController {
     public SignupMenuController(Scanner scanner){
         this.scanner = scanner;
     }
-    public String normalCreatUser(Matcher matcher) throws IOException {
+    public String normalCreatUser(Matcher matcher) throws IOException, NoSuchAlgorithmException {
         String username = matcher.group("username");
         String password = matcher.group("password");
         String passwordConfirmation = matcher.group("passwordConfirmation");
@@ -76,7 +76,7 @@ public class SignupMenuController {
         }
     }
 
-    public String creatUserWithoutSlogan(Matcher matcher) {
+    public String creatUserWithoutSlogan(Matcher matcher) throws NoSuchAlgorithmException {
         String username = matcher.group("username");
         String password = matcher.group("password");
         String passwordConfirmation = matcher.group("passwordConfirmation");
