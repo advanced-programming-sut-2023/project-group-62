@@ -17,11 +17,11 @@ public class MapMenuController {
             return "invalid x,y";
         for (Ground[] grounds : StrongHold.getCurrentPlay().getMap()) {
             for (Ground ground : grounds) {
-                if (ground.getX() < x + 10 && ground.getX() > x - 10 && ground.getY() < y + 10 && ground.getY() > y - 10){
+                if (ground.getX() - 10 < x && ground.getX() + 10 > x && ground.getY() - 10 < y && ground.getY() + 10 > y) {
                     part = GroundType.getAbbreviationGroundType(ground.getGroundType());
                     if (ground.getGroundTreeType() != null)
                         part = "T";
-                    if (!ground.getBuildings().isEmpty()){
+                    if (!ground.getBuildings().isEmpty()) {
                         if (ground.getBuildings().get(0) instanceof Castles)
                             part = "W";
                         else
@@ -37,14 +37,16 @@ public class MapMenuController {
                             }
                         }
                     }
-                    output = output + String.format("|%3s|",part);
+                    output = output + String.format(" |%3s| ", part);
+
                 }
             }
             output = output + "\n";
         }
 
-        return output;
+        return " " + output.trim();
     }
+
     public String moveMap(String direction, int count) {
         int x = getCurrentX(), y = getCurrentY();
         switch (direction) {
@@ -73,6 +75,7 @@ public class MapMenuController {
         }
         return showMap(x, y);
     }
+
     public String moveMap(String upDown, String rightLeft, int count) {
         int x = getCurrentX(), y = getCurrentY();
         switch (upDown) {
