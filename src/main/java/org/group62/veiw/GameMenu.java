@@ -156,15 +156,17 @@ public class GameMenu {
     }
 
     private void moveMap(Matcher matcher) {
-        //TODO
-        //mapMenuController.moveMap();
+        String upOrDown = matcher.group("upOrDown");
+        String rightOrLeft = matcher.group("rightOrLeft");
+        String count = matcher.group("count");
+        mapMenuController.moveMap(upOrDown,rightOrLeft,Integer.parseInt(count));
 
     }
 
     private void showDetails(Matcher matcher) {
         String xCoordinate = matcher.group("xCoordinates");
         String yCoordinate = matcher.group("yCoordinates");
-        System.out.println(mapMenuController.showMap(Integer.parseInt(xCoordinate),Integer.parseInt(yCoordinate)));
+        System.out.println(mapMenuController.showMapDetails(Integer.parseInt(xCoordinate),Integer.parseInt(yCoordinate)));
     }
 
     private void showMap(Matcher matcher) {
@@ -257,7 +259,7 @@ public class GameMenu {
     }
 
     private void showFoodList() {
-        System.out.println(governanceController.showFoodList());
+        System.out.print(governanceController.showFoodList());
     }
 
     private void showPopularity() {
@@ -284,9 +286,14 @@ public class GameMenu {
         String yCoordinates = matcher.group("yCoordinates");
         String type = matcher.group("type");
         String color = matcher.group("color");
-        Governance governance = cheaterController.findGovernanceByColor(color);
-        System.out.println(cheaterController.dropBuilding(Integer.parseInt(xCoordinates),Integer.parseInt(yCoordinates),
-                type,governance));
+        if(color != null) {
+            Governance governance = cheaterController.findGovernanceByColor(color);
+            System.out.println(cheaterController.dropBuilding(Integer.parseInt(xCoordinates), Integer.parseInt(yCoordinates),
+                    type, governance));
+        }else{
+            System.out.println(cheaterController.dropBuilding(Integer.parseInt(xCoordinates), Integer.parseInt(yCoordinates),
+                    type,Play.getCurrentGovernance()));
+        }
     }
 
     private void dropTree(Matcher matcher) {

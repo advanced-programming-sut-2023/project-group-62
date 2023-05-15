@@ -106,7 +106,7 @@ public class MapMenuController {
         return showMap(x, y);
     }
 
-    public static String showMapDetails(int x, int y) {
+    public String showMapDetails(int x, int y) {
         x = x - 1;
         y = y - 1;
         String output;
