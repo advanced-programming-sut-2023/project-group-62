@@ -30,6 +30,7 @@ public class GameMenuController {
             Governance g2 = new Governance(player2);
             Governance g3 = new Governance(player3);
             Governance g4 = new Governance(player4);
+            Play.setCurrentGovernance(g4);
             return createNewGame(g1,g2,g3,g4);
         }
 
@@ -111,8 +112,8 @@ public class GameMenuController {
         g3.setColor(GovernanceColor.BLUE);
         g4.setColor(GovernanceColor.RED);
         Play play = new Play(null, new ArrayList<Governance>(Arrays.asList(g1, g2, g3, g4)), Map.getMap1(g1, g2, g3, g4));
-        play.set10PeopleInEveryKeep();
         StrongHold.setCurrentPlay(play);
+        play.set10PeopleInEveryKeep();
         return "new game create successful";
     }
 }

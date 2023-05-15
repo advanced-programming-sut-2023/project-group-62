@@ -28,6 +28,8 @@ public class BuildingController {
                 (ground.getGroundType().equals(GroundType.IRON) && !building.getName().equals("Iron mine")) ||
                 (ground.getGroundType().equals(GroundType.PLAIN) && !building.getName().equals("Pitch rig")))
             return "can't drop building there";
+        else if (!ground.getPeople().isEmpty())
+            return "there is people";
         else if (governance.getGold() < building.getGoldCost())
             return "you don't have enough money";
         for (Resource resource : building.getResourcesCost().keySet()) {

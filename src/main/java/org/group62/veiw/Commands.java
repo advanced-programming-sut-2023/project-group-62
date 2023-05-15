@@ -79,12 +79,12 @@ public enum Commands {
     SHOW_FOOD_LIST("^\\s*show\\s+food\\s+list\\s*$"),
     FOOD_RATE("^\\s*food\\s+rate\\s+-r\\s+(?<rateNumber>\\d+)\\s*$"),
     FOOD_RATE_SHOW("^\\s*food\\s+rate\\s+show\\s*$"),
-    TAX_RATE("^\\s*tax\\s+rate\\s+-r(?<rateNumber>\\d+)\\s*$"),
+    TAX_RATE("^\\s*tax\\s+rate\\s+-r\\s+(?<rateNumber>\\d+)\\s*$"),
     TAX_RATE_SHOW("^\\s*tax\\s+rate\\s+show\\s*$"),
-    FEAR_RATE("^\\s*fear\\s+rate\\s+-r(?<rateNumber>\\d+)\\s*$"),
+    FEAR_RATE("^\\s*fear\\s+rate\\s+-r\\s+(?<rateNumber>\\d+)\\s*$"),
     DROP_BUILDING("^\\s*drop\\s+building(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+" +
-            "(?<yCoordinates>\\d+))(?=.+(-t)\\s+(?<type>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-y|\\s+-c|\\s+-color" +
-            "|\\s+-x)|.+))(?=.+(-color)\\s+(?<color>\\w+)).+)\\s*$"),
+            "(?<yCoordinates>\\d+))(?=.+(-type)\\s+(?<type>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-y|\\s+-c|\\s+-color" +
+            "|\\s+-x)|.+))(?=.+(-color)\\s+(?<color>\\w+))?.+)\\s*$"),
     SELECT_BUILDING("^^\\s*select\\s+building(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))" +
             "(?=.+(-y)\\s+(?<yCoordinates>\\d+)).+)\\s*$$"),
     CREATE_UNIT("^\\s*createunit(?<args>(?=.+(-t)\\s+(?<type>.+))(?=.+(-c)\\s+(?<count>\\d+)).+)\\s*$"),

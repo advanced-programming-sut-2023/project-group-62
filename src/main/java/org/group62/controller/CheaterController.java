@@ -111,6 +111,8 @@ public class CheaterController {
                 (ground.getGroundType().equals(GroundType.IRON) && !building.getName().equals("Iron mine")) ||
                 (ground.getGroundType().equals(GroundType.PLAIN) && !building.getName().equals("Pitch rig")))
             return "can't drop building there";
+        else if (!ground.getPeople().isEmpty())
+            return "there is people";
         else {
             ground.addBuilding(building);
             governance.addBuilding(building);

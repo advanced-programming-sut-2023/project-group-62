@@ -65,13 +65,13 @@ public class Map {
     }
 
     public static void setKeep(Ground[][] map, Governance governance, int x, int y) {
-        Building building = CastlesEnum.getCastles(CastlesEnum.KEEP);
+        Building building = CastlesEnum.getCastles(CastlesEnum.KEEP,governance);
         governance.addBuilding(building);
         map[x][y].addBuilding(building);
     }
 
     public static void setStockpile(Ground[][] map, Governance governance, int x, int y) {
-        Building building = IndustryEnum.getIndustry(IndustryEnum.STOCKPILE);
+        Building building = IndustryEnum.getIndustry(IndustryEnum.STOCKPILE , governance);
         governance.addBuilding(building);
         map[x][y].addBuilding(building);
     }

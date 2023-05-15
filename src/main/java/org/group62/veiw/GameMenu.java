@@ -257,7 +257,7 @@ public class GameMenu {
     }
 
     private void showFoodList() {
-        System.out.println(governanceController.showFoodList());
+        System.out.print(governanceController.showFoodList());
     }
 
     private void showPopularity() {
