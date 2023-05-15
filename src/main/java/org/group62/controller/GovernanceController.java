@@ -8,7 +8,7 @@ public class GovernanceController {
     public String showPopularityFactors() {
         Governance g = Play.getCurrentGovernance();
         return String.format("popularity factors:\nFood: %d\nTax: %d\nFear: %d\nReligion: %d", g.getFoodPopularity(),
-                g.getTaxPopularity(), g.getFear(), g.getReligionPopularity());
+                g.getTaxPopularity(), -1 * g.getFear(), g.getReligionPopularity());
     }
 
     public String showPopularity() {
@@ -18,7 +18,7 @@ public class GovernanceController {
     public String showFoodList() {
         String output = "foods:\n";
         for (Food food : Play.getCurrentGovernance().getFoods().keySet()) {
-            output = output + String.format("%s: %d", food, Play.getCurrentGovernance().getFoods().get(food));
+            output = output + String.format("%s: %d\n", food, Play.getCurrentGovernance().getFoods().get(food));
         }
         return output;
     }

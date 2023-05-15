@@ -2,6 +2,8 @@ package org.group62.controller;
 
 import org.group62.model.*;
 
+import java.util.ArrayList;
+
 public class TurnsController {
     public void nextRound() {
         collectTax();
@@ -203,14 +205,25 @@ public class TurnsController {
     private void setPopularity() {
         for (Governance governance : StrongHold.getCurrentPlay().getGovernances()) {
             int popularity = governance.getPopularity() + governance.getFoodPopularity() +
-                    governance.getTaxPopularity() + governance.getFear() + governance.getReligionPopularity();
+                    governance.getTaxPopularity() + -1 * governance.getFear() + governance.getReligionPopularity();
             if (popularity > 100)
                 popularity = 100;
             governance.setPopularity(popularity);
         }
     }
 
-    public void nextTurn() {
+    public String nextTurn() {
+        Governance currentGovernance = Play.getCurrentGovernance();
+        ArrayList<Governance> allGovernance = StrongHold.getCurrentPlay().getGovernances();
+        for (int i = 0; i < allGovernance.size(); i++) {
+            if (allGovernance.get(i).equals(currentGovernance)) {
+                if (i == allGovernance.size() - 1)
+                    Play.setCurrentGovernance(allGovernance.get(0));
+                else
+                    Play.setCurrentGovernance(allGovernance.get(i++));
+            }
+        }
+        return "Now is next governance turn!";
     }
 
     private void checkForEndKing() {
@@ -239,13 +252,14 @@ public class TurnsController {
             }
         }
     }
-    private Governance checkForEndGame(){
+
+    private Governance checkForEndGame() {
         int i = 0;
         Governance winner = null;
         for (Ground[] grounds : StrongHold.getCurrentPlay().getMap()) {
             for (Ground ground : grounds) {
                 for (People person : ground.getPeople()) {
-                    if (person instanceof King){
+                    if (person instanceof King) {
                         winner = person.getOwner();
                         i++;
                     }
@@ -253,7 +267,7 @@ public class TurnsController {
                 }
             }
         }
-        if(i<2)
+        if (i < 2)
             return winner;
         else
             return null;

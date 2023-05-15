@@ -153,7 +153,6 @@ public class ProfileMenuController {
         String securityQuestionSecure = (String) empobj.get("securityQuestionSecure");
         String securityQuestionAnswerSecure = (String) empobj.get("securityQuestionAnswerSecure");
         String highScore = (String) empobj.get("highScore");
-        String rank = (String) empobj.get("rank");
         array.put("username", username);
         array.put("passwordSecure", passwordSecure);
         array.put("Email", email);
@@ -162,7 +161,6 @@ public class ProfileMenuController {
         array.put("securityQuestionSecure", securityQuestionSecure);
         array.put("securityQuestionAnswerSecure", securityQuestionAnswerSecure);
         array.put("highScore",highScore);
-        array.put("rank",rank);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("User", array);
         newUserList.add(jsonObject);
