@@ -70,7 +70,7 @@ public enum Commands {
             "(?=.+(-y)\\s+(?<yCoordinates>\\S+)).+)\\s*$"),
     MAP_MOVE("^\\s*map\\s+(?<upOrDown>[updown]+)\\s+(?<rightOrLeft>[rightlef]+)\\s+(?<count>\\d+)$"),
     SHOW_DETAILS("^\\s*show\\s+details(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\S+))(?=.+(-y)\\s+" +
-            "(?<yCoordinates>\\S+)).+)\\s0*$"),
+            "(?<yCoordinates>\\S+)).+)\\s*$"),
     EXIT("^\\s*exit\\s*$"),
     BACK_TO_SIGNUP_MENU("^\\s*back\\s+to\\s+signup\\s+menu\\s*$"),
     SHOW_POPULARITY_FACTORS("^\\s*show\\s+popularity\\s+factors\\s*$"),
@@ -78,15 +78,15 @@ public enum Commands {
     SHOW_FOOD_LIST("^\\s*show\\s+food\\s+list\\s*$"),
     FOOD_RATE("^\\s*food\\s+rate\\s+-r\\s+(?<rateNumber>-?\\d+)\\s*$"),
     FOOD_RATE_SHOW("^\\s*food\\s+rate\\s+show\\s*$"),
-    TAX_RATE("^\\s*tax\\s+rate\\s+-r(?<rateNumber>-?\\d+)\\s*$"),
+    TAX_RATE("^\\s*tax\\s+rate\\s+-r\\s+(?<rateNumber>-?\\d+)\\s*$"),
     TAX_RATE_SHOW("^\\s*tax\\s+rate\\s+show\\s*$"),
-    FEAR_RATE("^\\s*fear\\s+rate\\s+-r(?<rateNumber>-?\\d+)\\s*$"),
-    DROP_BUILDING("^\\s*drop\\s+building(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+" +
+    FEAR_RATE("^\\s*fear\\s+rate\\s+-r\\s+(?<rateNumber>-?\\d+)\\s*$"),
+    DROP_BUILDING("^\\s*dropbuilding(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+" +
             "(?<yCoordinates>\\d+))(?=.+(-type)\\s+(?<type>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-y|\\s+-c|\\s+-color" +
             "|\\s+-x)|.+))(?=.+(-color)\\s+(?<color>\\w+))?.+)\\s*$"),
     SELECT_BUILDING("^^\\s*select\\s+building(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))" +
             "(?=.+(-y)\\s+(?<yCoordinates>\\d+)).+)\\s*$$"),
-    CREATE_UNIT("^\\s*createunit(?<args>(?=.+(-t)\\s+(?<type>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-t)|.+))" +
+    CREATE_UNIT("^\\s*createunit(?<args>(?=.+(-t)\\s+(?<type>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-t)|\\w+))" +
             "(?=.+(-c)\\s+(?<count>\\d+)).+)\\s*$"),
     REPAIR("^\\s*repair\\s*$"),
     SELECT_UNIT("^\\s*select\\s+unit(?<args>(?=.+(-x)\\s+(?<xCoordinates>\\d+))(?=.+(-y)\\s+" +
@@ -125,7 +125,7 @@ public enum Commands {
             "(.*\\S+\\s+.*)\"|.+?(?=\\s+-i)|.+)).+)\\s*$"),
     TRADE_HISTORY("^\\s*trade\\s+history\\s*$"),
     SHOW_PRICE_LIST("^\\s*show\\s+price\\s+list\\s*$"),
-    BUY("^\\s*buy(?<args>(?=.+(-i)\\s+(?<itemName>\"(.*\\S+\\s+.*)\"|.+))(?=.+(-a)\\s+(?<itemAmount>\\d+)).+)\\s*$"),
+    BUY("^\\s*buy(?<args>(?=.+(-i)\\s+(?<itemName>\"(.*\\S+\\s+.*)\"|\\w+))(?=.+(-a)\\s+(?<itemAmount>\\d+)).+)\\s*$"),
     SELL("^\\s*sell(?<args>(?=.+(-i)\\s+(?<itemName>\"(.*\\S+\\s+.*)\"|\\w+))(?=.+(-a)\\s+(?<itemAmount>\\d+)).+)\\s*$"),
     BACK("^\\s*back\\s*$"),
     NEW_GAME("^\\s*new\\s+game\\s*$"),

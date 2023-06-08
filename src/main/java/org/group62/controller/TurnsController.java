@@ -26,6 +26,7 @@ public class TurnsController {
     }
 
     private void endGame(User user) {
+
     }
 
     private void collectResource(Building building) {
@@ -215,15 +216,12 @@ public class TurnsController {
     public String nextTurn() {
         Governance currentGovernance = Play.getCurrentGovernance();
         ArrayList<Governance> allGovernance = StrongHold.getCurrentPlay().getGovernances();
-        for (int i = 0; i < allGovernance.size(); i++) {
-            if (allGovernance.get(i).equals(currentGovernance)) {
-                if (i == allGovernance.size() - 1)
-                    Play.setCurrentGovernance(allGovernance.get(0));
-                else
-                    Play.setCurrentGovernance(allGovernance.get(i++));
-            }
-        }
-        return "Now is next governance turn!";
+        if (allGovernance.indexOf(currentGovernance) == allGovernance.size() - 1) {
+            Play.setCurrentGovernance(allGovernance.get(0));
+            nextRound();
+        } else
+            Play.setCurrentGovernance(allGovernance.get(allGovernance.indexOf(currentGovernance) + 1));
+        return String.format("Now is %s turn!", currentGovernance.getOwner().getUsername());
     }
 
     private void checkForEndKing() {

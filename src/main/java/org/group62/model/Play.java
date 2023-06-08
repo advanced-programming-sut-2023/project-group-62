@@ -62,8 +62,10 @@ public class Play {
     public int howManyOfThisBuildingExistByName(String buildingName, Governance governance) {
         int output = 0;
         if (!governance.getBuildings().isEmpty())
-            if (governance.getBuildings().get(0).getName().equals(buildingName))
-                output++;
+            for (Building building : governance.getBuildings()) {
+                if (building.getName().equals(buildingName))
+                    output++;
+            }
         return output;
     }
 

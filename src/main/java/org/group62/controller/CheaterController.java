@@ -106,7 +106,7 @@ public class CheaterController {
             return "there is building";
         else if ((building instanceof Farm && !(ground.getGroundType().equals(GroundType.GRASS) ||
                 ground.getGroundType().equals(GroundType.DENSE_GRASSLAND))) ||
-                !canDropBuildingThere(x, y) || ground.getGroundTreeType() == null ||
+                !canDropBuildingThere(x, y) || ground.getGroundTreeType() != null ||
                 (ground.getGroundType().equals(GroundType.STONE) && !building.getName().equals("Quarry")) ||
                 (ground.getGroundType().equals(GroundType.IRON) && !building.getName().equals("Iron mine")) ||
                 (ground.getGroundType().equals(GroundType.PLAIN) && !building.getName().equals("Pitch rig")))
