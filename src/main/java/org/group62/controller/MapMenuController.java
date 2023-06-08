@@ -15,6 +15,8 @@ public class MapMenuController {
         String part;
         if (x < 0 || x > 399 || y < 0 || y > 399)
             return "invalid x,y";
+        setCurrentX(x);
+        setCurrentY(y);
         for (Ground[] grounds : StrongHold.getCurrentPlay().getMap()) {
             for (Ground ground : grounds) {
                 if (ground.getX() - 10 < x && ground.getX() + 10 > x && ground.getY() - 10 < y && ground.getY() + 10 > y) {
@@ -109,7 +111,7 @@ public class MapMenuController {
         return showMap(x, y);
     }
 
-    public static String showMapDetails(int x, int y) {
+    public String showMapDetails(int x, int y) {
         x = x - 1;
         y = y - 1;
         String output;

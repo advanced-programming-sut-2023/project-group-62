@@ -16,7 +16,7 @@ public class MarketMenuController {
         else {
             Play.getCurrentGovernance().addResource(resource,amount);
             Play.getCurrentGovernance().setGold(Play.getCurrentGovernance().getGold() - resource.getBuyPrice());
-            return "sell item was successful";
+            return "buy item was successful";
         }
     }
     public String sell(String itemName,int amount){

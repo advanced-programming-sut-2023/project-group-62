@@ -19,13 +19,13 @@ public class GameMenuController {
         if(!isPlayersIsValid(players))
             return "Player Username not exist. Please set players again!";
         else{
-            User player1 = new User();
+            User player4 = new User();
             User player2 = new User();
             User player3 = new User();
-            User player4 = currentUser;
-            userJsonFileParse("parseUserInformation",players[0],null,player1,null);
-            userJsonFileParse("parseUserInformation",players[1],null,player2,null);
-            userJsonFileParse("parseUserInformation",players[2],null,player3,null);
+            User player1 = currentUser;
+            userJsonFileParse("parseUserInformation",players[0],null,player2,null);
+            userJsonFileParse("parseUserInformation",players[1],null,player3,null);
+            userJsonFileParse("parseUserInformation",players[2],null,player4,null);
             Governance g1 = new Governance(player1);
             Governance g2 = new Governance(player2);
             Governance g3 = new Governance(player3);

@@ -45,6 +45,7 @@ public class TradeController {
             trade.getAcceptedGovernance().decreaseResource(trade.getResourceType(), trade.getResourceAmount());
             trade.getOwner().setGold(trade.getOwner().getGold() + trade.getPrice());
             trade.getAcceptedGovernance().setGold(trade.getAcceptedGovernance().getGold() - trade.getPrice());
+            StrongHold.getCurrentPlay().removeTrade(trade);
             return "trade was accepted";
         }
     }

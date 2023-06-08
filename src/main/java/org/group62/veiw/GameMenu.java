@@ -120,6 +120,8 @@ public class GameMenu {
                 System.out.println(buyItem(matcher));
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.SELL)) != null)
                 System.out.println(sellItem(matcher));
+            else if((Commands.getMatcherMatches(inputCommand,Commands.TRADE_HISTORY)) != null)
+                System.out.println(tradeController.showTradeHistory());
             else
                 System.out.println("Invalid command!");
         }
@@ -128,43 +130,46 @@ public class GameMenu {
     private String sellItem(Matcher matcher) {
         String itemName = matcher.group("itemName");
         String itemAmount = matcher.group("itemAmount");
-        //marketMenuController.
-        return null;
+        return marketMenuController.sell(itemName, Integer.parseInt(itemAmount));
     }
 
     private String buyItem(Matcher matcher) {
-        return null;
+        String itemName = matcher.group("itemName");
+        String itemAmount = matcher.group("itemAmount");
+        return marketMenuController.buy(itemName,Integer.parseInt(itemAmount));
     }
 
     private void showPriceList() {
         System.out.println(Resource.WOOD + "\tBuyPrice: " + Resource.WOOD.getBuyPrice() + "\tSellPrice: " +
-                Resource.WOOD.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.WOOD) + "items.");
+                Resource.WOOD.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.WOOD) + " items.");
         System.out.println(Resource.STONE + "\tBuyPrice: " + Resource.STONE.getBuyPrice() + "\tSellPrice: " +
-                Resource.STONE.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.STONE) + "items.");
+                Resource.STONE.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.STONE) + " items.");
         System.out.println(Resource.PITCH + "\tBuyPrice: " + Resource.PITCH.getBuyPrice() + "\tSellPrice: " +
-                Resource.PITCH.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.PITCH) + "items.");
+                Resource.PITCH.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.PITCH) + " items.");
         System.out.println(Resource.BEER + "\tBuyPrice: " + Resource.BEER.getBuyPrice() + "\tSellPrice: " +
-                Resource.BEER.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.BEER) + "items.");
+                Resource.BEER.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.BEER) + " items.");
         System.out.println(Resource.IRON + "\tBuyPrice: " + Resource.IRON.getBuyPrice() + "\tSellPrice: " +
-                Resource.IRON.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.IRON) + "items.");
+                Resource.IRON.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.IRON) + " items.");
         System.out.println(Resource.BARLEY + "\tBuyPrice: " + Resource.BARLEY.getBuyPrice() + "\tSellPrice: " +
-                Resource.BARLEY.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.BARLEY) + "items.");
+                Resource.BARLEY.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.BARLEY) + " items.");
         System.out.println(Resource.FLOUR + "\tBuyPrice: " + Resource.FLOUR.getBuyPrice() + "\tSellPrice: " +
-                Resource.FLOUR.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.FLOUR) + "items.");
+                Resource.FLOUR.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.FLOUR) + " items.");
         System.out.println(Resource.WHEAT + "\tBuyPrice: " + Resource.WHEAT.getBuyPrice() + "\tSellPrice: " +
-                Resource.WHEAT.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.WHEAT) + "items.");
+                Resource.WHEAT.getSellPrice() + "\tYou have " + Play.getCurrentGovernance().getResources().get(Resource.WHEAT) + " items.");
     }
 
     private void moveMap(Matcher matcher) {
-        //TODO
-        //mapMenuController.moveMap();
+        String upOrDown = matcher.group("upOrDown");
+        String rightOrLeft = matcher.group("rightOrLeft");
+        String count = matcher.group("count");
+        System.out.println(mapMenuController.moveMap(upOrDown,rightOrLeft,Integer.parseInt(count)));
 
     }
 
     private void showDetails(Matcher matcher) {
         String xCoordinate = matcher.group("xCoordinates");
         String yCoordinate = matcher.group("yCoordinates");
-        System.out.println(mapMenuController.showMap(Integer.parseInt(xCoordinate),Integer.parseInt(yCoordinate)));
+        System.out.println(mapMenuController.showMapDetails(Integer.parseInt(xCoordinate),Integer.parseInt(yCoordinate)));
     }
 
     private void showMap(Matcher matcher) {
@@ -210,7 +215,9 @@ public class GameMenu {
     }
 
     private void selectUnit(Matcher matcher) {
-        //TODO
+        int x = Integer.parseInt(matcher.group("xCoordinates"));
+        int y = Integer.parseInt(matcher.group("yCoordinates"));
+        System.out.println(unitsController.selectUnit(x,y));
     }
 
     private void nextTurn() {
@@ -284,9 +291,14 @@ public class GameMenu {
         String yCoordinates = matcher.group("yCoordinates");
         String type = matcher.group("type");
         String color = matcher.group("color");
-        Governance governance = cheaterController.findGovernanceByColor(color);
-        System.out.println(cheaterController.dropBuilding(Integer.parseInt(xCoordinates),Integer.parseInt(yCoordinates),
-                type,governance));
+        if(color != null) {
+            Governance governance = cheaterController.findGovernanceByColor(color);
+            System.out.println(cheaterController.dropBuilding(Integer.parseInt(xCoordinates), Integer.parseInt(yCoordinates),
+                    type, governance));
+        }else{
+            System.out.println(buildingController.dropBuilding(Integer.parseInt(xCoordinates), Integer.parseInt(yCoordinates),
+                    type));
+        }
     }
 
     private void dropTree(Matcher matcher) {

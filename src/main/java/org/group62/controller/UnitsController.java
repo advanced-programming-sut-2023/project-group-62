@@ -5,7 +5,7 @@ import org.group62.model.*;
 import java.util.ArrayList;
 
 public class UnitsController {
-    private ArrayList<Troop> currentTroops;
+    private ArrayList<Troop> currentTroops = new ArrayList<>();
     public String selectUnit(int x, int y){
         x = x - 1;
         y = y - 1;

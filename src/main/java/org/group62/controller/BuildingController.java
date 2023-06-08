@@ -23,7 +23,7 @@ public class BuildingController {
             return "there is building";
         else if ((building instanceof Farm && !(ground.getGroundType().equals(GroundType.GRASS) ||
                 ground.getGroundType().equals(GroundType.DENSE_GRASSLAND))) ||
-                !canDropBuildingThere(x, y) || ground.getGroundTreeType() == null ||
+                !canDropBuildingThere(x, y) || ground.getGroundTreeType() != null ||
                 (ground.getGroundType().equals(GroundType.STONE) && !building.getName().equals("Quarry")) ||
                 (ground.getGroundType().equals(GroundType.IRON) && !building.getName().equals("Iron mine")) ||
                 (ground.getGroundType().equals(GroundType.PLAIN) && !building.getName().equals("Pitch rig")))
@@ -57,7 +57,7 @@ public class BuildingController {
             }
         if (building.getWorkersNumber() != 0) {
             int i = 0;
-            for (int j = governance.getPeoples().size(); j >= 0; j--) {
+            for (int j = governance.getPeoples().size() - 1; j >= 0; j--) {
                 if (!(governance.getPeoples().get(j) instanceof Troop || governance.getPeoples().get(j) instanceof Worker)) {
                     int[] location = StrongHold.getCurrentPlay().getKeepLocationOfGovernance(governance);
                     StrongHold.getCurrentPlay().getMap()[location[0]][location[1]].removePeople(governance.getPeoples().get(j));
@@ -135,18 +135,18 @@ public class BuildingController {
 
                     break;
                 case "Engineer guild":
-                    arabianTroopEnum = ArabianTroopEnum.getArabianTroopEnumByName(type);
-                    if (arabianTroopEnum == null)
-                        return "you can't create this unit there";
-                    else
-                        troop = ArabianTroopEnum.getArabianTroop(arabianTroopEnum);
-                    break;
-                case "Mercenary post":
                     engineerTroopEnum = EngineerTroopEnum.getEngineerTroopEnumByName(type);
                     if (engineerTroopEnum == null)
                         return "you can't create this unit there";
                     else
                         troop = EngineerTroopEnum.getEngineerTroop(engineerTroopEnum);
+                    break;
+                case "Mercenary post":
+                    arabianTroopEnum = ArabianTroopEnum.getArabianTroopEnumByName(type);
+                    if (arabianTroopEnum == null)
+                        return "you can't create this unit there";
+                    else
+                        troop = ArabianTroopEnum.getArabianTroop(arabianTroopEnum);
                     break;
                 default:
                     return "you can't create unit with this building";
@@ -173,7 +173,7 @@ public class BuildingController {
                     for (int i = 0; i < count; i++)
                         ground.addPeople(EngineerTroopEnum.getEngineerTroop(engineerTroopEnum));
                 int i = 0;
-                for (int j = governance.getPeoples().size(); j >= 0; j--) {
+                for (int j = governance.getPeoples().size() - 1; j >= 0; j--) {
                     if (!(governance.getPeoples().get(j) instanceof Troop || governance.getPeoples().get(j) instanceof Worker)) {
                         int[] location1 = StrongHold.getCurrentPlay().getKeepLocationOfGovernance(governance);
                         StrongHold.getCurrentPlay().getMap()[location1[0]][location1[1]].removePeople(governance.getPeoples().get(j));
@@ -183,8 +183,9 @@ public class BuildingController {
                             break;
                     }
                 }
+                return "create unit was successful";
             }
-            return "create unit was successful";
+            return "bad shod ke";
         }
     }
 
