@@ -1,5 +1,7 @@
 package org.group62.veiw;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import org.group62.controller.LoginMenuController;
 import org.group62.controller.SignupMenuController;
 import org.group62.model.User;
@@ -9,11 +11,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class SignupMenu {
+public class SignupMenu extends Application {
     SignupMenuController signupMenuController;
     LoginMenuController loginMenuController;
-    Scanner scanner;
+
     private User currentUser;
+
+    Scanner scanner;
 
     public SignupMenu(SignupMenuController signupMenuController, Scanner scanner) {
         this.scanner = scanner;
@@ -54,6 +58,15 @@ public class SignupMenu {
 
 
         }
+    }
+    public SignupMenu(SignupMenuController signupMenuController) {
+        this.signupMenuController = signupMenuController;
+        currentUser = new User();
+        loginMenuController = new LoginMenuController();
+    }
+    @Override
+    public void start(Stage stage) throws Exception {
+
     }
 
     private void createUserWithRandomSlogan(Matcher matcher) throws NoSuchAlgorithmException {
@@ -170,4 +183,6 @@ public class SignupMenu {
 
         }
     }
+
+
 }
