@@ -1,6 +1,8 @@
 module mainProject {
     requires javafx.controls;
     requires javafx.fxml;
+    requires json.simple;
+    requires passay;
 
 
     exports org.group62;
