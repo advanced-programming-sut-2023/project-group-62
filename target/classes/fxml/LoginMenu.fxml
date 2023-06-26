@@ -6,15 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.text.Text?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.group62.Main"
+            fx:controller="org.group62.veiw.ControllerLoginMenu"
             prefHeight="400.0" prefWidth="600.0">
-    <center>
-            <HBox alignment="CENTER" spacing="20">
-                <Button text="signup" onMouseClicked="#signup"/>
-                <Button text="login" onMouseClicked="#login"/>
-            </HBox>
-    </center>
+    <HBox alignment="CENTER" spacing="20">
+        <Button text="signup" onMouseClicked="#signup"/>
+        <Button text="login" onMouseClicked="#login"/>
+    </HBox>
+
 </BorderPane>

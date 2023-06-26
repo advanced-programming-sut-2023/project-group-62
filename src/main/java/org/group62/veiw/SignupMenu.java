@@ -1,12 +1,16 @@
 package org.group62.veiw;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.group62.controller.LoginMenuController;
 import org.group62.controller.SignupMenuController;
 import org.group62.model.User;
 
 import java.io.IOException;
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -19,12 +23,12 @@ public class SignupMenu extends Application {
 
     Scanner scanner;
 
-    public SignupMenu(SignupMenuController signupMenuController, Scanner scanner) {
+    /*public SignupMenu(SignupMenuController signupMenuController, Scanner scanner) {
         this.scanner = scanner;
         this.signupMenuController = signupMenuController;
         currentUser = new User();
         loginMenuController = new LoginMenuController();
-    }
+    }*/
 
     Matcher matcher;
     String inputCommand;
@@ -66,6 +70,11 @@ public class SignupMenu extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
+        URL url = SignupMenu.class.getResource("/fxml/signupMenu.fxml");
+        BorderPane borderPane = FXMLLoader.load(url);
+        Scene scene = new Scene(borderPane);
+        stage.setScene(scene);
+        stage.show();
 
     }
 
