@@ -37,8 +37,9 @@ public class Main extends Application {
     }
 
     public void signup(MouseEvent mouseEvent) throws Exception {
-        SignupMenuController signupMenuController = new SignupMenuController();
-        SignupMenu signupMenu = new SignupMenu(signupMenuController);
+        Scanner scanner = new Scanner(System.in);
+        SignupMenuController signupMenuController = new SignupMenuController(scanner);
+        SignupMenu signupMenu = new SignupMenu(signupMenuController,scanner);
         signupMenu.start(Main.stage);
     }
 

@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb3c2f87-761b-4f37-970d-2523dbf3a5b5" name="Changes" comment="create start menu">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ControllerLoginMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/LoginMenu.fxml" afterDir="false" />
+    <list default="true" id="cb3c2f87-761b-4f37-970d-2523dbf3a5b5" name="Changes" comment="create signup menu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/SignupMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/signupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/signupMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/start.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/start.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/start.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/start.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/group62/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group62/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/group62/veiw/SignupMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group62/veiw/SignupMenu.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +107,15 @@
       <option name="project" value="LOCAL" />
       <updated>1687771860526</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="create signup menu">
+      <option name="closed" value="true" />
+      <created>1687795367138</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687795367138</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -134,6 +135,7 @@
     <MESSAGE value="poem" />
     <MESSAGE value="info" />
     <MESSAGE value="create start menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="create start menu" />
+    <MESSAGE value="create signup menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="create signup menu" />
   </component>
 </project>

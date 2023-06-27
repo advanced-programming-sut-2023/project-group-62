@@ -23,12 +23,12 @@ public class SignupMenu extends Application {
 
     Scanner scanner;
 
-    /*public SignupMenu(SignupMenuController signupMenuController, Scanner scanner) {
+    public SignupMenu(SignupMenuController signupMenuController, Scanner scanner) {
         this.scanner = scanner;
         this.signupMenuController = signupMenuController;
         currentUser = new User();
         loginMenuController = new LoginMenuController();
-    }*/
+    }
 
     Matcher matcher;
     String inputCommand;
@@ -62,11 +62,6 @@ public class SignupMenu extends Application {
 
 
         }
-    }
-    public SignupMenu(SignupMenuController signupMenuController) {
-        this.signupMenuController = signupMenuController;
-        currentUser = new User();
-        loginMenuController = new LoginMenuController();
     }
     @Override
     public void start(Stage stage) throws Exception {
