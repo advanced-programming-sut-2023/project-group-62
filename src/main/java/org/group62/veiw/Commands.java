@@ -23,6 +23,7 @@ public enum Commands {
     QUESTION_PICK("^\\s*question\\s+pick(?<args>(?=.+(-q)\\s+(?<questionNumber>\\S+))(?=.+(-a)\\s+(?<answer>" +
             "\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-q|\\s+-c)|.+))(?=.+(-c)\\s+(?<answerConfirm>\"(.*\\S+\\s+.*)" +
             "\"|.+?(?=\\s+-q|\\s+-a)|.+)).+)\\s*$"),
+    FXML_QUESTION_PICK("\\s*(?<questionNumber>(1|2|3))\\.(?<answer>\\S+)\\s*"),
     CREAT_USER_WITH_RANDOM_PASSWORD_WITH_SLOGAN("^\\s*user\\s+create(?<args>(?=.+(-u)\\s+(?<username>\"" +
             "(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|\\s+-e|\\s+-n|\\s+-s)|.+))(?=.+(-e)\\s+(?<email>\"(.*\\S+\\s+.*)\"" +
             "|.+?(?=\\s+-p|\\s+-u|\\s+-n|\\s+-s)|.+))(?=.+(-n)\\s+(?<nickname>\"(.*\\S+\\s+.*)\"|.+?(?=\\s+-p|" +

@@ -1,15 +1,21 @@
 package org.group62.veiw;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import org.group62.controller.GameMenuController;
 import org.group62.controller.MainMenuController;
 import org.group62.controller.ProfileMenuController;
 import org.group62.model.User;
 
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class MainMenu {
+public class MainMenu extends Application {
     ProfileMenuController profileMenuController;
     GameMenuController gameMenuController;
     MainMenuController mainMenuController;
@@ -18,6 +24,9 @@ public class MainMenu {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public MainMenu(){
     }
 
     public MainMenu(MainMenuController mainMenuController) {
@@ -50,5 +59,13 @@ public class MainMenu {
             else
                 System.out.println("Invalid command!");
         }
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        URL url = MainMenu.class.getResource("/fxml/MainMenu.fxml");
+        BorderPane borderPane = FXMLLoader.load(url);
+        Scene scene = new Scene(borderPane);
+        stage.setScene(scene);
     }
 }

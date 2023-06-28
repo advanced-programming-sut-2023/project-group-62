@@ -29,20 +29,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Main.stage = stage;
-        URL url = Main.class.getResource("/fxml/start.fxml");
-        BorderPane borderPane = FXMLLoader.load(url);
-        Scene scene = new Scene(borderPane);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void signup(MouseEvent mouseEvent) throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        SignupMenuController signupMenuController = new SignupMenuController(scanner);
-        SignupMenu signupMenu = new SignupMenu(signupMenuController,scanner);
+        SignupMenu signupMenu = new SignupMenu();
         signupMenu.start(Main.stage);
-    }
-
-    public void login(MouseEvent mouseEvent) {
     }
 }

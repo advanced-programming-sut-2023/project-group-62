@@ -179,7 +179,7 @@ public class ProfileMenuController {
                         throw new RuntimeException(e);
                     }
                 });
-            case "usernameCheck":
+            case "checkUsername":
                 usernames.clear();
                 empList.forEach(emp -> usernameParse((JSONObject) emp));
                 break;
@@ -261,7 +261,7 @@ public class ProfileMenuController {
     }
 
     private boolean isUsernameDuplicate(String username) {
-        userJsonFileParse("usernameCheck", null, null, null, null);
+        userJsonFileParse("checkUsername", null, null, null, null);
         if (usernames.size() != 0) {
             for (String name : usernames) {
                 if (username.equals(name))

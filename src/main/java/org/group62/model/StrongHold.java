@@ -7,6 +7,14 @@ public class StrongHold {
     private static User currentUser;
     private static Play currentPlay;
 
+    public static User getUserByUsername(String username){
+        for (User user : getUsers()) {
+            if (user.getUsername().equals(username))
+                return user;
+        }
+        return null;
+    }
+
     public static void addUser(User user) {
         users.add(user);
     }

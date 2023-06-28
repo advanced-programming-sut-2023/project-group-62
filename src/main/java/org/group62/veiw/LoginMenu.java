@@ -1,14 +1,20 @@
 package org.group62.veiw;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import org.group62.controller.LoginMenuController;
 import org.group62.controller.MainMenuController;
 import org.group62.controller.SHA256;
 import org.group62.model.User;
 
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class LoginMenu {
+public class LoginMenu extends Application {
     private Matcher matcher;
     private LoginMenuController loginMenuController;
     private MainMenuController mainMenuController;
@@ -18,6 +24,9 @@ public class LoginMenu {
         this.currentUser = currentUser;
     }
     private Integer timerFactor = 1;
+    public LoginMenu(){
+
+    }
     public LoginMenu(LoginMenuController loginMenuController) {
         this.loginMenuController = loginMenuController;
         mainMenuController = new MainMenuController();
@@ -58,6 +67,15 @@ public class LoginMenu {
                 System.out.println("Invalid command!");
 
         }
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        URL url = LoginMenu.class.getResource("/fxml/LoginMenu.fxml");
+        BorderPane borderPane = FXMLLoader.load(url);
+        Scene scene = new Scene(borderPane);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void forgotPassword(Matcher matcher,Scanner scanner) throws NoSuchAlgorithmException {
@@ -127,4 +145,6 @@ public class LoginMenu {
             }
         }
     }
+
+
 }

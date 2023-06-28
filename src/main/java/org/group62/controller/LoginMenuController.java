@@ -26,7 +26,7 @@ public class LoginMenuController {
     public String loginWithoutStayLoggedIn(Matcher matcher) throws NoSuchAlgorithmException {
         String username = matcher.group("username");
         String password = matcher.group("password");
-        userJsonFileParse("usernameCheck", username, null, currentUser, null);
+        userJsonFileParse("checkUsername", username, null, currentUser, null);
         if (!isUsernameExist(username))
             return "Username and password didn’t match! --> Username not exist!";
         else if (!isPasswordCorrect(password, username))
@@ -102,7 +102,7 @@ public class LoginMenuController {
     private void userJsonFileFunctions(JSONArray empList, String function, String username, String newPassword,
                                        User user, JSONArray newUserList) {
         switch (function) {
-            case "usernameCheck":
+            case "checkUsername":
                 usernames.clear();
                 empList.forEach(emp -> usernameParse((JSONObject) emp));
                 break;

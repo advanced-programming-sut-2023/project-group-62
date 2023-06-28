@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class GameMenuController {
     private ArrayList<String> usernames = new ArrayList<>();
     public String newGame(String[] players,User currentUser) {
-        userJsonFileParse("usernameCheck",null,null,null,null);
+        userJsonFileParse("checkUsername",null,null,null,null);
         if(!isPlayersIsValid(players))
             return "Player Username not exist. Please set players again!";
         else{
@@ -70,7 +70,7 @@ public class GameMenuController {
     private void userJsonFileFunctions(JSONArray empList, String function, String username, String newPassword,
                                        User user, JSONArray newUserList) {
         switch (function) {
-            case "usernameCheck":
+            case "checkUsername":
                 usernames.clear();
                 empList.forEach(emp -> usernameParse((JSONObject) emp));
                 break;
