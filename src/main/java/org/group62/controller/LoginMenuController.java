@@ -1,5 +1,6 @@
 package org.group62.controller;
 
+import org.group62.model.StrongHold;
 import org.group62.model.User;
 import org.group62.veiw.Commands;
 import org.json.simple.JSONArray;
@@ -23,6 +24,20 @@ public class LoginMenuController {
         this.currentUser = currentUser;
     }
 
+
+    public String login(String username, String password){
+        User user;
+        if (username.equals("") || password.equals(""))
+            return "Username and password didn't match! --> Some fields is empty!";
+        else if ((user = StrongHold.getUserByUsername(username))==null)
+            return "Username and password didn't match! --> Username not exist!";
+        else if (user.isPassWordCorrect(password))
+            return "Username and password didn't match! --> Password is incorrect!";
+        else {
+            StrongHold.setCurrentUser(user);
+            return "User logged in successfully!";
+        }
+    }
     public String loginWithoutStayLoggedIn(Matcher matcher) throws NoSuchAlgorithmException {
         String username = matcher.group("username");
         String password = matcher.group("password");
