@@ -67,5 +67,6 @@ public class MainMenu extends Application {
         BorderPane borderPane = FXMLLoader.load(url);
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);
+        stage.show();
     }
 }

@@ -5,15 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb3c2f87-761b-4f37-970d-2523dbf3a5b5" name="Changes" comment=" complete signup menu">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ForgotPasswordMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/controller/LoginMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ControllerForgotPasswordMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/controller/SignupMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/controller/SignupMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ControllerLoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ControllerLoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/forgotPasswordMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/ForgotPasswordMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/group62/Model/StrongHold.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group62/Model/StrongHold.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ControllerMainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ControllerMainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ForgotPasswordMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ForgotPasswordMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ProfileMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/ForgotPasswordMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/ForgotPasswordMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/ProfileMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/ProfileMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/MainMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/ProfileMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/ProfileMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/forgotPasswordMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/forgotPasswordMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/group62/controller/LoginMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group62/controller/LoginMenuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group62/controller/SignupMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group62/controller/SignupMenuController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/group62/veiw/ControllerLoginMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group62/veiw/ControllerLoginMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group62/veiw/ControllerMainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group62/veiw/ControllerMainMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group62/veiw/ForgotPasswordMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group62/veiw/ForgotPasswordMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group62/veiw/LoginMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group62/veiw/LoginMenu.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1687967731944</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary=" complete signup menu">
+      <option name="closed" value="true" />
+      <created>1688020537966</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1688020537966</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

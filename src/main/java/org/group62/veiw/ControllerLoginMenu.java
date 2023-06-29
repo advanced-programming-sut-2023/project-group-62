@@ -39,8 +39,7 @@ public class ControllerLoginMenu {
     }
 
     public void forgotPassword(MouseEvent mouseEvent) throws Exception {
-        User user;
-        if ((user = StrongHold.getUserByUsername(username.getText()))==null) {
+        if (StrongHold.getUserByUsername(username.getText())==null) {
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setTitle("Error");
             errorAlert.setHeaderText("change password failed");
@@ -48,7 +47,7 @@ public class ControllerLoginMenu {
             errorAlert.showAndWait();
         }
         else {
-            ForgotPasswordMenu forgotPasswordMenu = new ForgotPasswordMenu(user);
+            ForgotPasswordMenu forgotPasswordMenu = new ForgotPasswordMenu(username.getText());
             forgotPasswordMenu.start(Main.stage);
         }
     }

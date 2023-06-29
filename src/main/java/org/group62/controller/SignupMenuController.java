@@ -36,10 +36,10 @@ public class SignupMenuController {
         this.scanner = scanner;
     }
 
-    public String checkUsername(String username) {
+    public String checkUsername(String username) {// TODO: 6/29/2023 file read
         if (Commands.getMatcherMatches(username, Commands.USERNAME_VALIDATION) == null)
             return "Invalid username!";
-        else if (isUsernameDuplicate(username))
+        else if (StrongHold.getUserByUsername(username) != null)//if (isUsernameDuplicate(username))
             return "Your username is duplicate!";
         else
             return "good username";

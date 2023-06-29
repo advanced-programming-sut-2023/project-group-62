@@ -31,11 +31,29 @@ public class LoginMenuController {
             return "Username and password didn't match! --> Some fields is empty!";
         else if ((user = StrongHold.getUserByUsername(username))==null)
             return "Username and password didn't match! --> Username not exist!";
-        else if (user.isPassWordCorrect(password))
+        else if (!user.isPassWordCorrect(password))
             return "Username and password didn't match! --> Password is incorrect!";
         else {
             StrongHold.setCurrentUser(user);
             return "User logged in successfully!";
+        }
+    }
+    public String forgotPassword(String username, String newPassword, String answer){
+        User user;
+        SignupMenuController signupMenuController = new SignupMenuController();
+        if ((user = StrongHold.getUserByUsername(username)) == null)
+            return "change password failed: username not found";
+        if (answer.equals(""))
+            return  "change password failed: please wright answer";
+        else if (newPassword.equals(""))
+            return  "change password failed: please wright new password";
+        else if (!user.getPasswordRecoveryAnswer().equals(answer))
+            return  "change password failed: wrong answer";
+        else if (!signupMenuController.checkPassword(newPassword).equals("strong password"))
+            return signupMenuController.checkPassword(newPassword);
+        else {
+            user.setPassword(newPassword);
+            return "change password was successful";
         }
     }
     public String loginWithoutStayLoggedIn(Matcher matcher) throws NoSuchAlgorithmException {

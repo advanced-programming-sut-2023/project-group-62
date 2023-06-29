@@ -1,13 +1,19 @@
 package org.group62.veiw;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import org.group62.controller.ProfileMenuController;
 import org.group62.model.User;
 
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class ProfileMenu {
+public class ProfileMenu extends Application {
     Matcher matcher;
     ProfileMenuController profileMenuController;
     private User currentUser;
@@ -25,7 +31,7 @@ public class ProfileMenu {
         while (true) {
             String inputCommand = scanner.nextLine();
             if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_PASSWORD_CHANGE)) != null)
-                changePassword(matcher,scanner);
+                changePassword(matcher, scanner);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_USERNAME_CHANGE)) != null)
                 changeUsername(matcher);
             else if ((matcher = Commands.getMatcherMatches(inputCommand, Commands.PROFILE_NICKNAME_CHANGE)) != null)
@@ -53,6 +59,15 @@ public class ProfileMenu {
         }
     }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        URL url = ProfileMenu.class.getResource("/fxml/ProfileMenu.fxml");
+        BorderPane borderPane = FXMLLoader.load(url);
+        Scene scene = new Scene(borderPane);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     private void removeSlogan() {
         System.out.println(profileMenuController.removeSlogan());
     }
@@ -73,21 +88,23 @@ public class ProfileMenu {
         System.out.println(profileMenuController.changeUsername(matcher));
     }
 
-    private void changePassword(Matcher matcher,Scanner scanner) throws NoSuchAlgorithmException {
+    private void changePassword(Matcher matcher, Scanner scanner) throws NoSuchAlgorithmException {
         String message = profileMenuController.changePassword(matcher);
         String newPasswordConfirmation;
         System.out.println(message);
-        if(!message.startsWith("Profile change password failed:") && !message.startsWith("Set a new password failed:")) {
+        if (!message.startsWith("Profile change password failed:") && !message.startsWith("Set a new password failed:")) {
             newPasswordConfirmation = scanner.nextLine();
             Boolean isValid = profileMenuController.checkNewPasswordConfirmation(newPasswordConfirmation,
                     matcher.group("newPassword"));
-            if(isValid){
+            if (isValid) {
                 profileMenuController.putNewPasswordInCurrentUserPassword(matcher.group("newPassword"));
-                profileMenuController.writeDataInJsonFile("putNewPassword",matcher.group("newPassword"));
+                profileMenuController.writeDataInJsonFile("putNewPassword", matcher.group("newPassword"));
                 System.out.println("Password change successfully!");
-            }else
+            } else
                 System.out.println("Password confirmation failed!");
 
         }
     }
+
+
 }

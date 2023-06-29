@@ -6,9 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.group62.veiw.ControllerProfileMenu"
             prefHeight="800.0" prefWidth="1200.0">
+    <center>
 
-</AnchorPane>
+    </center>
+
+</BorderPane>

@@ -147,4 +147,6 @@ public class LoginMenu extends Application {
     }
 
 
+    public void start() {
+    }
 }
