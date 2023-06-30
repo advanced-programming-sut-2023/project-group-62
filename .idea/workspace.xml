@@ -4,22 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb3c2f87-761b-4f37-970d-2523dbf3a5b5" name="Changes" comment=" add changeable menu in profile menu">
+    <list default="true" id="cb3c2f87-761b-4f37-970d-2523dbf3a5b5" name="Changes" comment="add change slogan">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ControllerProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ControllerProfileMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ForgotPasswordMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ForgotPasswordMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/LoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ProfileMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/SignupMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangeAvatar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangeAvatar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangeEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangeEmail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangeNickname.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangeNickname.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangePassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangeSlogan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangeSlogan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangeUsername.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/changeMenu/ChangeUsername.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/ProfileMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/ProfileMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ControllerSignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group62/veiw/ControllerSignupMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/signupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/signupMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/changeMenu/ChangeSlogan.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/changeMenu/ChangeSlogan.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/signupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/signupMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group62/veiw/ControllerSignupMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group62/veiw/ControllerSignupMenu.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +174,23 @@
       <option name="project" value="LOCAL" />
       <updated>1688119254205</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="set background">
+      <option name="closed" value="true" />
+      <created>1688129559414</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1688129559414</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add change slogan">
+      <option name="closed" value="true" />
+      <created>1688130480608</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1688130480608</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -208,6 +215,8 @@
     <MESSAGE value=" complete signup menu" />
     <MESSAGE value=" complete login menu" />
     <MESSAGE value=" add changeable menu in profile menu" />
-    <option name="LAST_COMMIT_MESSAGE" value=" add changeable menu in profile menu" />
+    <MESSAGE value="set background" />
+    <MESSAGE value="add change slogan" />
+    <option name="LAST_COMMIT_MESSAGE" value="add change slogan" />
   </component>
 </project>

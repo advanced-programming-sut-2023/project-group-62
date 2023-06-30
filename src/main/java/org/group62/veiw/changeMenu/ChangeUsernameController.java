@@ -40,8 +40,11 @@ public class ChangeUsernameController {
         SignupMenuController signupMenuController = new SignupMenuController();
         newUsername.textProperty().addListener((observable, oldText, newText)->{
             String output;
-            if (!(output = signupMenuController.checkUsername(newText)).equals("good username"))
+            if (!(output = signupMenuController.checkUsername(newText)).equals("good username")){
                 text.setText(output);
+                text.setStyle("-fx-text-fill: red;");
+            }
+
         });
     }
 

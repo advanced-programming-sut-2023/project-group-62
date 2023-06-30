@@ -36,7 +36,7 @@ public class ControllerSignupMenu {
         errorAlert.setHeaderText("signup failed");
         if (answer.getText().equals(""))
             output = "wright answer";
-        else if ((matcher = Commands.getMatcherMatches(answer.getText(),Commands.FXML_QUESTION_PICK)) == null)
+        else if ((matcher = Commands.getMatcherMatches(answer.getText(), Commands.FXML_QUESTION_PICK)) == null)
             output = "please write the answer in the form given";
         else {
             switch (matcher.group("questionNumber")) {
@@ -50,14 +50,13 @@ public class ControllerSignupMenu {
                     passwordRecoveryQuestion = "When is your birthday?";
                     break;
             }
-            output = signupMenuController.createUser(username.getText(),password.getText(),
-                    passwordRecoveryQuestion,matcher.group("answer"),nickname.getText(),Email.getText(),slogan.getText());
-            if (output.equals("user created successful")){
+            output = signupMenuController.createUser(username.getText(), password.getText(),
+                    passwordRecoveryQuestion, matcher.group("answer"), nickname.getText(), Email.getText(), slogan.getText());
+            if (output.equals("user created successful")) {
                 informationAlert.setContentText(output);
                 informationAlert.showAndWait();
                 return;
-            }
-            else {
+            } else {
                 errorAlert.setContentText(output);
                 errorAlert.showAndWait();
                 return;
@@ -86,25 +85,33 @@ public class ControllerSignupMenu {
         String randomPassword = signupMenuController.randomPasswordGenerator();
         password.setText(randomPassword);
         textArea.setText("your random password : " + randomPassword);
-
+        textArea.setStyle("-fx-text-fill: green;");
     }
 
     public void randomSlogan(MouseEvent mouseEvent) {
         String randomSlogan = signupMenuController.randomSloganGenerator();
         slogan.setText(randomSlogan);
         textArea.setText("your random slogan : " + randomSlogan);
+        textArea.setStyle("-fx-text-fill: green;");
     }
+
     @FXML
-    public void initialize(){
-        username.textProperty().addListener((observable, oldText, newText)->{
+    public void initialize() {
+        username.textProperty().addListener((observable, oldText, newText) -> {
             String output;
-            if (!(output = signupMenuController.checkUsername(newText)).equals("good username"))
+            if (!(output = signupMenuController.checkUsername(newText)).equals("good username")) {
                 textArea.setText(output);
+                textArea.setStyle("-fx-text-fill: red;");
+            }
+
         });
-        password.textProperty().addListener((observable, oldText, newText)->{
+        password.textProperty().addListener((observable, oldText, newText) -> {
             String output;
-            if (!(output = signupMenuController.checkPassword(newText)).equals("strong password"))
+            if (!(output = signupMenuController.checkPassword(newText)).equals("strong password")) {
                 textArea.setText(output);
+                textArea.setStyle("-fx-text-fill: red;");
+            }
+
         });
     }
 }

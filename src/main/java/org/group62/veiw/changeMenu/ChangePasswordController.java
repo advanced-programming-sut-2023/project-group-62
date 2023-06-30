@@ -41,10 +41,12 @@ public class ChangePasswordController {
     @FXML
     public void initialize(){
         SignupMenuController signupMenuController = new SignupMenuController();
-        newPassword.textProperty().addListener((observable, oldText, newText)->{
+        newPassword.textProperty().addListener((observable, oldText, newText)-> {
             String output;
-            if (!(output = signupMenuController.checkPassword(newText)).equals("strong password"))
+            if (!(output = signupMenuController.checkPassword(newText)).equals("strong password")){
                 text.setText(output);
+                text.setStyle("-fx-text-fill: red;");
+        }
         });
     }
 }
