@@ -1,4 +1,4 @@
-package org.group62.veiw;
+package org.group62.veiw.changeMenu;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,16 +8,10 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
-public class ForgotPasswordMenu extends Application {
-    public static String username;
-
-    public ForgotPasswordMenu(String username) {
-        ForgotPasswordMenu.username = username;
-    }
-
+public class ChangeAvatar extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        URL url = ForgotPasswordMenu.class.getResource("/fxml/ForgotPasswordMenu.fxml");
+        URL url = ChangeAvatar.class.getResource("/fxml/changeMenu/ChangeAvatar.fxml");
         BorderPane borderPane = FXMLLoader.load(url);
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);

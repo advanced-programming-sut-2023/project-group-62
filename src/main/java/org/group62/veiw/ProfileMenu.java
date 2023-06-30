@@ -22,6 +22,8 @@ public class ProfileMenu extends Application {
         this.currentUser = currentUser;
     }
 
+    public ProfileMenu(){}
+
     public ProfileMenu(ProfileMenuController profileMenuController) {
         this.profileMenuController = profileMenuController;
     }

@@ -8,7 +8,7 @@ public class User {
     private String slogan;
     private String passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
-    private String highScore;
+    private String highScore = "0";
     private String rank;
     public User(){
 

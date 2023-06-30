@@ -211,19 +211,30 @@ public class LoginMenuController {
     }
 
     public String forgotPasswordReturnSecurityQuestion(String username) {
-        User forgetfulUser = new User();
+        /*User forgetfulUser = new User();
         userJsonFileParse("parseUserInformation", username, null, forgetfulUser, null);
         String passwordRecoveryQuestion = forgetfulUser.getPasswordRecoveryQuestion();
         if (passwordRecoveryQuestion != null)
             return passwordRecoveryQuestion;
+
+         */// TODO: 6/29/2023
+        User user;
+        if ((user = StrongHold.getUserByUsername(username)) != null)
+            return user.getPasswordRecoveryQuestion();
         else
             return "Username not found!";
     }
 
     public String forgotPasswordReturnSecurityQuestionAnswer(String username) {
-        User forgetfulUser = new User();
+        /*User forgetfulUser = new User();
         userJsonFileParse("parseUserInformation", username, null, forgetfulUser, null);
-        return forgetfulUser.getPasswordRecoveryAnswer();
+        return forgetfulUser.getPasswordRecoveryAnswer();*/
+        // TODO: 6/29/2023
+        User user;
+        if ((user = StrongHold.getUserByUsername(username)) != null)
+            return user.getPasswordRecoveryAnswer();
+        else
+            return "Username not found!";
     }
 
     public String forgotPasswordSetNewPassword(String username, String password) {

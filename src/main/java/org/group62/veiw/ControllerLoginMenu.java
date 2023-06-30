@@ -7,7 +7,6 @@ import javafx.scene.input.MouseEvent;
 import org.group62.Main;
 import org.group62.controller.LoginMenuController;
 import org.group62.model.StrongHold;
-import org.group62.model.User;
 
 public class ControllerLoginMenu {
     public TextField username;

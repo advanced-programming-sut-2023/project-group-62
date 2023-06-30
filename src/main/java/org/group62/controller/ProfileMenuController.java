@@ -21,6 +21,8 @@ public class ProfileMenuController {
     private User currentUser;
     private ArrayList<String> usernames = new ArrayList<>();
     private ArrayList<String> emails = new ArrayList<>();
+    public ProfileMenuController(){
+    }
 
     public Boolean checkNewPasswordConfirmation(String newPasswordConfirmation, String newPassword) {
         if (newPassword.equals(newPasswordConfirmation))
@@ -274,7 +276,9 @@ public class ProfileMenuController {
 
     public void putNewPasswordInCurrentUserPassword(String newPassword) throws NoSuchAlgorithmException {
         String newPasswordSecure = SHA256.sha256Security(newPassword);
-        currentUser.setPassword(newPasswordSecure);
+        StrongHold.getCurrentUser().setPassword(newPasswordSecure);
+        // TODO: 6/30/2023
+        //currentUser.setPassword(newPasswordSecure);
     }
     private Boolean isEmailDuplicate(String email){
         userJsonFileParse("emailCheck",null,null,null,null);
@@ -286,5 +290,96 @@ public class ProfileMenuController {
             return false;
         }
         return false;
+    }
+
+    public String showUsername() {
+        return "username is : " + StrongHold.getCurrentUser().getUsername();
+    }
+
+    public String showNickname() {
+        return "nickname is : " + StrongHold.getCurrentUser().getNickname();
+    }
+
+    public String showEmail() {
+        return "Email is : " + StrongHold.getCurrentUser().getEmail();
+    }
+
+    public String showSlogan() {
+        return "slogan is : " + StrongHold.getCurrentUser().getSlogan();
+    }
+
+    public String showHighScore() {
+        return "high score is : " + StrongHold.getCurrentUser().getHighScore();
+    }
+
+    public String showRank() {
+        int rank = 1;
+        for (User user : StrongHold.getUsers()) {
+            if (Integer.parseInt(StrongHold.getCurrentUser().getHighScore())<Integer.parseInt(user.getHighScore()))
+                rank++;
+        }
+        return "rank is : " + rank;
+    }
+    public String changeUsername(String newUsername){
+        if (newUsername.equals(""))
+            return "Profile change username failed: new username field is empty!";
+        else if (StrongHold.getUserByUsername(newUsername) != null)
+            return "Profile change username failed: username was used";
+        else if (isUsernameDuplicate(newUsername))
+            return "Profile change username failed: You have entered duplicate username!";
+        else if (Commands.getMatcherMatches(newUsername, Commands.USERNAME_VALIDATION) == null)
+            return "Profile change username failed: Invalid username format!";
+        else {
+            writeDataInJsonFile("putNewUsername", newUsername);
+            StrongHold.getCurrentUser().setUsername(newUsername);
+            return "change username was successful";
+        }
+    }
+    public String changePassword(String newPassword, String oldPassword) throws NoSuchAlgorithmException {
+        if (!isPasswordCorrect(oldPassword))
+            return "Profile change password failed: Current password is incorrect!";
+        else if(oldPassword.equals(newPassword))
+            return "Profile change password failed: Please enter a new password!";
+        else if (Commands.getMatcherMatches(newPassword, Commands.STRONG_PASSWORD) == null) {
+            if (newPassword.length() < 6)
+                return "Profile change password failed: Password is weak --> password is less than 6 characters!";
+            else if (Commands.getMatcherFind(newPassword, Commands.PASSWORD_WEAK_LOWERCASE_ALPHABET) == null)
+                return "Profile change password failed: Password is weak --> lowercase alphabet not involved!";
+            else if (Commands.getMatcherFind(newPassword, Commands.PASSWORD_WEAK_UPPERCASE_ALPHABET) == null)
+                return "Profile change password failed: Password is weak --> uppercase alphabet not involved!";
+            else if (Commands.getMatcherFind(newPassword, Commands.PASSWORD_WEAK_NUMBER) == null)
+                return "Profile change password failed: Password is weak --> numbers not involved!";
+            else
+                return "Profile change password failed: Password is weak --> any non number or alphabet not involved!";
+        }
+        else{
+            putNewPasswordInCurrentUserPassword(newPassword);
+            writeDataInJsonFile("putNewPassword", newPassword);
+            return "change password was successful";
+        }
+    }
+    public String changeNickname(String newNickname){
+        writeDataInJsonFile("putNewNickname",newNickname);
+        StrongHold.getCurrentUser().setNickname(newNickname);
+        return "change nickname was successful";
+
+    }
+    public String changeEmail(String newEmail){
+        if(isEmailDuplicate(newEmail))
+            return "Profile change email failed: Duplicate email address!";
+        else if(Commands.getMatcherMatches(newEmail,Commands.EMAIL_VALIDATION) == null)
+            return "Profile change email failed: Invalid email address format!";
+        else{
+            writeDataInJsonFile("putNewEmailAddress",newEmail);
+            StrongHold.getCurrentUser().setEmail(newEmail);
+            return "change email was successful";
+        }
+    }
+    public String changeSlogan(String newSlogan){
+        if (newSlogan.equals(""))
+            newSlogan = "empty";
+        writeDataInJsonFile("putNewSlogan",newSlogan);
+        StrongHold.getCurrentUser().setSlogan(newSlogan);
+        return "Profile change slogan successfully!";
     }
 }

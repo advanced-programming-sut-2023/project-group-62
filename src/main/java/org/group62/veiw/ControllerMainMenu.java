@@ -5,7 +5,9 @@ import org.group62.Main;
 import org.group62.model.StrongHold;
 
 public class ControllerMainMenu {
-    public void enterProfileMenu(MouseEvent mouseEvent) {
+    public void enterProfileMenu(MouseEvent mouseEvent) throws Exception {
+        ProfileMenu profileMenu = new ProfileMenu();
+        profileMenu.start(Main.stage);
     }
 
     public void enterGameMenu(MouseEvent mouseEvent) {
