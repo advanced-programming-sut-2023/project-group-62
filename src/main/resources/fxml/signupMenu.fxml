@@ -30,7 +30,7 @@
                 <Button text="reset" onMouseClicked="#reset"/>
             </HBox>
             <Button text="login menu" onMouseClicked="#loginMenu"/>
-            <TextArea text="" fx:id="textArea" maxWidth="600"/>
+            <TextArea text="" fx:id="textArea" maxWidth="300" maxHeight="30"/>
 
         </VBox>
     </center>

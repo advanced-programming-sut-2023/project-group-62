@@ -23,6 +23,7 @@
             </HBox>
             <HBox alignment="CENTER" spacing="10">
                 <Button text="change Email" onMouseClicked="#changeEmail"/>
+                <Button text="change slogan" onMouseClicked="#changeSlogan"/>
                 <Button text="change avatar" onMouseClicked="#changeAvatar"/>
             </HBox>
         </VBox>

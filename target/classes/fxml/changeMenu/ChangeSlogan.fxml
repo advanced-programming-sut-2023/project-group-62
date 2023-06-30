@@ -12,7 +12,7 @@
             prefHeight="800.0" prefWidth="1200.0">
     <center>
         <VBox alignment="CENTER" spacing="10">
-            <TextField promptText="new slogan" maxHeight="300" fx:id="newSlogan"/>
+            <TextField promptText="new slogan" fx:id="newSlogan"/>
             <Button text="change username" onMouseClicked="#sloganChange"/>
             <Button text="back" onMouseClicked="#back"/>
         </VBox>

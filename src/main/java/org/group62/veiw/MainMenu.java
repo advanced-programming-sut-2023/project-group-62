@@ -3,7 +3,8 @@ package org.group62.veiw;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.group62.controller.GameMenuController;
 import org.group62.controller.MainMenuController;
@@ -65,8 +66,19 @@ public class MainMenu extends Application {
     public void start(Stage stage) throws Exception {
         URL url = MainMenu.class.getResource("/fxml/MainMenu.fxml");
         BorderPane borderPane = FXMLLoader.load(url);
+        Background background = new Background(setBackGround());
+        borderPane.setBackground(background);
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);
         stage.show();
+    }
+    private BackgroundImage setBackGround() {
+        Image image = new Image(MainMenu.class.getResource("/images/11.jpg").toExternalForm(), 1200 ,800, false, false);
+        BackgroundImage backgroundImage = new BackgroundImage(image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        return backgroundImage;
     }
 }

@@ -8,13 +8,14 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.group62.veiw.changeMenu.ChangeSloganController"
+            fx:controller="org.group62.veiw.changeMenu.ChangeNicknameController"
             prefHeight="800.0" prefWidth="1200.0">
     <center>
         <VBox alignment="CENTER" spacing="10">
-            <TextField promptText="new slogan" maxHeight="300" fx:id="newSlogan"/>
-            <Button text="change username" onMouseClicked="#sloganChange"/>
+            <TextField promptText="new nickname" maxWidth="300" fx:id="newNickname"/>
+            <Button text="change nickname" onMouseClicked="#nicknameChange"/>
             <Button text="back" onMouseClicked="#back"/>
         </VBox>
     </center>
+
 </BorderPane>

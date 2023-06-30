@@ -2,7 +2,8 @@ package org.group62.veiw;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.group62.controller.LoginMenuController;
 import org.group62.controller.MainMenuController;
@@ -73,9 +74,20 @@ public class LoginMenu extends Application {
     public void start(Stage stage) throws Exception {
         URL url = LoginMenu.class.getResource("/fxml/LoginMenu.fxml");
         BorderPane borderPane = FXMLLoader.load(url);
+        Background background = new Background(setBackGround());
+        borderPane.setBackground(background);
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);
         stage.show();
+    }
+    private BackgroundImage setBackGround() {
+        Image image = new Image(LoginMenu.class.getResource("/images/19.jpg").toExternalForm(), 1200 ,800, false, false);
+        BackgroundImage backgroundImage = new BackgroundImage(image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        return backgroundImage;
     }
 
     private void forgotPassword(Matcher matcher,Scanner scanner) throws NoSuchAlgorithmException {

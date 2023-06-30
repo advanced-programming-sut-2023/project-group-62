@@ -47,4 +47,9 @@ public class ControllerProfileMenu {
         ChangeAvatar changeAvatar = new ChangeAvatar();
         changeAvatar.start(Main.stage);
     }
+
+    public void changeSlogan(MouseEvent mouseEvent) throws Exception {
+        ChangeSlogan changeSlogan = new ChangeSlogan();
+        changeSlogan.start(Main.stage);
+    }
 }
